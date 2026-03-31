@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>P&amp;M Apartments — Patryk Zacharek</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#FAF8F5',
+            charcoal: '#2C2C2C',
+            brass: '#B8956A',
+            'warm-gray': '#E8E4DF',
+            'ink': '#1A1A1A',
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background-color: #FAF8F5;
+      color: #2C2C2C;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #FAF8F5; }
+    ::-webkit-scrollbar-thumb { background: #B8956A; border-radius: 4px; }
+
+    /* Scroll animation */
+    .aos {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.85s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  transform 0.85s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .aos.stagger-1 { transition-delay: 0.1s; }
+    .aos.stagger-2 { transition-delay: 0.2s; }
+    .aos.stagger-3 { transition-delay: 0.3s; }
+    .aos.visible { opacity: 1; transform: translateY(0); }
+
+    /* Navbar */
+    #navbar {
+      transition: background-color 0.5s ease, backdrop-filter 0.5s ease,
+                  box-shadow 0.5s ease;
+    }
+    #navbar.scrolled {
+      background-color: rgba(250, 248, 245, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 1px 0 rgba(184, 149, 106, 0.15);
+    }
+    #navbar.scrolled .nav-logo { color: #2C2C2C; }
+    #navbar.scrolled .nav-link { color: #2C2C2C; }
+
+    /* Mobile menu */
+    #mobile-menu {
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      transform: translateY(-8px);
+    }
+    #mobile-menu.open { opacity: 1 !important; pointer-events: auto !important; transform: translateY(0); }
+
+    /* Scroll indicator pulse */
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.5; transform: translateY(0); }
+      50% { opacity: 1; transform: translateY(6px); }
+    }
+    .scroll-indicator { animation: scrollPulse 2s ease-in-out infinite; }
+
+    /* Grain overlay */
+    .grain { position: relative; }
+    .grain::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Text placeholder line */
+    .tpl {
+      height: 2px;
+      border-radius: 2px;
+      display: block;
+    }
+
+    /* Input placeholder */
+    ::placeholder { color: rgba(250, 248, 245, 0.35); }
+    input, textarea { caret-color: #B8956A; }
+
+    /* Property card image zoom */
+    .prop-card img {
+      transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .prop-card:hover img { transform: scale(1.05); }
+    .prop-card {
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  box-shadow 0.4s ease;
+    }
+    .prop-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(184, 149, 106, 0.14), 0 30px 70px rgba(44, 44, 44, 0.18) !important;
+    }
+
+    /* Agent photo */
+    .agent-photo img {
+      transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .agent-photo:hover img { transform: scale(1.03); }
+
+    /* Nav link underline */
+    .nav-link {
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: #B8956A;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    /* Ghost button */
+    .btn-ghost {
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+    .btn-ghost:hover {
+      background-color: #B8956A !important;
+      color: #FAF8F5 !important;
+    }
+
+    /* Solid button */
+    .btn-solid {
+      background-color: #B8956A;
+      transition: background-color 0.3s ease, transform 0.15s ease;
+    }
+    .btn-solid:hover { background-color: #A07D56; }
+    .btn-solid:active { transform: scale(0.98); }
+
+    /* Social icon */
+    .social-icon {
+      transition: color 0.3s ease, opacity 0.3s ease;
+    }
+    .social-icon:hover { color: #B8956A !important; opacity: 1 !important; }
+
+    /* Process step number */
+    .step-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 5rem;
+      line-height: 1;
+      color: #B8956A;
+      opacity: 0.15;
+      letter-spacing: -0.03em;
+    }
+
+    /* Decorative line */
+    .deco-line {
+      width: 40px;
+      height: 2px;
+      background: #B8956A;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     NAVIGATION
+═══════════════════════════════════════════ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-6 lg:px-12 py-5 flex items-center justify-between">
+
+  <!-- Logo -->
+  <a href="#" class="nav-logo font-serif text-cream text-base lg:text-lg uppercase tracking-[0.1em] cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="transition: color 0.3s ease; letter-spacing: 0.1em;">
+    P&amp;M Apartments
+  </a>
+
+  <!-- Desktop links -->
+  <div class="hidden md:flex items-center gap-8">
+    <a href="#oferty"  class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="transition: color 0.3s ease; line-height: 1.7;">Oferty</a>
+    <a href="#o-mnie"  class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="transition: color 0.3s ease; line-height: 1.7;">O mnie</a>
+    <a href="#proces"  class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="transition: color 0.3s ease; line-height: 1.7;">Proces</a>
+    <a href="#kontakt" class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="transition: color 0.3s ease; line-height: 1.7;">Kontakt</a>
+  </div>
+
+  <!-- Hamburger -->
+  <button id="hamburger" aria-label="Menu" class="md:hidden flex flex-col justify-center gap-[5px] w-8 h-8 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="background: none; border: none; padding: 4px;">
+    <span id="ham-1" class="block w-6 h-[1.5px] bg-cream" style="transition: transform 0.3s ease, opacity 0.3s ease;"></span>
+    <span id="ham-2" class="block w-6 h-[1.5px] bg-cream" style="transition: transform 0.3s ease, opacity 0.3s ease;"></span>
+    <span id="ham-3" class="block w-4 h-[1.5px] bg-cream self-end" style="transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;"></span>
+  </button>
+</nav>
+
+<!-- Mobile menu -->
+<div id="mobile-menu" class="fixed inset-0 z-40 flex flex-col items-center justify-center gap-10" style="background-color: #2C2C2C; opacity: 0; pointer-events: none;">
+  <a href="#oferty"  class="font-serif text-cream text-3xl cursor-pointer hover:text-brass" style="transition: color 0.3s ease; letter-spacing: -0.02em;">Oferty</a>
+  <a href="#o-mnie"  class="font-serif text-cream text-3xl cursor-pointer hover:text-brass" style="transition: color 0.3s ease; letter-spacing: -0.02em;">O mnie</a>
+  <a href="#proces"  class="font-serif text-cream text-3xl cursor-pointer hover:text-brass" style="transition: color 0.3s ease; letter-spacing: -0.02em;">Proces</a>
+  <a href="#kontakt" class="font-serif text-cream text-3xl cursor-pointer hover:text-brass" style="transition: color 0.3s ease; letter-spacing: -0.02em;">Kontakt</a>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     1. HERO
+═══════════════════════════════════════════ -->
+<section id="hero" class="relative w-full overflow-hidden" style="height: 100vh; min-height: 600px;">
+
+  <!-- Background image -->
+  <img
+    src="ImageDownloader_www.instagram.com_650500079_18048934589663850_3496726104653903685_n.jpg"
+    alt=""
+    loading="lazy"
+    class="absolute inset-0 w-full h-full object-cover"
+    style="object-position: center 30%;"
+  >
+
+  <!-- Dark gradient overlay -->
+  <div class="absolute inset-0" style="background: linear-gradient(170deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.0) 40%, rgba(0,0,0,0.72) 100%);"></div>
+
+  <!-- Content -->
+  <div class="relative z-10 h-full flex flex-col justify-end px-8 md:px-16 lg:px-24 pb-28 md:pb-32">
+    <div class="max-w-3xl">
+      <h1 class="font-serif text-cream leading-[1.05] mb-7" style="font-size: clamp(2.6rem, 5.5vw, 4.6rem); letter-spacing: -0.03em;">
+        Twój Dom.<br>Twoja Historia.
+      </h1>
+
+      <!-- Placeholder lines -->
+      <div class="flex flex-col gap-3 mb-10">
+        <span class="tpl bg-cream" style="width: 70%; opacity: 0.35;"></span>
+        <span class="tpl bg-cream" style="width: 55%; opacity: 0.35;"></span>
+        <span class="tpl bg-cream" style="width: 42%; opacity: 0.35;"></span>
+      </div>
+
+      <!-- Ghost CTA -->
+      <a href="#kontakt"
+         class="btn-ghost inline-block font-sans text-sm text-cream uppercase tracking-[0.15em] px-10 py-4 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass"
+         style="border: 1px solid #B8956A; letter-spacing: 0.15em;">
+        Umów Spotkanie
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
+    <div class="w-px bg-cream" style="height: 36px; opacity: 0.45;"></div>
+    <svg width="12" height="7" viewBox="0 0 12 7" fill="none">
+      <path d="M1 1L6 6L11 1" stroke="#FAF8F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+    </svg>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     2. TRZY FILARY
+═══════════════════════════════════════════ -->
+<section class="aos py-0" style="background-color: #2C2C2C;">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3">
+
+      <!-- Filar 1 -->
+      <div class="flex flex-col items-center text-center py-16 px-10 border-b md:border-b-0 md:border-r" style="border-color: rgba(184,149,106,0.25);">
+        <div class="mb-7" style="opacity: 0.9;">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 18L18 5L33 18V33H24V24H12V33H3V18Z" stroke="#B8956A" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="font-sans text-cream uppercase tracking-[0.06em] text-xs mb-5" style="line-height: 1.7;">Sprzedaż Nieruchomości</span>
+        <span class="tpl bg-cream" style="width: 60%; opacity: 0.2;"></span>
+      </div>
+
+      <!-- Filar 2 -->
+      <div class="flex flex-col items-center text-center py-16 px-10 border-b md:border-b-0 md:border-r" style="border-color: rgba(184,149,106,0.25);">
+        <div class="mb-7" style="opacity: 0.9;">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="13" cy="23" r="7" stroke="#B8956A" stroke-width="1.5"/>
+            <path d="M19 17L28 8" stroke="#B8956A" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M25 6L30 11" stroke="#B8956A" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="13" cy="23" r="2" fill="#B8956A"/>
+          </svg>
+        </div>
+        <span class="font-sans text-cream uppercase tracking-[0.06em] text-xs mb-5" style="line-height: 1.7;">Wykończenie Pod Klucz</span>
+        <span class="tpl bg-cream" style="width: 60%; opacity: 0.2;"></span>
+      </div>
+
+      <!-- Filar 3 -->
+      <div class="flex flex-col items-center text-center py-16 px-10">
+        <div class="mb-7" style="opacity: 0.9;">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="11" width="28" height="20" rx="1.5" stroke="#B8956A" stroke-width="1.5"/>
+            <path d="M12 11V8C12 6.9 12.9 6 14 6H22C23.1 6 24 6.9 24 8V11" stroke="#B8956A" stroke-width="1.5"/>
+            <path d="M10 21L15 26L26 16" stroke="#B8956A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="font-sans text-cream uppercase tracking-[0.06em] text-xs mb-5" style="line-height: 1.7;">Gotowe do Zamieszkania</span>
+        <span class="tpl bg-cream" style="width: 60%; opacity: 0.2;"></span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     3. SOCIAL PROOF / LICZBY
+═══════════════════════════════════════════ -->
+<section class="aos grain relative py-24" style="background-color: #E8E4DF;">
+  <!-- Top brass line -->
+  <div class="absolute top-0 left-0 right-0 h-px" style="background-color: #B8956A; opacity: 0.6; z-index: 2;"></div>
+
+  <div class="relative z-2 max-w-5xl mx-auto px-8 grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+
+    <div class="aos stagger-1">
+      <div class="font-serif text-charcoal leading-none mb-3" style="font-size: clamp(2.2rem, 4.5vw, 3.6rem); letter-spacing: -0.03em;">150+</div>
+      <div class="font-sans text-charcoal uppercase tracking-[0.06em]" style="font-size: 0.65rem; opacity: 0.6; line-height: 1.7;">Zrealizowanych projektów</div>
+    </div>
+
+    <div class="aos stagger-2">
+      <div class="font-serif text-charcoal leading-none mb-3" style="font-size: clamp(2.2rem, 4.5vw, 3.6rem); letter-spacing: -0.03em;">95%</div>
+      <div class="font-sans text-charcoal uppercase tracking-[0.06em]" style="font-size: 0.65rem; opacity: 0.6; line-height: 1.7;">Zadowolonych klientów</div>
+    </div>
+
+    <div class="aos stagger-3">
+      <div class="font-serif text-charcoal leading-none mb-3" style="font-size: clamp(2.2rem, 4.5vw, 3.6rem); letter-spacing: -0.03em;">12</div>
+      <div class="font-sans text-charcoal uppercase tracking-[0.06em]" style="font-size: 0.65rem; opacity: 0.6; line-height: 1.7;">Lat doświadczenia</div>
+    </div>
+
+    <div class="aos stagger-1">
+      <div class="font-serif text-charcoal leading-none mb-3" style="font-size: clamp(2.2rem, 4.5vw, 3.6rem); letter-spacing: -0.03em;">50M+</div>
+      <div class="font-sans text-charcoal uppercase tracking-[0.06em]" style="font-size: 0.65rem; opacity: 0.6; line-height: 1.7;">Wartość sprzedaży (PLN)</div>
+    </div>
+
+  </div>
+
+  <!-- Bottom brass line -->
+  <div class="absolute bottom-0 left-0 right-0 h-px" style="background-color: #B8956A; opacity: 0.6; z-index: 2;"></div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     4. O MNIE
+═══════════════════════════════════════════ -->
+<section id="o-mnie" class="py-24 lg:py-32" style="background-color: #FAF8F5;">
+  <div class="max-w-6xl mx-auto px-8">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-10 lg:gap-16 items-center">
+
+      <!-- Photo — 40% -->
+      <div class="md:col-span-2 aos agent-photo overflow-hidden" style="box-shadow: 0 4px 6px rgba(184,149,106,0.08), 0 14px 48px rgba(44,44,44,0.1);">
+        <img
+          src="portret.jpg"
+          alt="Patryk Zacharek"
+          loading="lazy"
+          class="w-full object-cover block"
+          style="aspect-ratio: 3/4; object-position: center top;"
+        >
+      </div>
+
+      <!-- Content — 60% -->
+      <div class="md:col-span-3 aos stagger-2">
+        <h2 class="font-serif text-charcoal mb-1" style="font-size: clamp(2rem, 3.5vw, 3.2rem); letter-spacing: -0.03em;">Patryk Zacharek</h2>
+        <p class="font-sans uppercase tracking-[0.12em] mb-10" style="font-size: 0.72rem; color: #B8956A; line-height: 1.7;">P&amp;M Apartments</p>
+
+        <!-- Text placeholder lines -->
+        <div class="flex flex-col gap-[14px] mb-12">
+          <span class="tpl bg-charcoal" style="width: 92%; opacity: 0.12;"></span>
+          <span class="tpl bg-charcoal" style="width: 78%; opacity: 0.12;"></span>
+          <span class="tpl bg-charcoal" style="width: 96%; opacity: 0.12;"></span>
+          <span class="tpl bg-charcoal" style="width: 68%; opacity: 0.12;"></span>
+          <span class="tpl bg-charcoal" style="width: 84%; opacity: 0.12;"></span>
+          <span class="tpl bg-charcoal" style="width: 58%; opacity: 0.12;"></span>
+        </div>
+
+        <!-- Social icons -->
+        <div class="flex items-center gap-6">
+          <a href="#" class="social-icon text-charcoal cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4.5"/>
+              <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+          <a href="#" class="social-icon text-charcoal cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" aria-label="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+          <a href="#" class="social-icon text-charcoal cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" aria-label="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+              <rect x="2" y="9" width="4" height="12"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     5. WYBRANE NIERUCHOMOŚCI
+═══════════════════════════════════════════ -->
+<section id="oferty" class="py-24 lg:py-32" style="background-color: #FAF8F5; border-top: 1px solid rgba(184,149,106,0.15);">
+  <div class="max-w-6xl mx-auto px-8">
+
+    <!-- Title -->
+    <div class="text-center mb-16 aos">
+      <h2 class="font-serif text-charcoal mb-4" style="font-size: clamp(1.9rem, 3.5vw, 3rem); letter-spacing: -0.03em;">Wybrane Nieruchomości</h2>
+      <div class="deco-line"></div>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
+
+      <!-- Card 1 -->
+      <div class="prop-card relative overflow-hidden cursor-pointer aos stagger-1" style="aspect-ratio: 4/5; box-shadow: 0 4px 6px rgba(184,149,106,0.07), 0 10px 40px rgba(44,44,44,0.08);">
+        <img
+          src="ImageDownloader_www.instagram.com_650650966_18048934568663850_1252851737655757389_n.jpg"
+          alt="Nieruchomość 1"
+          loading="lazy"
+          class="w-full h-full object-cover block"
+        >
+        <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%);"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-6">
+          <p class="font-sans text-cream uppercase tracking-[0.1em] mb-1" style="font-size: 0.65rem; opacity: 0.75;">Gdańsk, Morena</p>
+          <p class="font-serif text-cream" style="font-size: 1.15rem;">450 000 PLN</p>
+        </div>
+      </div>
+
+      <!-- Card 2 — offset vertically on desktop -->
+      <div class="prop-card relative overflow-hidden cursor-pointer aos stagger-2 md:mt-10" style="aspect-ratio: 4/5; box-shadow: 0 4px 6px rgba(184,149,106,0.07), 0 10px 40px rgba(44,44,44,0.08);">
+        <img
+          src="ImageDownloader_www.instagram.com_650371492_18048934559663850_7455913439178293252_n.jpg"
+          alt="Nieruchomość 2"
+          loading="lazy"
+          class="w-full h-full object-cover block"
+        >
+        <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%);"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-6">
+          <p class="font-sans text-cream uppercase tracking-[0.1em] mb-1" style="font-size: 0.65rem; opacity: 0.75;">Wrocław, Śródmieście</p>
+          <p class="font-serif text-cream" style="font-size: 1.15rem;">680 000 PLN</p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="prop-card relative overflow-hidden cursor-pointer aos stagger-3" style="aspect-ratio: 4/5; box-shadow: 0 4px 6px rgba(184,149,106,0.07), 0 10px 40px rgba(44,44,44,0.08);">
+        <img
+          src="ImageDownloader_www.instagram.com_650804947_18048934529663850_3720488150567141685_n.jpg"
+          alt="Nieruchomość 3"
+          loading="lazy"
+          class="w-full h-full object-cover block"
+        >
+        <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%);"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-6">
+          <p class="font-sans text-cream uppercase tracking-[0.1em] mb-1" style="font-size: 0.65rem; opacity: 0.75;">Wrocław, Centrum</p>
+          <p class="font-serif text-cream" style="font-size: 1.15rem;">520 000 PLN</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Ghost CTA -->
+    <div class="text-center aos">
+      <a href="#"
+         class="btn-ghost inline-block font-sans text-sm text-charcoal uppercase tracking-[0.15em] px-12 py-4 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass"
+         style="border: 1px solid #B8956A;">
+        Zobacz Wszystkie Oferty
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     6. JAK PRACUJĘ / PROCES
+═══════════════════════════════════════════ -->
+<section id="proces" class="py-24 lg:py-32" style="background-color: #2C2C2C;">
+  <div class="max-w-6xl mx-auto px-8">
+
+    <!-- Title -->
+    <h2 class="font-serif text-cream text-center mb-20 aos" style="font-size: clamp(1.9rem, 3.5vw, 3rem); letter-spacing: -0.03em;">Jak Pracuję</h2>
+
+    <!-- Steps -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-0 relative">
+
+      <!-- Horizontal connector (desktop only) -->
+      <div class="hidden md:block absolute top-10 h-px" style="background: rgba(184,149,106,0.3); left: calc(16.66% + 24px); right: calc(16.66% + 24px);"></div>
+
+      <!-- Step 01 -->
+      <div class="text-center px-8 py-6 aos stagger-1">
+        <div class="step-num mb-4">01</div>
+        <div class="font-sans font-bold text-cream uppercase tracking-[0.1em] text-xs mb-5" style="line-height: 1.7;">Konsultacja i Wizja</div>
+        <div class="flex flex-col items-center gap-3">
+          <span class="tpl bg-cream" style="width: 78%; opacity: 0.25;"></span>
+          <span class="tpl bg-cream" style="width: 60%; opacity: 0.25;"></span>
+        </div>
+      </div>
+
+      <!-- Step 02 -->
+      <div class="text-center px-8 py-6 aos stagger-2">
+        <div class="step-num mb-4">02</div>
+        <div class="font-sans font-bold text-cream uppercase tracking-[0.1em] text-xs mb-5" style="line-height: 1.7;">Projekt i Realizacja</div>
+        <div class="flex flex-col items-center gap-3">
+          <span class="tpl bg-cream" style="width: 72%; opacity: 0.25;"></span>
+          <span class="tpl bg-cream" style="width: 54%; opacity: 0.25;"></span>
+        </div>
+      </div>
+
+      <!-- Step 03 -->
+      <div class="text-center px-8 py-6 aos stagger-3">
+        <div class="step-num mb-4">03</div>
+        <div class="font-sans font-bold text-cream uppercase tracking-[0.1em] text-xs mb-5" style="line-height: 1.7;">Klucze w Dłoni</div>
+        <div class="flex flex-col items-center gap-3">
+          <span class="tpl bg-cream" style="width: 68%; opacity: 0.25;"></span>
+          <span class="tpl bg-cream" style="width: 48%; opacity: 0.25;"></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     7. TESTIMONIAL
+═══════════════════════════════════════════ -->
+<section class="aos grain relative py-24 lg:py-32" style="background-color: #E8E4DF;">
+  <div class="relative z-10 max-w-6xl mx-auto px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+
+      <!-- Testimonial 1 -->
+      <div class="flex flex-col">
+        <div class="font-serif text-brass leading-none mb-4 select-none" style="font-size: 5.5rem; opacity: 0.35; line-height: 0.75;">&ldquo;</div>
+        <div class="flex flex-col gap-[14px] mb-8" style="max-width: 480px;">
+          <span class="tpl bg-charcoal" style="width: 100%; opacity: 0.18;"></span>
+          <span class="tpl bg-charcoal" style="width: 88%; opacity: 0.18;"></span>
+          <span class="tpl bg-charcoal" style="width: 78%; opacity: 0.18;"></span>
+          <span class="tpl bg-charcoal" style="width: 55%; opacity: 0.18;"></span>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-full flex-shrink-0" style="background-color: #C9C3BC;"></div>
+          <span class="tpl bg-charcoal" style="width: 110px; opacity: 0.18;"></span>
+        </div>
+      </div>
+
+      <!-- Testimonial 2 -->
+      <div class="flex flex-col">
+        <div class="font-serif text-brass leading-none mb-4 select-none" style="font-size: 5.5rem; opacity: 0.35; line-height: 0.75;">&ldquo;</div>
+        <div class="flex flex-col gap-[14px] mb-8" style="max-width: 480px;">
+          <span class="tpl bg-charcoal" style="width: 94%; opacity: 0.18;"></span>
+          <span class="tpl bg-charcoal" style="width: 82%; opacity: 0.18;"></span>
+          <span class="tpl bg-charcoal" style="width: 70%; opacity: 0.18;"></span>
+          <span class="tpl bg-charcoal" style="width: 48%; opacity: 0.18;"></span>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-full flex-shrink-0" style="background-color: #C9C3BC;"></div>
+          <span class="tpl bg-charcoal" style="width: 130px; opacity: 0.18;"></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     8. KONTAKT / CTA
+═══════════════════════════════════════════ -->
+<section id="kontakt" class="py-24 lg:py-32" style="background-color: #2C2C2C;">
+  <div class="max-w-6xl mx-auto px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24 items-start">
+
+      <!-- Left -->
+      <div class="aos">
+        <h2 class="font-serif text-cream mb-7" style="font-size: clamp(2rem, 3.2vw, 3rem); letter-spacing: -0.03em;">Porozmawiajmy</h2>
+        <div class="flex flex-col gap-3 mb-10">
+          <span class="tpl bg-cream" style="width: 78%; opacity: 0.2;"></span>
+          <span class="tpl bg-cream" style="width: 60%; opacity: 0.2;"></span>
+        </div>
+
+        <div class="flex flex-col gap-5">
+          <!-- Phone -->
+          <div class="flex items-center gap-4">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#B8956A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            <span class="font-sans text-cream text-sm" style="opacity: 0.55; line-height: 1.7;">+48 000 000 000</span>
+          </div>
+          <!-- Email -->
+          <div class="flex items-center gap-4">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#B8956A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <span class="font-sans text-cream text-sm" style="opacity: 0.55; line-height: 1.7;">kontakt@pmapartments.pl</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right — Form -->
+      <div class="aos stagger-2">
+        <form class="flex flex-col gap-8" onsubmit="return false;">
+
+          <div>
+            <input
+              type="text"
+              placeholder="Imię i Nazwisko"
+              class="w-full bg-transparent font-sans text-cream text-sm py-3 cursor-text"
+              style="border: none; border-bottom: 1px solid rgba(250,248,245,0.18); outline: none; transition: border-color 0.3s ease; line-height: 1.7;"
+              onfocus="this.style.borderBottomColor='#B8956A'"
+              onblur="this.style.borderBottomColor='rgba(250,248,245,0.18)'"
+            >
+          </div>
+
+          <div>
+            <input
+              type="email"
+              placeholder="Adres Email"
+              class="w-full bg-transparent font-sans text-cream text-sm py-3 cursor-text"
+              style="border: none; border-bottom: 1px solid rgba(250,248,245,0.18); outline: none; transition: border-color 0.3s ease; line-height: 1.7;"
+              onfocus="this.style.borderBottomColor='#B8956A'"
+              onblur="this.style.borderBottomColor='rgba(250,248,245,0.18)'"
+            >
+          </div>
+
+          <div>
+            <textarea
+              placeholder="Wiadomość"
+              rows="4"
+              class="w-full bg-transparent font-sans text-cream text-sm py-3 resize-none cursor-text"
+              style="border: none; border-bottom: 1px solid rgba(250,248,245,0.18); outline: none; transition: border-color 0.3s ease; line-height: 1.7;"
+              onfocus="this.style.borderBottomColor='#B8956A'"
+              onblur="this.style.borderBottomColor='rgba(250,248,245,0.18)'"
+            ></textarea>
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              class="btn-solid font-sans text-cream text-sm uppercase tracking-[0.15em] px-12 py-4 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass"
+              style="border: none; letter-spacing: 0.15em;"
+            >
+              Wyślij Wiadomość
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     9. FOOTER
+═══════════════════════════════════════════ -->
+<footer style="background-color: #1A1A1A; border-top: 1px solid rgba(184,149,106,0.2);">
+  <div class="max-w-6xl mx-auto px-8 py-16">
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+
+      <!-- Brand column -->
+      <div>
+        <div class="font-serif text-cream text-base uppercase tracking-[0.1em] mb-3" style="letter-spacing: 0.1em;">P&amp;M Apartments</div>
+        <div class="font-sans text-cream" style="font-size: 0.72rem; opacity: 0.38; line-height: 1.7;">Patryk Zacharek</div>
+      </div>
+
+      <!-- Nav links -->
+      <div class="flex flex-col gap-3">
+        <a href="#oferty"  class="font-sans text-cream cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="font-size: 0.72rem; opacity: 0.45; line-height: 1.7; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.45'">Oferty</a>
+        <a href="#o-mnie"  class="font-sans text-cream cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="font-size: 0.72rem; opacity: 0.45; line-height: 1.7; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.45'">O mnie</a>
+        <a href="#proces"  class="font-sans text-cream cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="font-size: 0.72rem; opacity: 0.45; line-height: 1.7; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.45'">Proces</a>
+        <a href="#kontakt" class="font-sans text-cream cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="font-size: 0.72rem; opacity: 0.45; line-height: 1.7; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.45'">Kontakt</a>
+      </div>
+
+      <!-- Social icons -->
+      <div class="flex items-start gap-5">
+        <a href="#" class="social-icon text-cream cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="opacity: 0.45;" aria-label="Instagram">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4.5"/>
+            <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <a href="#" class="social-icon text-cream cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="opacity: 0.45;" aria-label="Facebook">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </a>
+        <a href="#" class="social-icon text-cream cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="opacity: 0.45;" aria-label="LinkedIn">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect x="2" y="9" width="4" height="12"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Bottom copyright -->
+    <div class="pt-8" style="border-top: 1px solid rgba(250,248,245,0.07);">
+      <p class="font-sans text-cream mb-1" style="font-size: 0.68rem; opacity: 0.45; line-height: 1.7;">
+        &copy; 2025 P&amp;M Apartments. Wszelkie prawa zastrzeżone.
+      </p>
+      <p class="font-sans text-cream" style="font-size: 0.65rem; opacity: 0.32; line-height: 1.7;">
+        Strona stworzona przez <a href="https://nextengroup.pl" class="underline cursor-pointer" style="transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Next Group</a>
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════════ -->
+<script>
+  // ── Navbar scroll ──────────────────────────
+  const navbar = document.getElementById('navbar');
+  const navLogo = navbar.querySelector('.nav-logo');
+  const navLinks = navbar.querySelectorAll('.nav-link');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      navbar.classList.add('scrolled');
+      navLogo.style.color = '#2C2C2C';
+      navLinks.forEach(l => l.style.color = '#2C2C2C');
+    } else {
+      navbar.classList.remove('scrolled');
+      navLogo.style.color = '#FAF8F5';
+      navLinks.forEach(l => l.style.color = '#FAF8F5');
+    }
+  }, { passive: true });
+
+  // ── Mobile menu ─────────────────────────────
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const ham1 = document.getElementById('ham-1');
+  const ham2 = document.getElementById('ham-2');
+  const ham3 = document.getElementById('ham-3');
+  let menuOpen = false;
+
+  function toggleMenu(force) {
+    menuOpen = force !== undefined ? force : !menuOpen;
+    if (menuOpen) {
+      mobileMenu.classList.add('open');
+      ham1.style.transform = 'translateY(6.5px) rotate(45deg)';
+      ham2.style.opacity = '0';
+      ham3.style.transform = 'translateY(-6.5px) rotate(-45deg)';
+      ham3.style.width = '24px';
+    } else {
+      mobileMenu.classList.remove('open');
+      ham1.style.transform = '';
+      ham2.style.opacity = '';
+      ham3.style.transform = '';
+      ham3.style.width = '';
+    }
+  }
+
+  hamburger.addEventListener('click', () => toggleMenu());
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
+
+  // ── Intersection Observer ───────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.aos').forEach(el => observer.observe(el));
+
+  // ── Smooth anchor scroll ────────────────────
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id === '#') return;
+      const target = document.querySelector(id);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
