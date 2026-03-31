@@ -56,6 +56,7 @@
     .aos.stagger-1 { transition-delay: 0.1s; }
     .aos.stagger-2 { transition-delay: 0.2s; }
     .aos.stagger-3 { transition-delay: 0.3s; }
+    .aos.stagger-4 { transition-delay: 0.4s; }
     .aos.visible { opacity: 1; transform: translateY(0); }
     @media (prefers-reduced-motion: reduce) {
       .aos { opacity: 1 !important; transform: none !important; transition: none !important; }
@@ -275,7 +276,7 @@
     <a href="#o-nas" class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="transition: color 0.3s ease; line-height: 1.7;">O nas</a>
     <a href="#wykończenie" class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="transition: color 0.3s ease; line-height: 1.7;">Wykończenie</a>
     <a href="#wlasciciel" class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="transition: color 0.3s ease; line-height: 1.7;">O właścicielu</a>
-    <a href="#oferty" class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="transition: color 0.3s ease; line-height: 1.7;">Oferty</a>
+    <a href="#oferty" class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="transition: color 0.3s ease; line-height: 1.7;">Realizacje</a>
     <a href="#kontakt" class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="transition: color 0.3s ease; line-height: 1.7;">Kontakt</a>
   </div>
 
@@ -292,7 +293,7 @@
   <a href="#o-nas" class="font-serif text-cream text-3xl cursor-pointer hover:text-brass" style="transition: color 0.3s ease; letter-spacing: -0.02em;">O nas</a>
   <a href="#wykończenie" class="font-serif text-cream text-3xl cursor-pointer hover:text-brass" style="transition: color 0.3s ease; letter-spacing: -0.02em;">Wykończenie</a>
   <a href="#wlasciciel" class="font-serif text-cream text-3xl cursor-pointer hover:text-brass" style="transition: color 0.3s ease; letter-spacing: -0.02em;">O właścicielu</a>
-  <a href="#oferty" class="font-serif text-cream text-3xl cursor-pointer hover:text-brass" style="transition: color 0.3s ease; letter-spacing: -0.02em;">Oferty</a>
+  <a href="#oferty" class="font-serif text-cream text-3xl cursor-pointer hover:text-brass" style="transition: color 0.3s ease; letter-spacing: -0.02em;">Realizacje</a>
   <a href="#kontakt" class="font-serif text-cream text-3xl cursor-pointer hover:text-brass" style="transition: color 0.3s ease; letter-spacing: -0.02em;">Kontakt</a>
 </div>
 
@@ -590,25 +591,25 @@
       </div>
     </div>
 
-    <div class="aos">
-      <h3 class="font-serif text-charcoal mb-10" style="font-size: clamp(1.6rem, 2.7vw, 2.4rem); letter-spacing: -0.03em;">Jak wygląda współpraca?</h3>
+    <div>
+      <h3 class="aos font-serif text-charcoal mb-10" style="font-size: clamp(1.6rem, 2.7vw, 2.4rem); letter-spacing: -0.03em;">Jak wygląda współpraca?</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-        <div class="px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
+        <div class="aos stagger-1 px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
           <div class="step-num mb-4">01</div>
           <p class="font-sans font-bold text-charcoal uppercase tracking-[0.1em] text-xs mb-4" style="line-height: 1.7;">Spotkanie i omówienie potrzeb</p>
           <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.72; line-height: 1.8;">Określamy styl, budżet, zakres prac i termin realizacji.</p>
         </div>
-        <div class="px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
+        <div class="aos stagger-2 px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
           <div class="step-num mb-4">02</div>
           <p class="font-sans font-bold text-charcoal uppercase tracking-[0.1em] text-xs mb-4" style="line-height: 1.7;">Projekt i kosztorys</p>
           <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.72; line-height: 1.8;">Przedstawiamy zakres prac i wycenę lub proponujemy własny pomysł na Twoje wnętrze.</p>
         </div>
-        <div class="px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
+        <div class="aos stagger-3 px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
           <div class="step-num mb-4">03</div>
           <p class="font-sans font-bold text-charcoal uppercase tracking-[0.1em] text-xs mb-4" style="line-height: 1.7;">Realizacja</p>
           <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.72; line-height: 1.8;">Wykonujemy wszystkie prace, na bieżąco informując o postępach.</p>
         </div>
-        <div class="px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
+        <div class="aos stagger-4 px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
           <div class="step-num mb-4">04</div>
           <p class="font-sans font-bold text-charcoal uppercase tracking-[0.1em] text-xs mb-4" style="line-height: 1.7;">Odbiór mieszkania</p>
           <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.72; line-height: 1.8;">Podpisujemy protokół odbioru, przekazujemy klucze i gwarancję.</p>
@@ -623,7 +624,7 @@
 <!-- ═══════════════════════════════════════════
      4. O WŁAŚCICIELU
 ═══════════════════════════════════════════ -->
-<section id="wlasciciel" class="py-24 lg:py-32" style="background-color: #E8E4DF;">
+<section id="wlasciciel" class="py-24 lg:py-32" style="background-color: #E8E4DF; border-top: 1px solid rgba(184,149,106,0.15);">
   <div class="max-w-6xl mx-auto px-8">
     <div class="grid grid-cols-1 md:grid-cols-5 gap-10 lg:gap-16 items-center">
 
