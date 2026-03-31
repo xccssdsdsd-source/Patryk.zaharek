@@ -251,10 +251,20 @@
 
     /* Decorative line */
     .deco-line {
-      width: 40px;
-      height: 2px;
-      background: #B8956A;
-      margin: 0 auto;
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: currentColor;
+      margin: 12px auto 0;
+    }
+
+    /* Card hover */
+    .card-hover {
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.10);
     }
   </style>
 </head>
@@ -313,7 +323,7 @@
   >
 
   <!-- Dark gradient overlay -->
-  <div class="absolute inset-0" style="background: linear-gradient(170deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.0) 40%, rgba(0,0,0,0.72) 100%);"></div>
+  <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);"></div>
 
   <!-- Content -->
   <div class="relative z-10 h-full flex flex-col justify-end px-8 md:px-16 lg:px-24 pb-28 md:pb-32">
@@ -354,17 +364,17 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-      <div class="aos stagger-1 text-center px-8 py-8" style="border: 1px solid rgba(184,149,106,0.2);">
+      <div class="aos stagger-1 card-hover text-center px-8 py-8" style="border: 1px solid rgba(184,149,106,0.2);">
         <div class="step-num mb-4">01</div>
         <div class="font-sans font-bold text-cream uppercase tracking-[0.1em] text-xs" style="line-height: 1.7;">Zakup nieruchomości</div>
       </div>
 
-      <div class="aos stagger-2 text-center px-8 py-8" style="border: 1px solid rgba(184,149,106,0.2);">
+      <div class="aos stagger-2 card-hover text-center px-8 py-8" style="border: 1px solid rgba(184,149,106,0.2);">
         <div class="step-num mb-4">02</div>
         <div class="font-sans font-bold text-cream uppercase tracking-[0.1em] text-xs" style="line-height: 1.7;">Wykończenie pod klucz</div>
       </div>
 
-      <div class="aos stagger-3 text-center px-8 py-8" style="border: 1px solid rgba(184,149,106,0.2);">
+      <div class="aos stagger-3 card-hover text-center px-8 py-8" style="border: 1px solid rgba(184,149,106,0.2);">
         <div class="step-num mb-4">03</div>
         <div class="font-sans font-bold text-cream uppercase tracking-[0.1em] text-xs" style="line-height: 1.7;">Sprzedaż mieszkań</div>
       </div>
@@ -481,6 +491,7 @@
       <div class="aos">
         <p class="font-sans uppercase tracking-[0.12em] mb-4" style="font-size: 0.72rem; color: #B8956A; line-height: 1.7;">Wrocław i okolice</p>
         <h2 class="font-serif text-charcoal mb-6" style="font-size: clamp(2rem, 3.5vw, 3.2rem); letter-spacing: -0.03em;">Wykończenie pod klucz</h2>
+        <div class="deco-line" style="margin-left: 0; margin-right: auto; margin-bottom: 24px;"></div>
         <p class="font-sans text-charcoal mb-10" style="font-size: 1rem; opacity: 0.72; line-height: 1.9;">
           Kupujesz nowe mieszkanie i nie chcesz martwić się ekipami, materiałami i terminami? Z nami odbierzesz klucze i wprowadzisz się do gotowego, dopracowanego wnętrza.
         </p>
@@ -563,27 +574,27 @@
       <div class="aos stagger-2">
         <h3 class="font-serif text-charcoal mb-6" style="font-size: clamp(1.6rem, 2.7vw, 2.4rem); letter-spacing: -0.03em;">Dlaczego warto wybrać nas?</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
+          <div class="card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
             <p class="font-sans font-bold text-charcoal mb-3" style="line-height: 1.7;">14 lat doświadczenia</p>
             <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.72; line-height: 1.8;">Wykończyliśmy dziesiątki mieszkań — znamy każdy etap procesu.</p>
           </div>
-          <div class="px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
+          <div class="card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
             <p class="font-sans font-bold text-charcoal mb-3" style="line-height: 1.7;">Pełna odpowiedzialność</p>
             <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.72; line-height: 1.8;">Jeden punkt kontaktu, bez pośredników i chaosu organizacyjnego.</p>
           </div>
-          <div class="px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
+          <div class="card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
             <p class="font-sans font-bold text-charcoal mb-3" style="line-height: 1.7;">Jasny kosztorys</p>
             <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.72; line-height: 1.8;">Przed startem ustalamy zakres i cenę — bez niespodzianek.</p>
           </div>
-          <div class="px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
+          <div class="card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
             <p class="font-sans font-bold text-charcoal mb-3" style="line-height: 1.7;">Terminowość i gwarancja</p>
             <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.72; line-height: 1.8;">Dotrzymujemy terminów i udzielamy gwarancji na wykonane prace.</p>
           </div>
-          <div class="px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
+          <div class="card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
             <p class="font-sans font-bold text-charcoal mb-3" style="line-height: 1.7;">Stały kontakt</p>
             <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.72; line-height: 1.8;">Zawsze odbieram telefony. Masz ze mną bezpośredni kontakt na każdym etapie.</p>
           </div>
-          <div class="px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
+          <div class="card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
             <p class="font-sans font-bold text-charcoal mb-3" style="line-height: 1.7;">15% oszczędności na VAT</p>
             <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.72; line-height: 1.8;">Pomagamy zoptymalizować koszty materiałów dzięki doświadczeniu inwestycyjnemu.</p>
           </div>
@@ -594,22 +605,22 @@
     <div>
       <h3 class="aos font-serif text-charcoal mb-10" style="font-size: clamp(1.6rem, 2.7vw, 2.4rem); letter-spacing: -0.03em;">Jak wygląda współpraca?</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-        <div class="aos stagger-1 px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
+        <div class="aos stagger-1 card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
           <div class="step-num mb-4">01</div>
           <p class="font-sans font-bold text-charcoal uppercase tracking-[0.1em] text-xs mb-4" style="line-height: 1.7;">Spotkanie i omówienie potrzeb</p>
           <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.72; line-height: 1.8;">Określamy styl, budżet, zakres prac i termin realizacji.</p>
         </div>
-        <div class="aos stagger-2 px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
+        <div class="aos stagger-2 card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
           <div class="step-num mb-4">02</div>
           <p class="font-sans font-bold text-charcoal uppercase tracking-[0.1em] text-xs mb-4" style="line-height: 1.7;">Projekt i kosztorys</p>
           <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.72; line-height: 1.8;">Przedstawiamy zakres prac i wycenę lub proponujemy własny pomysł na Twoje wnętrze.</p>
         </div>
-        <div class="aos stagger-3 px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
+        <div class="aos stagger-3 card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
           <div class="step-num mb-4">03</div>
           <p class="font-sans font-bold text-charcoal uppercase tracking-[0.1em] text-xs mb-4" style="line-height: 1.7;">Realizacja</p>
           <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.72; line-height: 1.8;">Wykonujemy wszystkie prace, na bieżąco informując o postępach.</p>
         </div>
-        <div class="aos stagger-4 px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
+        <div class="aos stagger-4 card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
           <div class="step-num mb-4">04</div>
           <p class="font-sans font-bold text-charcoal uppercase tracking-[0.1em] text-xs mb-4" style="line-height: 1.7;">Odbiór mieszkania</p>
           <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.72; line-height: 1.8;">Podpisujemy protokół odbioru, przekazujemy klucze i gwarancję.</p>
@@ -629,7 +640,7 @@
     <div class="grid grid-cols-1 md:grid-cols-5 gap-10 lg:gap-16 items-center">
 
       <!-- Photo — 40% -->
-      <div class="md:col-span-2 aos agent-photo overflow-hidden" style="box-shadow: 0 4px 6px rgba(184,149,106,0.08), 0 14px 48px rgba(44,44,44,0.1);">
+      <div class="md:col-span-2 aos agent-photo overflow-hidden" style="box-shadow: 0 8px 32px rgba(0,0,0,0.12); border-radius: 4px;">
         <img
           src="portret.jpg"
           alt="Patryk Zacharek"
@@ -643,6 +654,7 @@
       <div class="md:col-span-3 aos stagger-2">
         <p class="font-sans uppercase tracking-[0.12em] mb-4" style="font-size: 0.72rem; color: #B8956A; line-height: 1.7;">O właścicielu</p>
         <h2 class="font-serif text-charcoal mb-2" style="font-size: clamp(2rem, 3.5vw, 3.2rem); letter-spacing: -0.03em;">Patryk Zacharek</h2>
+        <div class="deco-line" style="margin-left: 0; margin-right: auto; margin-bottom: 16px;"></div>
         <p class="font-sans uppercase tracking-[0.12em] mb-8" style="font-size: 0.72rem; color: #B8956A; line-height: 1.7;">Właściciel P&amp;M Apartments</p>
         <p class="font-sans text-charcoal mb-12" style="font-size: 1rem; opacity: 0.7; line-height: 1.9;">
           Patryk Zacharek to założyciel i właściciel P&amp;M Apartments. Od ponad 14 lat działa na rynku nieruchomości i wykończeń wnętrz, specjalizując się w przygotowaniu mieszkań z rynku pierwotnego do sprzedaży. Osobiście nadzoruje każdy projekt — od zakupu lokalu, przez projekt i wykończenie, po finalną sprzedaż.
@@ -760,6 +772,7 @@
       <!-- Left -->
       <div class="aos">
         <h2 class="font-serif text-cream mb-7" style="font-size: clamp(2rem, 3.2vw, 3rem); letter-spacing: -0.03em;">Porozmawiajmy</h2>
+        <div class="deco-line" style="margin-left: 0; margin-right: auto; margin-bottom: 28px;"></div>
         <div class="mb-10" style="max-width: 520px;">
           <p class="font-sans text-cream mb-3" style="font-size: 1rem; opacity: 0.92; line-height: 1.8;">
             Poszukujesz gotowego mieszkania pod klucz we Wrocławiu?
