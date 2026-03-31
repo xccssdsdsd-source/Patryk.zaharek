@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/jpeg" href="favicon.jpg">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -193,8 +194,9 @@
 <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-6 lg:px-12 py-5 flex items-center justify-between">
 
   <!-- Logo -->
-  <a href="#" class="nav-logo font-serif text-cream text-base lg:text-lg uppercase tracking-[0.1em] cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="transition: color 0.3s ease; letter-spacing: 0.1em;">
-    P&amp;M Apartments
+  <a href="#" class="nav-logo flex items-center gap-3 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="text-decoration: none;">
+    <img src="favicon.jpg" alt="Patryk Zacharek" class="rounded-full object-cover object-top flex-shrink-0" style="width: 34px; height: 34px; border: 1px solid rgba(184,149,106,0.5);">
+    <span class="font-serif text-cream text-base lg:text-lg uppercase" style="transition: color 0.3s ease; letter-spacing: 0.1em;">P&amp;M Apartments</span>
   </a>
 
   <!-- Desktop links -->
@@ -686,7 +688,10 @@
 
       <!-- Brand column -->
       <div>
-        <div class="font-serif text-cream text-base uppercase tracking-[0.1em] mb-3" style="letter-spacing: 0.1em;">P&amp;M Apartments</div>
+        <div class="flex items-center gap-3 mb-3">
+          <img src="favicon.jpg" alt="Patryk Zacharek" class="rounded-full object-cover object-top flex-shrink-0" style="width: 32px; height: 32px; border: 1px solid rgba(184,149,106,0.4);">
+          <div class="font-serif text-cream text-base uppercase" style="letter-spacing: 0.1em;">P&amp;M Apartments</div>
+        </div>
         <div class="font-sans text-cream" style="font-size: 0.72rem; opacity: 0.38; line-height: 1.7;">Patryk Zacharek</div>
       </div>
 
@@ -743,18 +748,21 @@
 <script>
   // ── Navbar scroll ──────────────────────────
   const navbar = document.getElementById('navbar');
-  const navLogo = navbar.querySelector('.nav-logo');
+  const navLogoSpan = navbar.querySelector('.nav-logo span');
   const navLinks = navbar.querySelectorAll('.nav-link');
+  const hamSpans = navbar.querySelectorAll('button span');
 
   window.addEventListener('scroll', () => {
     if (window.scrollY > 60) {
       navbar.classList.add('scrolled');
-      navLogo.style.color = '#2C2C2C';
+      if (navLogoSpan) navLogoSpan.style.color = '#2C2C2C';
       navLinks.forEach(l => l.style.color = '#2C2C2C');
+      hamSpans.forEach(s => s.style.background = '#2C2C2C');
     } else {
       navbar.classList.remove('scrolled');
-      navLogo.style.color = '#FAF8F5';
+      if (navLogoSpan) navLogoSpan.style.color = '#FAF8F5';
       navLinks.forEach(l => l.style.color = '#FAF8F5');
+      hamSpans.forEach(s => s.style.background = '#FAF8F5');
     }
   }, { passive: true });
 
