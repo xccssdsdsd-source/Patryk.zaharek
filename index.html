@@ -129,6 +129,66 @@
     .realization-card:hover img {
       transform: scale(1.03);
     }
+    .realization-carousel {
+      position: relative;
+      overflow: hidden;
+    }
+    .realization-slide {
+      display: none;
+    }
+    .realization-slide.active {
+      display: block;
+    }
+    .realization-slide img {
+      transition: transform 0.6s ease;
+    }
+    .realization-carousel:hover .realization-slide.active img {
+      transform: scale(1.03);
+    }
+    .realization-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 46px;
+      height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(250, 248, 245, 0.45);
+      background: rgba(26, 26, 26, 0.28);
+      color: #FAF8F5;
+      cursor: pointer;
+      transition: background-color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .realization-nav:hover {
+      background: rgba(184, 149, 106, 0.86);
+      border-color: rgba(184, 149, 106, 0.86);
+    }
+    .realization-nav.prev {
+      left: 18px;
+    }
+    .realization-nav.next {
+      right: 18px;
+    }
+    .realization-thumb {
+      border: 1px solid rgba(184,149,106,0.12);
+      opacity: 0.58;
+      transition: transform 0.3s ease, opacity 0.3s ease, border-color 0.3s ease;
+      cursor: pointer;
+      background: none;
+      padding: 0;
+      overflow: hidden;
+    }
+    .realization-thumb:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+    .realization-thumb.active {
+      opacity: 1;
+      border-color: #B8956A;
+    }
 
     /* Agent photo */
     .agent-photo img {
@@ -558,42 +618,6 @@
 
 
 <!-- ═══════════════════════════════════════════
-     3. SOCIAL PROOF / LICZBY
-═══════════════════════════════════════════ -->
-<section class="aos grain relative py-24" style="background-color: #E8E4DF;">
-  <!-- Top brass line -->
-  <div class="absolute top-0 left-0 right-0 h-px" style="background-color: #B8956A; opacity: 0.6; z-index: 2;"></div>
-
-  <div class="relative z-2 max-w-5xl mx-auto px-8 grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
-
-    <div class="aos stagger-1">
-      <div class="font-serif text-charcoal leading-none mb-3" style="font-size: clamp(2.2rem, 4.5vw, 3.6rem); letter-spacing: -0.03em;">150+</div>
-      <div class="font-sans text-charcoal uppercase tracking-[0.06em]" style="font-size: 0.65rem; opacity: 0.6; line-height: 1.7;">Zrealizowanych projektów</div>
-    </div>
-
-    <div class="aos stagger-2">
-      <div class="font-serif text-charcoal leading-none mb-3" style="font-size: clamp(2.2rem, 4.5vw, 3.6rem); letter-spacing: -0.03em;">95%</div>
-      <div class="font-sans text-charcoal uppercase tracking-[0.06em]" style="font-size: 0.65rem; opacity: 0.6; line-height: 1.7;">Zadowolonych klientów</div>
-    </div>
-
-    <div class="aos stagger-3">
-      <div class="font-serif text-charcoal leading-none mb-3" style="font-size: clamp(2.2rem, 4.5vw, 3.6rem); letter-spacing: -0.03em;">14</div>
-      <div class="font-sans text-charcoal uppercase tracking-[0.06em]" style="font-size: 0.65rem; opacity: 0.6; line-height: 1.7;">Lat doświadczenia</div>
-    </div>
-
-    <div class="aos stagger-1">
-      <div class="font-serif text-charcoal leading-none mb-3" style="font-size: clamp(2.2rem, 4.5vw, 3.6rem); letter-spacing: -0.03em;">50M+</div>
-      <div class="font-sans text-charcoal uppercase tracking-[0.06em]" style="font-size: 0.65rem; opacity: 0.6; line-height: 1.7;">Wartość sprzedaży (PLN)</div>
-    </div>
-
-  </div>
-
-  <!-- Bottom brass line -->
-  <div class="absolute bottom-0 left-0 right-0 h-px" style="background-color: #B8956A; opacity: 0.6; z-index: 2;"></div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════
      4. O WŁAŚCICIELU
 ═══════════════════════════════════════════ -->
 <section id="wlasciciel" class="py-24 lg:py-32" style="background-color: #FAF8F5;">
@@ -661,73 +685,59 @@
       <div class="deco-line"></div>
     </div>
 
-    <!-- Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
+    <div class="aos mb-14">
+      <div id="realization-carousel" class="realization-carousel" style="box-shadow: 0 6px 10px rgba(184,149,106,0.08), 0 16px 56px rgba(44,44,44,0.12);">
+        <div class="realization-slide active">
+          <img src="realizacje/DSCF9843.jpeg" alt="Realizacja mieszkania 1" loading="lazy" class="w-full object-cover block" style="aspect-ratio: 16 / 10;">
+        </div>
+        <div class="realization-slide">
+          <img src="realizacje/XT3F1909_HDR-1024x683.webp" alt="Realizacja mieszkania 2" loading="lazy" class="w-full object-cover block" style="aspect-ratio: 16 / 10;">
+        </div>
+        <div class="realization-slide">
+          <img src="realizacje/DSCF9876.jpeg" alt="Realizacja mieszkania 3" loading="lazy" class="w-full object-cover block" style="aspect-ratio: 16 / 10;">
+        </div>
+        <div class="realization-slide">
+          <img src="realizacje/XT3F6878.jpg" alt="Realizacja mieszkania 4" loading="lazy" class="w-full object-cover block" style="aspect-ratio: 16 / 10;">
+        </div>
+        <div class="realization-slide">
+          <img src="realizacje/DSCF1637.jpg" alt="Realizacja mieszkania 5" loading="lazy" class="w-full object-cover block" style="aspect-ratio: 16 / 10;">
+        </div>
+        <div class="realization-slide">
+          <img src="realizacje/thumbs-XT4F2028.jpg" alt="Realizacja mieszkania 6" loading="lazy" class="w-full object-cover block" style="aspect-ratio: 16 / 10;">
+        </div>
 
-      <article class="realization-card overflow-hidden aos stagger-1" style="aspect-ratio: 4 / 3; box-shadow: 0 4px 6px rgba(184,149,106,0.07), 0 10px 40px rgba(44,44,44,0.08);">
-        <img src="/zdj%C4%99cia%20do%20realizacji/ImageDownloader_pm-apartments.pl_DSCF1630_HDR.jpg" alt="Realizacja 01" loading="lazy" class="w-full h-full object-cover block" onerror="this.parentElement.remove()">
-      </article>
+        <button type="button" class="realization-nav prev" aria-label="Poprzednie zdjęcie">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button type="button" class="realization-nav next" aria-label="Następne zdjęcie">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
 
-      <article class="realization-card overflow-hidden aos stagger-2" style="aspect-ratio: 4 / 3; box-shadow: 0 4px 6px rgba(184,149,106,0.07), 0 10px 40px rgba(44,44,44,0.08);">
-        <img src="/zdj%C4%99cia%20do%20realizacji/ImageDownloader_pm-apartments.pl_DSCF9861.jpeg" alt="Realizacja 02" loading="lazy" class="w-full h-full object-cover block" onerror="this.parentElement.remove()">
-      </article>
-
-      <article class="realization-card overflow-hidden aos stagger-3" style="aspect-ratio: 4 / 3; box-shadow: 0 4px 6px rgba(184,149,106,0.07), 0 10px 40px rgba(44,44,44,0.08);">
-        <img src="/zdj%C4%99cia%20do%20realizacji/ImageDownloader_pm-apartments.pl_DSCF9870.jpeg" alt="Realizacja 03" loading="lazy" class="w-full h-full object-cover block" onerror="this.parentElement.remove()">
-      </article>
-
-      <article class="realization-card overflow-hidden aos stagger-1" style="aspect-ratio: 4 / 3; box-shadow: 0 4px 6px rgba(184,149,106,0.07), 0 10px 40px rgba(44,44,44,0.08);">
-        <img src="/zdj%C4%99cia%20do%20realizacji/ImageDownloader_pm-apartments.pl_XT2F3679.jpg" alt="Realizacja 04" loading="lazy" class="w-full h-full object-cover block" onerror="this.parentElement.remove()">
-      </article>
-
-      <article class="realization-card overflow-hidden aos stagger-2" style="aspect-ratio: 4 / 3; box-shadow: 0 4px 6px rgba(184,149,106,0.07), 0 10px 40px rgba(44,44,44,0.08);">
-        <img src="/zdj%C4%99cia%20do%20realizacji/ImageDownloader_pm-apartments.pl_XT2F3682.jpg" alt="Realizacja 05" loading="lazy" class="w-full h-full object-cover block" onerror="this.parentElement.remove()">
-      </article>
-
-      <article class="realization-card overflow-hidden aos stagger-3" style="aspect-ratio: 4 / 3; box-shadow: 0 4px 6px rgba(184,149,106,0.07), 0 10px 40px rgba(44,44,44,0.08);">
-        <img src="/zdj%C4%99cia%20do%20realizacji/ImageDownloader_pm-apartments.pl_XT2F7173.jpg" alt="Realizacja 06" loading="lazy" class="w-full h-full object-cover block" onerror="this.parentElement.remove()">
-      </article>
-
-      <article class="realization-card overflow-hidden aos stagger-1" style="aspect-ratio: 4 / 3; box-shadow: 0 4px 6px rgba(184,149,106,0.07), 0 10px 40px rgba(44,44,44,0.08);">
-        <img src="/zdj%C4%99cia%20do%20realizacji/ImageDownloader_pm-apartments.pl_XT2F7188.jpg" alt="Realizacja 07" loading="lazy" class="w-full h-full object-cover block" onerror="this.parentElement.remove()">
-      </article>
-
-      <article class="realization-card overflow-hidden aos stagger-2" style="aspect-ratio: 4 / 3; box-shadow: 0 4px 6px rgba(184,149,106,0.07), 0 10px 40px rgba(44,44,44,0.08);">
-        <img src="/zdj%C4%99cia%20do%20realizacji/ImageDownloader_pm-apartments.pl_XT2F7196.jpg" alt="Realizacja 08" loading="lazy" class="w-full h-full object-cover block" onerror="this.parentElement.remove()">
-      </article>
-
-      <article class="realization-card overflow-hidden aos stagger-3" style="aspect-ratio: 4 / 3; box-shadow: 0 4px 6px rgba(184,149,106,0.07), 0 10px 40px rgba(44,44,44,0.08);">
-        <img src="/zdj%C4%99cia%20do%20realizacji/ImageDownloader_pm-apartments.pl_XT2F7206.jpg" alt="Realizacja 09" loading="lazy" class="w-full h-full object-cover block" onerror="this.parentElement.remove()">
-      </article>
-
-      <article class="realization-card overflow-hidden aos stagger-1" style="aspect-ratio: 4 / 3; box-shadow: 0 4px 6px rgba(184,149,106,0.07), 0 10px 40px rgba(44,44,44,0.08);">
-        <img src="/zdj%C4%99cia%20do%20realizacji/ImageDownloader_pm-apartments.pl_XT2F7210.jpg" alt="Realizacja 10" loading="lazy" class="w-full h-full object-cover block" onerror="this.parentElement.remove()">
-      </article>
-
-      <article class="realization-card overflow-hidden aos stagger-2" style="aspect-ratio: 4 / 3; box-shadow: 0 4px 6px rgba(184,149,106,0.07), 0 10px 40px rgba(44,44,44,0.08);">
-        <img src="/zdj%C4%99cia%20do%20realizacji/ImageDownloader_pm-apartments.pl_XT2F7217.jpg" alt="Realizacja 11" loading="lazy" class="w-full h-full object-cover block" onerror="this.parentElement.remove()">
-      </article>
-
-      <article class="realization-card overflow-hidden aos stagger-3" style="aspect-ratio: 4 / 3; box-shadow: 0 4px 6px rgba(184,149,106,0.07), 0 10px 40px rgba(44,44,44,0.08);">
-        <img src="/zdj%C4%99cia%20do%20realizacji/ImageDownloader_pm-apartments.pl_XT3F6862.jpg" alt="Realizacja 12" loading="lazy" class="w-full h-full object-cover block" onerror="this.parentElement.remove()">
-      </article>
-
-      <article class="realization-card overflow-hidden aos stagger-1" style="aspect-ratio: 4 / 3; box-shadow: 0 4px 6px rgba(184,149,106,0.07), 0 10px 40px rgba(44,44,44,0.08);">
-        <img src="/zdj%C4%99cia%20do%20realizacji/ImageDownloader_pm-apartments.pl_XT3F6867.jpg" alt="Realizacja 13" loading="lazy" class="w-full h-full object-cover block" onerror="this.parentElement.remove()">
-      </article>
-
-      <article class="realization-card overflow-hidden aos stagger-2" style="aspect-ratio: 4 / 3; box-shadow: 0 4px 6px rgba(184,149,106,0.07), 0 10px 40px rgba(44,44,44,0.08);">
-        <img src="/zdj%C4%99cia%20do%20realizacji/ImageDownloader_pm-apartments.pl_XT3F6876.jpg" alt="Realizacja 14" loading="lazy" class="w-full h-full object-cover block" onerror="this.parentElement.remove()">
-      </article>
-
-      <article class="realization-card overflow-hidden aos stagger-3" style="aspect-ratio: 4 / 3; box-shadow: 0 4px 6px rgba(184,149,106,0.07), 0 10px 40px rgba(44,44,44,0.08);">
-        <img src="/zdj%C4%99cia%20do%20realizacji/ImageDownloader_pm-apartments.pl_XT4F0898.jpg" alt="Realizacja 15" loading="lazy" class="w-full h-full object-cover block" onerror="this.parentElement.remove()">
-      </article>
-
-      <article class="realization-card overflow-hidden aos stagger-1" style="aspect-ratio: 4 / 3; box-shadow: 0 4px 6px rgba(184,149,106,0.07), 0 10px 40px rgba(44,44,44,0.08);">
-        <img src="/zdj%C4%99cia%20do%20realizacji/ImageDownloader_pm-apartments.pl_XT4F0903.jpg" alt="Realizacja 16" loading="lazy" class="w-full h-full object-cover block" onerror="this.parentElement.remove()">
-      </article>
-
+      <div class="grid grid-cols-3 md:grid-cols-6 gap-3 mt-4">
+        <button type="button" class="realization-thumb active" data-slide-target="0" aria-label="Pokaż zdjęcie 1">
+          <img src="realizacje/DSCF9843.jpeg" alt="" loading="lazy" class="w-full object-cover block" style="aspect-ratio: 4 / 3;">
+        </button>
+        <button type="button" class="realization-thumb" data-slide-target="1" aria-label="Pokaż zdjęcie 2">
+          <img src="realizacje/XT3F1909_HDR-1024x683.webp" alt="" loading="lazy" class="w-full object-cover block" style="aspect-ratio: 4 / 3;">
+        </button>
+        <button type="button" class="realization-thumb" data-slide-target="2" aria-label="Pokaż zdjęcie 3">
+          <img src="realizacje/DSCF9876.jpeg" alt="" loading="lazy" class="w-full object-cover block" style="aspect-ratio: 4 / 3;">
+        </button>
+        <button type="button" class="realization-thumb" data-slide-target="3" aria-label="Pokaż zdjęcie 4">
+          <img src="realizacje/XT3F6878.jpg" alt="" loading="lazy" class="w-full object-cover block" style="aspect-ratio: 4 / 3;">
+        </button>
+        <button type="button" class="realization-thumb" data-slide-target="4" aria-label="Pokaż zdjęcie 5">
+          <img src="realizacje/DSCF1637.jpg" alt="" loading="lazy" class="w-full object-cover block" style="aspect-ratio: 4 / 3;">
+        </button>
+        <button type="button" class="realization-thumb" data-slide-target="5" aria-label="Pokaż zdjęcie 6">
+          <img src="realizacje/thumbs-XT4F2028.jpg" alt="" loading="lazy" class="w-full object-cover block" style="aspect-ratio: 4 / 3;">
+        </button>
+      </div>
     </div>
 
     <!-- Ghost CTA -->
@@ -971,6 +981,25 @@
       }
     });
   });
+
+  const realizationCarousel = document.getElementById('realization-carousel');
+  if (realizationCarousel) {
+    const slides = Array.from(realizationCarousel.querySelectorAll('.realization-slide'));
+    const thumbs = Array.from(document.querySelectorAll('.realization-thumb'));
+    const prevButton = realizationCarousel.querySelector('.realization-nav.prev');
+    const nextButton = realizationCarousel.querySelector('.realization-nav.next');
+    let activeSlide = 0;
+
+    const renderSlide = index => {
+      activeSlide = (index + slides.length) % slides.length;
+      slides.forEach((slide, slideIndex) => slide.classList.toggle('active', slideIndex === activeSlide));
+      thumbs.forEach((thumb, thumbIndex) => thumb.classList.toggle('active', thumbIndex === activeSlide));
+    };
+
+    prevButton?.addEventListener('click', () => renderSlide(activeSlide - 1));
+    nextButton?.addEventListener('click', () => renderSlide(activeSlide + 1));
+    thumbs.forEach((thumb, index) => thumb.addEventListener('click', () => renderSlide(index)));
+  }
 </script>
 
 </body>
