@@ -266,6 +266,159 @@
       transform: translateY(-5px);
       box-shadow: 0 12px 28px rgba(0,0,0,0.10);
     }
+
+    /* ── W sprzedaży ── */
+    #w-sprzedazy {
+      padding: 6rem 0;
+      background-color: #2C2C2C;
+      border-top: 1px solid rgba(184,149,106,0.15);
+    }
+    .properties-list {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .property-card {
+      background-color: rgba(250,248,245,0.04);
+      border: 1px solid rgba(184,149,106,0.2);
+      padding: 2.5rem;
+    }
+    .property-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.75rem 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .property-header h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.4rem, 2.4vw, 2rem);
+      letter-spacing: -0.02em;
+      color: #FAF8F5;
+      margin: 0;
+    }
+    .property-address {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 0.85rem;
+      color: #B8956A;
+      margin: 0;
+      letter-spacing: 0.04em;
+    }
+    .property-badge.sold {
+      background-color: #c0392b;
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      letter-spacing: 0.06em;
+    }
+    .property-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+      margin-bottom: 1.5rem;
+      padding: 1rem 0;
+      border-top: 1px solid rgba(184,149,106,0.15);
+      border-bottom: 1px solid rgba(184,149,106,0.15);
+    }
+    .property-meta span {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 0.9rem;
+      color: #FAF8F5;
+      opacity: 0.82;
+    }
+    .property-description {
+      margin-bottom: 1.75rem;
+    }
+    .property-description p {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 1rem;
+      color: #FAF8F5;
+      opacity: 0.72;
+      line-height: 1.9;
+      margin: 0;
+    }
+    .property-features {
+      margin-bottom: 2rem;
+    }
+    .property-features h4 {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #B8956A;
+      margin: 1.5rem 0 0.75rem;
+    }
+    .property-features p,
+    .property-features li {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 0.95rem;
+      color: #FAF8F5;
+      opacity: 0.72;
+      line-height: 1.85;
+    }
+    .property-features ul {
+      padding-left: 1.25rem;
+      margin: 0;
+    }
+    .property-features li {
+      margin-bottom: 0.35rem;
+    }
+    .property-features p {
+      margin: 0 0 0.5rem;
+    }
+    .property-map {
+      margin-bottom: 2rem;
+    }
+    .property-map h4 {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #B8956A;
+      margin: 0 0 0.75rem;
+    }
+    .property-footer {
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(184,149,106,0.15);
+    }
+    .btn-prospekt {
+      display: inline-block;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #FAF8F5;
+      border: 1px solid #B8956A;
+      padding: 0.85rem 2rem;
+      text-decoration: none;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+    .btn-prospekt:hover {
+      background-color: #B8956A;
+      color: #2C2C2C;
+    }
+    @media (max-width: 767px) {
+      .property-meta {
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      .property-map iframe {
+        height: 280px !important;
+      }
+      .property-card {
+        padding: 1.5rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -287,6 +440,7 @@
     <a href="#wykończenie" class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="transition: color 0.3s ease; line-height: 1.7;">Wykończenie</a>
     <a href="#wlasciciel" class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="transition: color 0.3s ease; line-height: 1.7;">O właścicielu</a>
     <a href="#oferty" class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="transition: color 0.3s ease; line-height: 1.7;">Realizacje</a>
+    <a href="#w-sprzedazy" class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="transition: color 0.3s ease; line-height: 1.7;">W sprzedaży</a>
     <a href="#kontakt" class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="transition: color 0.3s ease; line-height: 1.7;">Kontakt</a>
   </div>
 
@@ -763,7 +917,105 @@
 
 
 <!-- ═══════════════════════════════════════════
-     8. KONTAKT / CTA
+     8. W SPRZEDAŻY
+═══════════════════════════════════════════ -->
+<section id="w-sprzedazy">
+  <div class="max-w-6xl mx-auto px-8">
+
+    <div class="text-center mb-16">
+      <p class="font-sans uppercase tracking-[0.12em] mb-4" style="font-size: 0.72rem; color: #B8956A; line-height: 1.7;">Oferta</p>
+      <h2 class="font-serif text-cream mb-4" style="font-size: clamp(1.9rem, 3.5vw, 3rem); letter-spacing: -0.03em;">W sprzedaży</h2>
+      <div class="deco-line"></div>
+    </div>
+
+  </div>
+
+  <div class="properties-list">
+
+    <!-- KARTA #1 -->
+    <div class="property-card">
+
+      <div class="property-header">
+        <h3>Osiedle Zielna</h3>
+        <p class="property-address">ul. Jankiela 4/4, Wrocław</p>
+        <span class="property-badge sold">Sprzedane</span>
+      </div>
+
+      <div class="property-meta">
+        <span>3 pokoje</span>
+        <span>55,31 m²</span>
+        <span>13 993 zł/m²</span>
+        <span>774 000 zł</span>
+        <span>Garaż: 32 000 zł</span>
+      </div>
+
+      <div class="property-description">
+        <p>
+          Osiedle Zielna we Wrocławiu w dzielnicy Psie Pole, która oferuje kameralną zabudowę,
+          dużą ilość zieleni i plac zabaw. Inwestycja posiada miejsca parkingowe w garażu
+          podziemnym, a jej lokalizacja zapewnia spokój, bliskość natury oraz dogodny dostęp
+          do centrum miasta i okolicznych punktów usługowych.
+        </p>
+      </div>
+
+      <div class="property-features">
+        <h4>Charakterystyka osiedla</h4>
+        <ul>
+          <li><strong>Kameralny charakter:</strong> Osiedle składa się z niewielu budynków, co tworzy atmosferę spokoju i intymności.</li>
+          <li><strong>Zieleń:</strong> Duże, zielone patio, kwiatowe ogrody, krzewy i drzewa; zautomatyzowane systemy nawadniające.</li>
+          <li><strong>Udogodnienia:</strong> Plac zabaw dla dzieci, siłownia na świeżym powietrzu, stojaki na rowery.</li>
+          <li><strong>Bezpieczeństwo:</strong> Monitoring 24/7 całego terenu osiedla.</li>
+        </ul>
+
+        <h4>Lokalizacja i okolica</h4>
+        <ul>
+          <li><strong>Dzielnica:</strong> Psie Pole — historyczna dzielnica na północy Wrocławia.</li>
+          <li><strong>Komunikacja:</strong> Pobliskie przystanki autobusowe; dojazd do centrum ~20 min samochodem.</li>
+          <li><strong>Infrastruktura:</strong> Sklepy, supermarkety, szkoły, przedszkola, tereny zielone.</li>
+        </ul>
+
+        <h4>Standard wykończenia</h4>
+        <p>Mieszkanie gotowe do wprowadzenia:</p>
+        <ul>
+          <li>Meble na wymiar (stolarz, systemy Blum)</li>
+          <li>Podłoga: deska fornirowana dąb</li>
+          <li>Drzwi lakierowane Porta</li>
+          <li>Gładzie gipsowe</li>
+          <li>Farby Flugger</li>
+          <li>Płytki i armatura: Paradyż oraz GROHE</li>
+          <li>Rolety zewnętrzne</li>
+        </ul>
+      </div>
+
+      <div class="property-map">
+        <h4>Lokalizacja na mapie</h4>
+        <iframe
+          src="https://www.google.com/maps?q=ul.+Jankiela+4,+51-663+Wrocław&t=k&z=16&output=embed"
+          width="100%"
+          height="420"
+          style="border:0; border-radius: 8px;"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Lokalizacja: ul. Jankiela 4/4, Wrocław">
+        </iframe>
+      </div>
+
+      <div class="property-footer">
+        <a href="prospekt-osiedle-zielna.pdf" download="Prospekt_Informacyjny_Osiedle_Zielna.pdf" class="btn-prospekt">Pobierz prospekt informacyjny (PDF)</a>
+      </div>
+
+    </div>
+    <!-- KONIEC KARTY #1 -->
+
+  </div>
+  <!-- Kolejne nieruchomości dodawaj jako nowe div.property-card wewnątrz div.properties-list -->
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     9. KONTAKT / CTA
 ═══════════════════════════════════════════ -->
 <section id="kontakt" class="py-24 lg:py-32" style="background-color: #2C2C2C;">
   <div class="max-w-6xl mx-auto px-8">
