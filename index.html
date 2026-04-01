@@ -418,41 +418,123 @@
       background-color: #B8956A;
       color: #2C2C2C;
     }
-    /* ── Gallery ── */
-    .property-gallery {
-      margin: 1.75rem 0;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
+    /* ── Gallery Slider ── */
+    .gallery-wrap {
+      position: relative;
+      margin: 2rem 0;
     }
-    .property-gallery a {
+    .gallery-slider {
+      overflow: hidden;
+      border-radius: 4px;
+    }
+    .gallery-track {
+      display: flex;
+      gap: 10px;
+      transition: transform 0.48s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+    .gallery-track a {
+      flex: 0 0 calc(33.333% - 7px);
       display: block;
       overflow: hidden;
       border-radius: 3px;
       position: relative;
       aspect-ratio: 4/3;
       background: #1a1a1a;
+      cursor: zoom-in;
     }
-    .property-gallery a::after {
+    .gallery-track a::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(184,149,106,0.18) 0%, transparent 60%);
+      background: linear-gradient(to top, rgba(30,24,16,0.55) 0%, transparent 55%);
       opacity: 0;
-      transition: opacity 0.25s ease;
+      transition: opacity 0.28s ease;
     }
-    .property-gallery a:hover::after {
+    .gallery-track a:hover::after {
       opacity: 1;
     }
-    .property-gallery a:hover img {
-      transform: scale(1.04);
+    .gallery-track a:hover img {
+      transform: scale(1.05);
     }
-    .property-gallery img {
+    .gallery-track img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.35s ease;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    /* Nav buttons */
+    .gallery-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(30,24,16,0.78);
+      border: 1px solid rgba(184,149,106,0.45);
+      color: #B8956A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: background 0.22s ease, border-color 0.22s ease, opacity 0.22s ease;
+      backdrop-filter: blur(6px);
+    }
+    .gallery-btn:hover {
+      background: rgba(184,149,106,0.18);
+      border-color: #B8956A;
+    }
+    .gallery-btn:focus-visible {
+      outline: 2px solid #B8956A;
+      outline-offset: 2px;
+    }
+    .gallery-btn:active {
+      transform: translateY(-50%) scale(0.93);
+    }
+    .gallery-btn.disabled {
+      opacity: 0.25;
+      pointer-events: none;
+    }
+    .gallery-btn--prev { left: -18px; }
+    .gallery-btn--next { right: -18px; }
+    .gallery-btn svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    /* Counter */
+    .gallery-counter {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 14px;
+    }
+    .gallery-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(184,149,106,0.3);
+      transition: background 0.25s ease, transform 0.25s ease;
+      cursor: pointer;
+    }
+    .gallery-dot.active {
+      background: #B8956A;
+      transform: scale(1.5);
+    }
+    @media (max-width: 767px) {
+      .gallery-track a {
+        flex: 0 0 calc(50% - 5px);
+      }
+      .gallery-btn--prev { left: -12px; }
+      .gallery-btn--next { right: -12px; }
     }
     /* Lightbox overlay */
     .lightbox-overlay {
@@ -501,9 +583,7 @@
       .property-card {
         padding: 1.5rem;
       }
-      .property-gallery {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      /* gallery responsive handled in slider rules */
     }
   </style>
 </head>
@@ -1035,50 +1115,64 @@
         <span>Garaż: 32 000 zł</span>
       </div>
 
-      <!-- GALERIA ZDJĘĆ -->
-      <div class="property-gallery">
-        <a href="Jankiel/1.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 1">
-          <img src="Jankiel/1.jpg" alt="Osiedle Zielna – zdjęcie 1" loading="lazy">
-        </a>
-        <a href="Jankiel/2.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 2">
-          <img src="Jankiel/2.jpg" alt="Osiedle Zielna – zdjęcie 2" loading="lazy">
-        </a>
-        <a href="Jankiel/3.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 3">
-          <img src="Jankiel/3.jpg" alt="Osiedle Zielna – zdjęcie 3" loading="lazy">
-        </a>
-        <a href="Jankiel/4.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 4">
-          <img src="Jankiel/4.jpg" alt="Osiedle Zielna – zdjęcie 4" loading="lazy">
-        </a>
-        <a href="Jankiel/5.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 5">
-          <img src="Jankiel/5.jpg" alt="Osiedle Zielna – zdjęcie 5" loading="lazy">
-        </a>
-        <a href="Jankiel/6.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 6">
-          <img src="Jankiel/6.jpg" alt="Osiedle Zielna – zdjęcie 6" loading="lazy">
-        </a>
-        <a href="Jankiel/7.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 7">
-          <img src="Jankiel/7.jpg" alt="Osiedle Zielna – zdjęcie 7" loading="lazy">
-        </a>
-        <a href="Jankiel/8.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 8">
-          <img src="Jankiel/8.jpg" alt="Osiedle Zielna – zdjęcie 8" loading="lazy">
-        </a>
-        <a href="Jankiel/9.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 9">
-          <img src="Jankiel/9.jpg" alt="Osiedle Zielna – zdjęcie 9" loading="lazy">
-        </a>
-        <a href="Jankiel/10.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 10">
-          <img src="Jankiel/10.jpg" alt="Osiedle Zielna – zdjęcie 10" loading="lazy">
-        </a>
-        <a href="Jankiel/11.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 11">
-          <img src="Jankiel/11.jpg" alt="Osiedle Zielna – zdjęcie 11" loading="lazy">
-        </a>
-        <a href="Jankiel/12.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 12">
-          <img src="Jankiel/12.jpg" alt="Osiedle Zielna – zdjęcie 12" loading="lazy">
-        </a>
-        <a href="Jankiel/13.JPG" onclick="openLightbox(this.href);return false;" title="Zdjęcie 13">
-          <img src="Jankiel/13.JPG" alt="Osiedle Zielna – zdjęcie 13" loading="lazy">
-        </a>
-        <a href="Jankiel/14.JPG" onclick="openLightbox(this.href);return false;" title="Zdjęcie 14">
-          <img src="Jankiel/14.JPG" alt="Osiedle Zielna – zdjęcie 14" loading="lazy">
-        </a>
+      <!-- GALERIA ZDJĘĆ – SLIDER -->
+      <div class="gallery-wrap" id="gallery-jankiel">
+        <button class="gallery-btn gallery-btn--prev" aria-label="Poprzednie zdjęcia" onclick="galleryPrev('gallery-jankiel')">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+
+        <div class="gallery-slider">
+          <div class="gallery-track" id="gallery-jankiel-track">
+            <a href="Jankiel/1.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 1">
+              <img src="Jankiel/1.jpg" alt="Osiedle Zielna – zdjęcie 1" loading="lazy">
+            </a>
+            <a href="Jankiel/2.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 2">
+              <img src="Jankiel/2.jpg" alt="Osiedle Zielna – zdjęcie 2" loading="lazy">
+            </a>
+            <a href="Jankiel/3.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 3">
+              <img src="Jankiel/3.jpg" alt="Osiedle Zielna – zdjęcie 3" loading="lazy">
+            </a>
+            <a href="Jankiel/4.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 4">
+              <img src="Jankiel/4.jpg" alt="Osiedle Zielna – zdjęcie 4" loading="lazy">
+            </a>
+            <a href="Jankiel/5.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 5">
+              <img src="Jankiel/5.jpg" alt="Osiedle Zielna – zdjęcie 5" loading="lazy">
+            </a>
+            <a href="Jankiel/6.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 6">
+              <img src="Jankiel/6.jpg" alt="Osiedle Zielna – zdjęcie 6" loading="lazy">
+            </a>
+            <a href="Jankiel/7.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 7">
+              <img src="Jankiel/7.jpg" alt="Osiedle Zielna – zdjęcie 7" loading="lazy">
+            </a>
+            <a href="Jankiel/8.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 8">
+              <img src="Jankiel/8.jpg" alt="Osiedle Zielna – zdjęcie 8" loading="lazy">
+            </a>
+            <a href="Jankiel/9.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 9">
+              <img src="Jankiel/9.jpg" alt="Osiedle Zielna – zdjęcie 9" loading="lazy">
+            </a>
+            <a href="Jankiel/10.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 10">
+              <img src="Jankiel/10.jpg" alt="Osiedle Zielna – zdjęcie 10" loading="lazy">
+            </a>
+            <a href="Jankiel/11.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 11">
+              <img src="Jankiel/11.jpg" alt="Osiedle Zielna – zdjęcie 11" loading="lazy">
+            </a>
+            <a href="Jankiel/12.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 12">
+              <img src="Jankiel/12.jpg" alt="Osiedle Zielna – zdjęcie 12" loading="lazy">
+            </a>
+            <a href="Jankiel/13.JPG" onclick="openLightbox(this.href);return false;" title="Zdjęcie 13">
+              <img src="Jankiel/13.JPG" alt="Osiedle Zielna – zdjęcie 13" loading="lazy">
+            </a>
+            <a href="Jankiel/14.JPG" onclick="openLightbox(this.href);return false;" title="Zdjęcie 14">
+              <img src="Jankiel/14.JPG" alt="Osiedle Zielna – zdjęcie 14" loading="lazy">
+            </a>
+          </div>
+        </div>
+
+        <button class="gallery-btn gallery-btn--next" aria-label="Następne zdjęcia" onclick="galleryNext('gallery-jankiel')">
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+
+        <div class="gallery-counter" id="gallery-jankiel-dots"></div>
       </div>
 
       <div class="property-description">
@@ -1383,6 +1477,102 @@
       }
     });
   });
+
+  // ── Gallery Sliders ─────────────────────────
+  (function() {
+    var galleries = {};
+
+    function perView(id) {
+      return window.innerWidth <= 767 ? 2 : 3;
+    }
+
+    function initGallery(id) {
+      var wrap  = document.getElementById(id);
+      if (!wrap) return;
+      var track = document.getElementById(id + '-track');
+      var dotsEl = document.getElementById(id + '-dots');
+      var items = Array.from(track.children);
+      var total = items.length;
+      var step  = perView(id);
+      var maxIdx = Math.max(0, total - step);
+      var state = { idx: 0, total: total, step: step, maxIdx: maxIdx };
+      galleries[id] = state;
+
+      // build dots
+      dotsEl.innerHTML = '';
+      for (var d = 0; d <= maxIdx; d++) {
+        var dot = document.createElement('button');
+        dot.className = 'gallery-dot' + (d === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Slajd ' + (d + 1));
+        dot.dataset.idx = d;
+        dot.dataset.gid = id;
+        dot.addEventListener('click', function() {
+          goTo(this.dataset.gid, parseInt(this.dataset.idx));
+        });
+        dotsEl.appendChild(dot);
+      }
+
+      updateSlider(id);
+    }
+
+    function goTo(id, idx) {
+      var wrap  = document.getElementById(id);
+      var track = document.getElementById(id + '-track');
+      var dotsEl = document.getElementById(id + '-dots');
+      var state = galleries[id];
+      state.step = perView(id);
+      state.maxIdx = Math.max(0, state.total - state.step);
+      state.idx = Math.max(0, Math.min(idx, state.maxIdx));
+
+      var items = Array.from(track.children);
+      var itemW = items[0].getBoundingClientRect().width;
+      var gap = 10;
+      var offset = state.idx * (itemW + gap);
+      track.style.transform = 'translateX(-' + offset + 'px)';
+
+      // dots
+      Array.from(dotsEl.children).forEach(function(d, i) {
+        d.classList.toggle('active', i === state.idx);
+      });
+
+      // buttons
+      var prev = wrap.querySelector('.gallery-btn--prev');
+      var next = wrap.querySelector('.gallery-btn--next');
+      if (prev) prev.classList.toggle('disabled', state.idx === 0);
+      if (next) next.classList.toggle('disabled', state.idx >= state.maxIdx);
+    }
+
+    function updateSlider(id) { goTo(id, 0); }
+
+    window.galleryPrev = function(id) {
+      var state = galleries[id];
+      if (state) goTo(id, state.idx - 1);
+    };
+    window.galleryNext = function(id) {
+      var state = galleries[id];
+      if (state) goTo(id, state.idx + 1);
+    };
+
+    // touch/swipe
+    function addSwipe(id) {
+      var slider = document.querySelector('#' + id + ' .gallery-slider');
+      if (!slider) return;
+      var startX = 0;
+      slider.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+      slider.addEventListener('touchend', function(e) {
+        var dx = e.changedTouches[0].clientX - startX;
+        if (Math.abs(dx) > 40) dx < 0 ? window.galleryNext(id) : window.galleryPrev(id);
+      }, { passive: true });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      initGallery('gallery-jankiel');
+      addSwipe('gallery-jankiel');
+    });
+    window.addEventListener('resize', function() {
+      initGallery('gallery-jankiel');
+    });
+  })();
 
   const realizationCarousel = document.getElementById('realization-carousel');
   if (realizationCarousel) {
