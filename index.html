@@ -418,6 +418,78 @@
       background-color: #B8956A;
       color: #2C2C2C;
     }
+    /* ── Gallery ── */
+    .property-gallery {
+      margin: 1.75rem 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .property-gallery a {
+      display: block;
+      overflow: hidden;
+      border-radius: 3px;
+      position: relative;
+      aspect-ratio: 4/3;
+      background: #1a1a1a;
+    }
+    .property-gallery a::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(184,149,106,0.18) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .property-gallery a:hover::after {
+      opacity: 1;
+    }
+    .property-gallery a:hover img {
+      transform: scale(1.04);
+    }
+    .property-gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+    /* Lightbox overlay */
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(20,18,15,0.94);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+    .lightbox-overlay.active {
+      display: flex;
+    }
+    .lightbox-overlay img {
+      max-width: 92vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 4px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(184,149,106,0.12);
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 1.25rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      color: #FAF8F5;
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.7;
+      transition: opacity 0.2s ease;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    .lightbox-close:hover { opacity: 1; }
     @media (max-width: 767px) {
       .property-meta {
         flex-direction: column;
@@ -428,6 +500,9 @@
       }
       .property-card {
         padding: 1.5rem;
+      }
+      .property-gallery {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
   </style>
@@ -960,6 +1035,52 @@
         <span>Garaż: 32 000 zł</span>
       </div>
 
+      <!-- GALERIA ZDJĘĆ -->
+      <div class="property-gallery">
+        <a href="Jankiel/1.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 1">
+          <img src="Jankiel/1.jpg" alt="Osiedle Zielna – zdjęcie 1" loading="lazy">
+        </a>
+        <a href="Jankiel/2.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 2">
+          <img src="Jankiel/2.jpg" alt="Osiedle Zielna – zdjęcie 2" loading="lazy">
+        </a>
+        <a href="Jankiel/3.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 3">
+          <img src="Jankiel/3.jpg" alt="Osiedle Zielna – zdjęcie 3" loading="lazy">
+        </a>
+        <a href="Jankiel/4.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 4">
+          <img src="Jankiel/4.jpg" alt="Osiedle Zielna – zdjęcie 4" loading="lazy">
+        </a>
+        <a href="Jankiel/5.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 5">
+          <img src="Jankiel/5.jpg" alt="Osiedle Zielna – zdjęcie 5" loading="lazy">
+        </a>
+        <a href="Jankiel/6.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 6">
+          <img src="Jankiel/6.jpg" alt="Osiedle Zielna – zdjęcie 6" loading="lazy">
+        </a>
+        <a href="Jankiel/7.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 7">
+          <img src="Jankiel/7.jpg" alt="Osiedle Zielna – zdjęcie 7" loading="lazy">
+        </a>
+        <a href="Jankiel/8.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 8">
+          <img src="Jankiel/8.jpg" alt="Osiedle Zielna – zdjęcie 8" loading="lazy">
+        </a>
+        <a href="Jankiel/9.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 9">
+          <img src="Jankiel/9.jpg" alt="Osiedle Zielna – zdjęcie 9" loading="lazy">
+        </a>
+        <a href="Jankiel/10.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 10">
+          <img src="Jankiel/10.jpg" alt="Osiedle Zielna – zdjęcie 10" loading="lazy">
+        </a>
+        <a href="Jankiel/11.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 11">
+          <img src="Jankiel/11.jpg" alt="Osiedle Zielna – zdjęcie 11" loading="lazy">
+        </a>
+        <a href="Jankiel/12.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 12">
+          <img src="Jankiel/12.jpg" alt="Osiedle Zielna – zdjęcie 12" loading="lazy">
+        </a>
+        <a href="Jankiel/13.JPG" onclick="openLightbox(this.href);return false;" title="Zdjęcie 13">
+          <img src="Jankiel/13.JPG" alt="Osiedle Zielna – zdjęcie 13" loading="lazy">
+        </a>
+        <a href="Jankiel/14.JPG" onclick="openLightbox(this.href);return false;" title="Zdjęcie 14">
+          <img src="Jankiel/14.JPG" alt="Osiedle Zielna – zdjęcie 14" loading="lazy">
+        </a>
+      </div>
+
       <div class="property-description">
         <p>
           Osiedle Zielna we Wrocławiu w dzielnicy Psie Pole, która oferuje kameralną zabudowę,
@@ -1281,6 +1402,28 @@
     nextButton?.addEventListener('click', () => renderSlide(activeSlide + 1));
     thumbs.forEach((thumb, index) => thumb.addEventListener('click', () => renderSlide(index)));
   }
+</script>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()" aria-label="Zamknij">&times;</button>
+  <img id="lightbox-img" src="" alt="Powiększone zdjęcie">
+</div>
+<script>
+  function openLightbox(src) {
+    var lb = document.getElementById('lightbox');
+    var img = document.getElementById('lightbox-img');
+    img.src = src;
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
 </script>
 
 </body>
