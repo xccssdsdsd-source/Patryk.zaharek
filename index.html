@@ -6,37 +6,14 @@
   <title>P&amp;M Apartments Patryk Zacharek</title>
   <meta name="description" content="P&amp;M Apartments Patryk Zacharek tworzy wyjątkowe mieszkania z pasją. Zakup nieruchomości, wykończenie pod klucz i sprzedaż mieszkań we Wrocławiu.">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/webp" href="favicon.webp">
-
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            cream: '#FAF8F5',
-            charcoal: '#2C2C2C',
-            brass: '#B8956A',
-            'warm-gray': '#E8E4DF',
-            'ink': '#1A1A1A',
-          },
-          fontFamily: {
-            serif: ['"Playfair Display"', 'Georgia', 'serif'],
-            sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
-          },
-        }
-      }
-    }
-  </script>
+  <link rel="stylesheet" href="styles/tailwind.css">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'DM Sans', system-ui, sans-serif;
+      font-family: system-ui, sans-serif;
       background-color: #FAF8F5;
       color: #2C2C2C;
       overflow-x: hidden;
@@ -584,6 +561,241 @@
         padding: 1.5rem;
       }
       /* gallery responsive handled in slider rules */
+    }
+    .consent-embed {
+      border: 1px solid rgba(184,149,106,0.2);
+      border-radius: 8px;
+      background: rgba(250,248,245,0.03);
+      padding: 1.5rem;
+    }
+    .consent-embed__inner {
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .consent-embed__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .consent-link {
+      font-family: system-ui, sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #B8956A;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+    .consent-link:hover,
+    .consent-link:focus-visible {
+      text-decoration: underline;
+      outline: none;
+    }
+    .cmp-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(16, 16, 16, 0.55);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      z-index: 9997;
+    }
+    .cmp-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .cmp-banner,
+    .cmp-panel {
+      position: fixed;
+      left: 50%;
+      width: min(720px, calc(100vw - 2rem));
+      background: #FAF8F5;
+      color: #1A1A1A;
+      border: 1px solid rgba(184,149,106,0.28);
+      box-shadow: 0 28px 70px rgba(16,16,16,0.24);
+      z-index: 9998;
+    }
+    .cmp-banner {
+      bottom: 1rem;
+      transform: translateX(-50%) translateY(120%);
+      transition: transform 0.28s ease;
+      padding: 1.5rem;
+    }
+    .cmp-banner.active {
+      transform: translateX(-50%) translateY(0);
+    }
+    .cmp-panel {
+      top: 50%;
+      transform: translate(-50%, -48%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      max-height: calc(100vh - 2rem);
+      overflow: auto;
+      padding: 1.5rem;
+    }
+    .cmp-panel.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, -50%);
+    }
+    .cmp-title {
+      font-family: Georgia, serif;
+      font-size: clamp(1.5rem, 2.2vw, 2rem);
+      margin: 0 0 0.75rem;
+      letter-spacing: -0.02em;
+    }
+    .cmp-copy {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: rgba(26,26,26,0.82);
+      margin: 0;
+    }
+    .cmp-actions,
+    .cmp-panel__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+    .cmp-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0.85rem 1.15rem;
+      border: 1px solid #B8956A;
+      background: transparent;
+      color: #1A1A1A;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+    .cmp-button:hover,
+    .cmp-button:focus-visible {
+      background: #B8956A;
+      color: #FAF8F5;
+      outline: none;
+    }
+    .cmp-button--solid {
+      background: #1A1A1A;
+      color: #FAF8F5;
+      border-color: #1A1A1A;
+    }
+    .cmp-button--muted {
+      border-color: rgba(26,26,26,0.16);
+    }
+    .cmp-categories {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .cmp-category {
+      border: 1px solid rgba(184,149,106,0.18);
+      padding: 1rem;
+      background: #fff;
+    }
+    .cmp-category__row {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+    .cmp-category__label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+    .cmp-category__desc {
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: rgba(26,26,26,0.74);
+      margin: 0;
+      max-width: 40rem;
+    }
+    .cmp-toggle {
+      position: relative;
+      width: 54px;
+      height: 30px;
+      flex: 0 0 auto;
+    }
+    .cmp-toggle input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      margin: 0;
+      cursor: pointer;
+    }
+    .cmp-toggle__track {
+      position: absolute;
+      inset: 0;
+      background: rgba(44,44,44,0.18);
+      border-radius: 999px;
+      pointer-events: none;
+      transition: background-color 0.2s ease;
+    }
+    .cmp-toggle__track::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+      transition: transform 0.2s ease;
+    }
+    .cmp-toggle input:checked + .cmp-toggle__track {
+      background: #1A1A1A;
+    }
+    .cmp-toggle input:checked + .cmp-toggle__track::after {
+      transform: translateX(24px);
+    }
+    .cmp-toggle input:disabled + .cmp-toggle__track {
+      background: #B8956A;
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+    .cmp-meta {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      line-height: 1.65;
+      color: rgba(26,26,26,0.64);
+    }
+    @media (max-width: 767px) {
+      .cmp-banner,
+      .cmp-panel {
+        width: calc(100vw - 1rem);
+        padding: 1rem;
+      }
+      .cmp-actions,
+      .cmp-panel__actions,
+      .consent-embed__actions {
+        flex-direction: column;
+      }
+      .cmp-button {
+        width: 100%;
+      }
+      .cmp-category__row {
+        flex-direction: column;
+      }
+      .consent-embed__inner {
+        min-height: 320px;
+      }
     }
   </style>
 </head>
@@ -1215,16 +1427,32 @@
 
       <div class="property-map">
         <h4>Lokalizacja na mapie</h4>
-        <iframe
-          src="https://www.google.com/maps?q=ul.+Jankiela+4,+51-663+Wrocław&t=k&z=16&output=embed"
-          width="100%"
-          height="420"
-          style="border:0; border-radius: 8px;"
-          allowfullscreen
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Lokalizacja: ul. Jankiela 4/4, Wrocław">
-        </iframe>
+        <div
+          class="consent-embed"
+          data-consent-embed
+          data-consent-category="social"
+          data-consent-type="iframe"
+          data-consent-src="https://www.google.com/maps?q=ul.+Jankiela+4,+51-663+Wrocław&t=k&z=16&output=embed"
+          data-consent-title="Lokalizacja: ul. Jankiela 4/4, Wrocław"
+          data-consent-width="100%"
+          data-consent-height="420"
+          data-consent-style="border:0; border-radius: 8px;"
+          data-consent-loading="lazy"
+          data-consent-referrerpolicy="no-referrer-when-downgrade"
+          data-consent-allowfullscreen="true">
+          <div class="consent-embed__inner">
+            <p class="font-sans text-cream uppercase tracking-[0.12em]" style="font-size: 0.72rem; color: #B8956A; margin: 0;">Treść zewnętrzna</p>
+            <h5 class="font-serif text-cream" style="font-size: 1.5rem; margin: 0;">Mapa Google jest domyślnie zablokowana</h5>
+            <p class="font-sans text-cream" style="font-size: 0.95rem; line-height: 1.8; opacity: 0.72; margin: 0; max-width: 38rem;">
+              Osadzenie mapy może przekazywać dane do Google i używać identyfikatorów podobnych do cookies.
+              Włącz kategorię „Social / third-party embeds”, aby załadować mapę na tej stronie.
+            </p>
+            <div class="consent-embed__actions">
+              <button type="button" class="cmp-button cmp-button--solid" data-open-consent-settings>Ustaw zgody</button>
+              <a href="https://www.google.com/maps/search/?api=1&query=ul.+Jankiela+4,+51-663+Wrocław" target="_blank" rel="noopener noreferrer" class="cmp-button">Otwórz w Google Maps</a>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="property-footer">
@@ -1395,10 +1623,105 @@
       <p class="font-sans text-cream" style="font-size: 0.65rem; opacity: 0.32; line-height: 1.7;">
         Strona stworzona przez <a href="https://nextengroup.pl" class="underline cursor-pointer" style="transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Next Group</a>
       </p>
+      <p class="font-sans text-cream" style="font-size: 0.68rem; opacity: 0.45; line-height: 1.7; margin-top: 1rem;">
+        <button type="button" class="consent-link" data-open-consent-settings>Ustawienia prywatności i cookies</button>
+      </p>
     </div>
 
   </div>
 </footer>
+
+<div class="cmp-backdrop" id="cmp-backdrop" hidden></div>
+
+<section class="cmp-banner" id="cmp-banner" hidden aria-labelledby="cmp-banner-title" aria-describedby="cmp-banner-copy">
+  <h2 class="cmp-title" id="cmp-banner-title">Prywatność domyślnie</h2>
+  <p class="cmp-copy" id="cmp-banner-copy">
+    Strona nie uruchamia analityki, marketingu ani osadzonych treści stron trzecich przed zgodą.
+    Możesz zaakceptować wszystkie kategorie opcjonalne, odrzucić wszystkie albo ustawić je oddzielnie.
+  </p>
+  <div class="cmp-actions">
+    <button type="button" class="cmp-button cmp-button--solid" data-consent-action="accept-all">Akceptuję wszystkie</button>
+    <button type="button" class="cmp-button cmp-button--muted" data-consent-action="reject-all">Odrzucam wszystkie</button>
+    <button type="button" class="cmp-button" data-open-consent-settings>Dostosuj ustawienia</button>
+  </div>
+</section>
+
+<section class="cmp-panel" id="cmp-panel" hidden aria-labelledby="cmp-panel-title">
+  <h2 class="cmp-title" id="cmp-panel-title">Ustawienia prywatności</h2>
+  <p class="cmp-copy">
+    Zgoda jest granularna i odwoływalna. Kategorie inne niż ściśle niezbędne pozostają wyłączone, dopóki nie wybierzesz inaczej.
+  </p>
+  <div class="cmp-categories">
+    <article class="cmp-category">
+      <div class="cmp-category__row">
+        <div>
+          <span class="cmp-category__label">Niezbędne / strictly necessary</span>
+          <p class="cmp-category__desc">Pamięć decyzji o zgodzie i techniczne elementy interfejsu potrzebne do działania strony.</p>
+        </div>
+        <label class="cmp-toggle" aria-label="Niezbędne / strictly necessary">
+          <input type="checkbox" checked disabled>
+          <span class="cmp-toggle__track"></span>
+        </label>
+      </div>
+    </article>
+    <article class="cmp-category">
+      <div class="cmp-category__row">
+        <div>
+          <span class="cmp-category__label">Funkcjonalne</span>
+          <p class="cmp-category__desc">Opcjonalne funkcje poprawiające wygodę użytkownika. Obecnie brak aktywnych integracji w tej kategorii.</p>
+        </div>
+        <label class="cmp-toggle" aria-label="Funkcjonalne">
+          <input type="checkbox" data-consent-toggle="functional">
+          <span class="cmp-toggle__track"></span>
+        </label>
+      </div>
+    </article>
+    <article class="cmp-category">
+      <div class="cmp-category__row">
+        <div>
+          <span class="cmp-category__label">Analityczne</span>
+          <p class="cmp-category__desc">Pomiar ruchu i zachowań użytkowników. Obecnie brak aktywnych integracji w tej kategorii.</p>
+        </div>
+        <label class="cmp-toggle" aria-label="Analityczne">
+          <input type="checkbox" data-consent-toggle="analytics">
+          <span class="cmp-toggle__track"></span>
+        </label>
+      </div>
+    </article>
+    <article class="cmp-category">
+      <div class="cmp-category__row">
+        <div>
+          <span class="cmp-category__label">Marketingowe / reklamowe</span>
+          <p class="cmp-category__desc">Remarketing, reklama behawioralna i piksele reklamowe. Obecnie brak aktywnych integracji w tej kategorii.</p>
+        </div>
+        <label class="cmp-toggle" aria-label="Marketingowe / reklamowe">
+          <input type="checkbox" data-consent-toggle="marketing">
+          <span class="cmp-toggle__track"></span>
+        </label>
+      </div>
+    </article>
+    <article class="cmp-category">
+      <div class="cmp-category__row">
+        <div>
+          <span class="cmp-category__label">Social / third-party embeds</span>
+          <p class="cmp-category__desc">Osadzone treści zewnętrzne, np. Google Maps. Bez zgody te elementy pozostają zablokowane.</p>
+        </div>
+        <label class="cmp-toggle" aria-label="Social / third-party embeds">
+          <input type="checkbox" data-consent-toggle="social">
+          <span class="cmp-toggle__track"></span>
+        </label>
+      </div>
+    </article>
+  </div>
+  <p class="cmp-meta">
+    Decyzja jest zapisywana lokalnie na urządzeniu jako ustawienie niezbędne technicznie. Zmianę możesz wykonać w dowolnym momencie z poziomu linku w stopce.
+  </p>
+  <div class="cmp-panel__actions">
+    <button type="button" class="cmp-button cmp-button--solid" data-consent-action="save-preferences">Zapisz wybrane</button>
+    <button type="button" class="cmp-button cmp-button--muted" data-consent-action="reject-all">Odrzucam wszystkie</button>
+    <button type="button" class="cmp-button" data-consent-action="accept-all">Akceptuję wszystkie</button>
+  </div>
+</section>
 
 
 <!-- ═══════════════════════════════════════════
@@ -1592,6 +1915,283 @@
     nextButton?.addEventListener('click', () => renderSlide(activeSlide + 1));
     thumbs.forEach((thumb, index) => thumb.addEventListener('click', () => renderSlide(index)));
   }
+</script>
+
+<script>
+  (function() {
+    const CONSENT_KEY = 'pm_consent_preferences_v1';
+    const CONSENT_VERSION = 1;
+    const DEFAULT_CATEGORIES = {
+      necessary: true,
+      functional: false,
+      analytics: false,
+      marketing: false,
+      social: false,
+    };
+
+    const banner = document.getElementById('cmp-banner');
+    const panel = document.getElementById('cmp-panel');
+    const backdrop = document.getElementById('cmp-backdrop');
+    const toggleNodes = Array.from(document.querySelectorAll('[data-consent-toggle]'));
+    const openButtons = Array.from(document.querySelectorAll('[data-open-consent-settings]'));
+    const actionButtons = Array.from(document.querySelectorAll('[data-consent-action]'));
+    const embedNodes = Array.from(document.querySelectorAll('[data-consent-embed]'));
+    const consentListeners = new Set();
+
+    embedNodes.forEach(embed => {
+      if (!embed.dataset.placeholderHtml) {
+        embed.dataset.placeholderHtml = embed.innerHTML;
+      }
+    });
+
+    function readConsent() {
+      try {
+        const parsed = JSON.parse(localStorage.getItem(CONSENT_KEY));
+        if (!parsed || parsed.version !== CONSENT_VERSION || !parsed.categories) return null;
+        return {
+          ...parsed,
+          categories: { ...DEFAULT_CATEGORIES, ...parsed.categories, necessary: true },
+        };
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function hasDecision() {
+      return Boolean(readConsent());
+    }
+
+    function getCategoryState() {
+      const saved = readConsent();
+      return saved ? saved.categories : { ...DEFAULT_CATEGORIES };
+    }
+
+    function persistConsent(categories) {
+      const payload = {
+        version: CONSENT_VERSION,
+        updatedAt: new Date().toISOString(),
+        categories: { ...DEFAULT_CATEGORIES, ...categories, necessary: true },
+      };
+      localStorage.setItem(CONSENT_KEY, JSON.stringify(payload));
+      return payload;
+    }
+
+    function syncToggles(categories) {
+      toggleNodes.forEach(toggle => {
+        toggle.checked = Boolean(categories[toggle.dataset.consentToggle]);
+      });
+    }
+
+    function getSelectionFromPanel() {
+      const selected = { ...DEFAULT_CATEGORIES };
+      toggleNodes.forEach(toggle => {
+        selected[toggle.dataset.consentToggle] = Boolean(toggle.checked);
+      });
+      return selected;
+    }
+
+    function showBackdrop() {
+      backdrop.hidden = false;
+      requestAnimationFrame(() => backdrop.classList.add('active'));
+    }
+
+    function hideBackdrop() {
+      backdrop.classList.remove('active');
+      window.setTimeout(() => {
+        if (!banner.classList.contains('active') && !panel.classList.contains('active')) {
+          backdrop.hidden = true;
+        }
+      }, 250);
+    }
+
+    function openBanner() {
+      banner.hidden = false;
+      showBackdrop();
+      requestAnimationFrame(() => banner.classList.add('active'));
+    }
+
+    function closeBanner() {
+      banner.classList.remove('active');
+      window.setTimeout(() => {
+        if (!banner.classList.contains('active')) {
+          banner.hidden = true;
+          if (!panel.classList.contains('active')) hideBackdrop();
+        }
+      }, 280);
+    }
+
+    function openPanel() {
+      syncToggles(getCategoryState());
+      panel.hidden = false;
+      showBackdrop();
+      requestAnimationFrame(() => panel.classList.add('active'));
+    }
+
+    function closePanel() {
+      panel.classList.remove('active');
+      window.setTimeout(() => {
+        if (!panel.classList.contains('active')) {
+          panel.hidden = true;
+          if (!banner.classList.contains('active')) hideBackdrop();
+        }
+      }, 250);
+    }
+
+    function restoreEmbedPlaceholder(embed) {
+      if (embed.dataset.loaded === 'true') {
+        embed.innerHTML = embed.dataset.placeholderHtml || '';
+        embed.dataset.loaded = 'false';
+      }
+    }
+
+    function activateEmbed(embed) {
+      if (embed.dataset.loaded === 'true') return;
+      if (embed.dataset.consentType !== 'iframe') return;
+
+      const iframe = document.createElement('iframe');
+      iframe.src = embed.dataset.consentSrc;
+      iframe.width = embed.dataset.consentWidth || '100%';
+      iframe.height = embed.dataset.consentHeight || '420';
+      iframe.style.cssText = embed.dataset.consentStyle || '';
+      iframe.loading = embed.dataset.consentLoading || 'lazy';
+      iframe.referrerPolicy = embed.dataset.consentReferrerpolicy || 'no-referrer-when-downgrade';
+      iframe.title = embed.dataset.consentTitle || 'Treść zewnętrzna';
+      if (embed.dataset.consentAllowfullscreen === 'true') iframe.allowFullscreen = true;
+
+      embed.innerHTML = '';
+      embed.appendChild(iframe);
+      embed.dataset.loaded = 'true';
+    }
+
+    function applyEmbeds(categories) {
+      embedNodes.forEach(embed => {
+        const category = embed.dataset.consentCategory;
+        if (categories[category]) {
+          activateEmbed(embed);
+        } else {
+          restoreEmbedPlaceholder(embed);
+        }
+      });
+    }
+
+    function executeDeferredScript(scriptNode) {
+      if (scriptNode.dataset.loaded === 'true') return;
+
+      const replacement = document.createElement('script');
+      Array.from(scriptNode.attributes).forEach(attribute => {
+        if (!attribute.name.startsWith('data-consent') && attribute.name !== 'type') {
+          replacement.setAttribute(attribute.name, attribute.value);
+        }
+      });
+
+      if (scriptNode.dataset.consentSrc) {
+        replacement.src = scriptNode.dataset.consentSrc;
+      } else {
+        replacement.textContent = scriptNode.textContent;
+      }
+
+      scriptNode.dataset.loaded = 'true';
+      scriptNode.parentNode.insertBefore(replacement, scriptNode.nextSibling);
+    }
+
+    function applyDeferredScripts(categories) {
+      document.querySelectorAll('script[type="text/plain"][data-consent-category]').forEach(scriptNode => {
+        const category = scriptNode.dataset.consentCategory;
+        if (categories[category]) {
+          executeDeferredScript(scriptNode);
+        }
+      });
+    }
+
+    function applyConsentState(categories) {
+      syncToggles(categories);
+      applyEmbeds(categories);
+      applyDeferredScripts(categories);
+      const detail = { categories: { ...categories, necessary: true } };
+      document.documentElement.dataset.consentState = hasDecision() ? 'set' : 'unset';
+      document.documentElement.dataset.consentSocial = String(detail.categories.social);
+      window.dispatchEvent(new CustomEvent('pm:consent-change', { detail }));
+      consentListeners.forEach(listener => listener(detail));
+    }
+
+    function saveConsent(categories) {
+      const stored = persistConsent(categories);
+      applyConsentState(stored.categories);
+      closePanel();
+      closeBanner();
+      return stored;
+    }
+
+    function acceptAll() {
+      return saveConsent({
+        functional: true,
+        analytics: true,
+        marketing: true,
+        social: true,
+      });
+    }
+
+    function rejectAll() {
+      return saveConsent({
+        functional: false,
+        analytics: false,
+        marketing: false,
+        social: false,
+      });
+    }
+
+    openButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        closeBanner();
+        openPanel();
+      });
+    });
+
+    actionButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const action = button.dataset.consentAction;
+        if (action === 'accept-all') acceptAll();
+        if (action === 'reject-all') rejectAll();
+        if (action === 'save-preferences') saveConsent(getSelectionFromPanel());
+      });
+    });
+
+    backdrop.addEventListener('click', () => {
+      if (panel.classList.contains('active')) {
+        closePanel();
+        if (!hasDecision()) openBanner();
+      }
+    });
+
+    document.addEventListener('keydown', event => {
+      if (event.key !== 'Escape') return;
+      if (panel.classList.contains('active')) {
+        closePanel();
+        if (!hasDecision()) openBanner();
+      }
+    });
+
+    const initialConsent = readConsent();
+    applyConsentState(initialConsent ? initialConsent.categories : DEFAULT_CATEGORIES);
+    if (!initialConsent) {
+      openBanner();
+    }
+
+    window.PMConsent = {
+      key: CONSENT_KEY,
+      getState: () => ({ hasDecision: hasDecision(), categories: getCategoryState() }),
+      openPreferences: openPanel,
+      acceptAll,
+      rejectAll,
+      savePreferences: () => saveConsent(getSelectionFromPanel()),
+      onChange(callback) {
+        consentListeners.add(callback);
+        return function unsubscribe() {
+          consentListeners.delete(callback);
+        };
+      },
+    };
+  })();
 </script>
 
 <!-- LIGHTBOX -->
