@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://pm-apartments.pl/sitemap.xml
