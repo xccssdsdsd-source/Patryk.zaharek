@@ -815,6 +815,173 @@
         min-height: 320px;
       }
     }
+    /* ── Nasze Realizacje cards ── */
+    .nr-card {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(184,149,106,0.18);
+      background: #FAF8F5;
+      cursor: pointer;
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1),
+                  box-shadow 0.35s ease,
+                  border-color 0.35s ease;
+    }
+    .nr-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(184,149,106,0.14), 0 24px 60px rgba(44,44,44,0.16);
+      border-color: rgba(184,149,106,0.5);
+    }
+    .nr-card:focus-visible {
+      outline: 2px solid #B8956A;
+      outline-offset: 2px;
+    }
+    .nr-card__img-wrap {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+    }
+    .nr-card__img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .nr-card:hover .nr-card__img-wrap img {
+      transform: scale(1.05);
+    }
+    .nr-card__badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(26,26,26,0.72);
+      color: #FAF8F5;
+      font-family: system-ui, sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      padding: 4px 9px;
+      border-radius: 4px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(184,149,106,0.3);
+      pointer-events: none;
+    }
+    .nr-card__body {
+      padding: 1.25rem 1.5rem 1.5rem;
+    }
+    .nr-card__name {
+      font-family: Georgia, Times New Roman, serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #B8956A;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.2rem;
+      line-height: 1.3;
+    }
+    .nr-card__location {
+      font-family: system-ui, sans-serif;
+      font-size: 0.78rem;
+      color: #2C2C2C;
+      opacity: 0.55;
+      line-height: 1.5;
+      margin-bottom: 0.5rem;
+    }
+    .nr-card__desc {
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+      color: #2C2C2C;
+      opacity: 0.72;
+      line-height: 1.7;
+    }
+    /* ── nr-lightbox ── */
+    #nr-lb {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      background: rgba(16,14,10,0.93);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+    #nr-lb.active { display: flex; }
+    #nr-lb__inner {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 90vw;
+      opacity: 0;
+      transform: scale(0.96);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    #nr-lb.active #nr-lb__inner {
+      opacity: 1;
+      transform: scale(1);
+    }
+    #nr-lb__img {
+      max-width: 88vw;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 6px;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(184,149,106,0.12);
+      display: block;
+    }
+    #nr-lb__footer {
+      margin-top: 0.85rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.82rem;
+      color: rgba(250,248,245,0.65);
+      letter-spacing: 0.06em;
+      text-align: center;
+    }
+    .nr-lb__close {
+      position: fixed;
+      top: 1.25rem;
+      right: 1.5rem;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(26,26,26,0.6);
+      border: 1px solid rgba(184,149,106,0.3);
+      border-radius: 50%;
+      color: #FAF8F5;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      z-index: 10;
+      line-height: 1;
+    }
+    .nr-lb__close:hover { background: rgba(184,149,106,0.85); }
+    .nr-lb__close:focus-visible { outline: 2px solid #B8956A; outline-offset: 2px; }
+    .nr-lb__nav {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(26,26,26,0.55);
+      border: 1px solid rgba(184,149,106,0.3);
+      border-radius: 50%;
+      color: #FAF8F5;
+      cursor: pointer;
+      transition: background 0.25s ease, border-color 0.25s ease;
+      z-index: 10;
+    }
+    .nr-lb__nav:hover { background: rgba(184,149,106,0.85); border-color: #B8956A; }
+    .nr-lb__nav:focus-visible { outline: 2px solid #B8956A; outline-offset: 2px; }
+    .nr-lb__nav--prev { left: 1.5rem; }
+    .nr-lb__nav--next { right: 1.5rem; }
+    @media (max-width: 640px) {
+      .nr-lb__nav--prev { left: 0.5rem; }
+      .nr-lb__nav--next { right: 0.5rem; }
+    }
   </style>
 
   <script type="application/ld+json">
@@ -1317,74 +1484,46 @@
 
 
 <!-- ═══════════════════════════════════════════
-     5. WYBRANE REALIZACJE
+     5. NASZE REALIZACJE
 ═══════════════════════════════════════════ -->
 <section id="oferty" class="py-24 lg:py-32" style="background-color: #FAF8F5; border-top: 1px solid rgba(184,149,106,0.15);">
   <div class="max-w-6xl mx-auto px-8">
-
-    <!-- Title -->
     <div class="text-center mb-16 aos">
-      <h2 class="font-serif text-charcoal mb-4" style="font-size: clamp(1.9rem, 3.5vw, 3rem); letter-spacing: -0.03em;">Realizacje wykończeń mieszkań we Wrocławiu</h2>
+      <p class="font-sans uppercase tracking-[0.12em] mb-4" style="font-size: 0.72rem; color: #B8956A; line-height: 1.7;">Portfolio</p>
+      <h2 class="font-serif text-charcoal mb-4" style="font-size: clamp(1.9rem, 3.5vw, 3rem); letter-spacing: -0.03em;">Nasze realizacje</h2>
+      <p class="font-sans text-charcoal mb-4" style="font-size: 1rem; opacity: 0.65; line-height: 1.7;">Każde mieszkanie to osobna historia — sprawdź efekty naszej pracy.</p>
       <div class="deco-line"></div>
     </div>
-
-    <div class="aos mb-14">
-      <div id="realization-carousel" class="realization-carousel" style="box-shadow: 0 6px 10px rgba(184,149,106,0.08), 0 16px 56px rgba(44,44,44,0.12);">
-        <div class="realization-slide active">
-          <img src="realizacje/DSCF9843.jpeg" alt="Wykończenie mieszkania pod klucz Wrocław — nowoczesny salon" loading="lazy" class="w-full object-cover block" style="aspect-ratio: 16 / 10;">
-        </div>
-        <div class="realization-slide">
-          <img src="realizacje/XT3F1909_HDR-1024x683.webp" alt="Wykończone mieszkanie na sprzedaż Wrocław — kuchnia z jadalnią" loading="lazy" class="w-full object-cover block" style="aspect-ratio: 16 / 10;">
-        </div>
-        <div class="realization-slide">
-          <img src="realizacje/DSCF9876.jpeg" alt="Wykończenie wnętrz Wrocław — elegancka łazienka" loading="lazy" class="w-full object-cover block" style="aspect-ratio: 16 / 10;">
-        </div>
-        <div class="realization-slide">
-          <img src="realizacje/XT3F6878.jpg" alt="Mieszkanie pod klucz Wrocław — sypialnia w nowoczesnym stylu" loading="lazy" class="w-full object-cover block" style="aspect-ratio: 16 / 10;">
-        </div>
-        <div class="realization-slide">
-          <img src="realizacje/DSCF1637.jpg" alt="P&amp;M Apartments realizacja — salon z aneksem kuchennym Wrocław" loading="lazy" class="w-full object-cover block" style="aspect-ratio: 16 / 10;">
-        </div>
-        <button type="button" class="realization-nav prev" aria-label="Poprzednie zdjęcie">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-        <button type="button" class="realization-nav next" aria-label="Następne zdjęcie">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <div class="nr-card aos" style="transition-delay: 0ms;" tabindex="0" role="button" aria-label="Otwórz galerię Jankiela 4" data-nr-name="Jankiela 4" data-nr-loc="Wrocław Psie Pole, Osiedle Zielna" data-nr-photos='["public/nasze-realizacje/Jankiel...jpg","public/nasze-realizacje/Jankiela-4....jpg","public/nasze-realizacje/Jankiela-4..jpg","public/nasze-realizacje/Jankiela-4.jpg"]'>
+        <div class="nr-card__img-wrap"><img src="public/nasze-realizacje/Jankiel...jpg" alt="Wykończenie mieszkania Jankiela 4 Wrocław Psie Pole Osiedle Zielna" loading="lazy"><span class="nr-card__badge">4 zdjęcia</span></div>
+        <div class="nr-card__body"><p class="nr-card__name">Jankiela 4</p><p class="nr-card__location">Wrocław Psie Pole, Osiedle Zielna</p><p class="nr-card__desc">Mieszkanie 3 pokojowe o powierzchni 55,31 m²</p></div>
       </div>
-
-      <div class="grid grid-cols-3 md:grid-cols-6 gap-3 mt-4">
-        <button type="button" class="realization-thumb active" data-slide-target="0" aria-label="Pokaż zdjęcie 1">
-          <img src="realizacje/DSCF9843.jpeg" alt="Miniatura — wykończenie mieszkania Wrocław salon" loading="lazy" class="w-full object-cover block" style="aspect-ratio: 4 / 3;">
-        </button>
-        <button type="button" class="realization-thumb" data-slide-target="1" aria-label="Pokaż zdjęcie 2">
-          <img src="realizacje/XT3F1909_HDR-1024x683.webp" alt="Miniatura — wykończone mieszkanie Wrocław kuchnia" loading="lazy" class="w-full object-cover block" style="aspect-ratio: 4 / 3;">
-        </button>
-        <button type="button" class="realization-thumb" data-slide-target="2" aria-label="Pokaż zdjęcie 3">
-          <img src="realizacje/DSCF9876.jpeg" alt="Miniatura — wykończenie wnętrz Wrocław łazienka" loading="lazy" class="w-full object-cover block" style="aspect-ratio: 4 / 3;">
-        </button>
-        <button type="button" class="realization-thumb" data-slide-target="3" aria-label="Pokaż zdjęcie 4">
-          <img src="realizacje/XT3F6878.jpg" alt="Miniatura — mieszkanie pod klucz Wrocław sypialnia" loading="lazy" class="w-full object-cover block" style="aspect-ratio: 4 / 3;">
-        </button>
-        <button type="button" class="realization-thumb" data-slide-target="4" aria-label="Pokaż zdjęcie 5">
-          <img src="realizacje/DSCF1637.jpg" alt="Miniatura — P&amp;M Apartments realizacja salon Wrocław" loading="lazy" class="w-full object-cover block" style="aspect-ratio: 4 / 3;">
-        </button>
+      <div class="nr-card aos" style="transition-delay: 100ms;" tabindex="0" role="button" aria-label="Otwórz galerię Nefrytowa 77" data-nr-name="Nefrytowa 77" data-nr-loc="Wrocław Ołtaszyn" data-nr-photos='["public/nasze-realizacje/Nefrytowa....jpg","public/nasze-realizacje/Nefrytowa...jpg","public/nasze-realizacje/Nefrytowa..jpg","public/nasze-realizacje/Nefrytowa.jpg"]'>
+        <div class="nr-card__img-wrap"><img src="public/nasze-realizacje/Nefrytowa....jpg" alt="Wykończenie mieszkania Nefrytowa 77 Wrocław Ołtaszyn" loading="lazy"><span class="nr-card__badge">4 zdjęcia</span></div>
+        <div class="nr-card__body"><p class="nr-card__name">Nefrytowa 77</p><p class="nr-card__location">Wrocław Ołtaszyn</p><p class="nr-card__desc">Mieszkanie 2 pokojowe o powierzchni 43,82 m²</p></div>
+      </div>
+      <div class="nr-card aos" style="transition-delay: 200ms;" tabindex="0" role="button" aria-label="Otwórz galerię Kurlandzka 32" data-nr-name="Kurlandzka 32" data-nr-loc="Wrocław Ołtaszyn" data-nr-photos='["public/nasze-realizacje/Kurlandzka....jpg","public/nasze-realizacje/Kurlandzka...jpg","public/nasze-realizacje/Kurlandzka..jpg","public/nasze-realizacje/Kurlandzka.jpg"]'>
+        <div class="nr-card__img-wrap"><img src="public/nasze-realizacje/Kurlandzka....jpg" alt="Wykończenie mieszkania Kurlandzka 32 Wrocław Ołtaszyn" loading="lazy"><span class="nr-card__badge">4 zdjęcia</span></div>
+        <div class="nr-card__body"><p class="nr-card__name">Kurlandzka 32</p><p class="nr-card__location">Wrocław Ołtaszyn</p><p class="nr-card__desc">Mieszkanie 2 pokojowe o powierzchni 43,82 m²</p></div>
+      </div>
+      <div class="nr-card aos" style="transition-delay: 300ms;" tabindex="0" role="button" aria-label="Otwórz galerię Kajdasza" data-nr-name="Kajdasza" data-nr-loc="Wrocław Jagodno" data-nr-photos='["public/nasze-realizacje/kajdasza....jpg","public/nasze-realizacje/kajdasza...jpg","public/nasze-realizacje/kajdasza..jpg","public/nasze-realizacje/kajdasza.jpg"]'>
+        <div class="nr-card__img-wrap"><img src="public/nasze-realizacje/kajdasza....jpg" alt="Wykończenie mieszkania Kajdasza Wrocław Jagodno" loading="lazy"><span class="nr-card__badge">4 zdjęcia</span></div>
+        <div class="nr-card__body"><p class="nr-card__name">Kajdasza</p><p class="nr-card__location">Wrocław Jagodno</p><p class="nr-card__desc">Mieszkanie 2 pokojowe z osobną kuchnią o powierzchni 49,01 m²</p></div>
+      </div>
+      <div class="nr-card aos" style="transition-delay: 400ms;" tabindex="0" role="button" aria-label="Otwórz galerię Ameriga Vespucciego (41 m²)" data-nr-name="Ameriga Vespucciego" data-nr-loc="Wrocław Swojczyce, Osiedle Olimpia Port" data-nr-photos='["public/nasze-realizacje/ameriga-Vespucciego.jpg","public/nasze-realizacje/ameriga-Vespucciego.....jpg","public/nasze-realizacje/ameriga-Vespucciego....jpg","public/nasze-realizacje/ameriga-Vespucciego...jpg","public/nasze-realizacje/ameriga-Vespucciego..jpg"]'>
+        <div class="nr-card__img-wrap"><img src="public/nasze-realizacje/ameriga-Vespucciego.jpg" alt="Wykończenie mieszkania Ameriga Vespucciego Wrocław Swojczyce Osiedle Olimpia Port" loading="lazy"><span class="nr-card__badge">5 zdjęć</span></div>
+        <div class="nr-card__body"><p class="nr-card__name">Ameriga Vespucciego</p><p class="nr-card__location">Wrocław Swojczyce, Osiedle Olimpia Port</p><p class="nr-card__desc">Mieszkanie 2 pokojowe o powierzchni 41 m²</p></div>
+      </div>
+      <div class="nr-card aos" style="transition-delay: 500ms;" tabindex="0" role="button" aria-label="Otwórz galerię Ameriga Vespucciego (40 m²)" data-nr-name="Ameriga Vespucciego" data-nr-loc="Wrocław Swojczyce, Osiedle Olimpia Port" data-nr-photos='["public/nasze-realizacje/ameriga-Vespucciego1...jpg","public/nasze-realizacje/ameriga-Vespucciego1..jpg","public/nasze-realizacje/ameriga-Vespucciego1.jpg"]'>
+        <div class="nr-card__img-wrap"><img src="public/nasze-realizacje/ameriga-Vespucciego1...jpg" alt="Wykończenie mieszkania Ameriga Vespucciego Wrocław Swojczyce Osiedle Olimpia Port" loading="lazy"><span class="nr-card__badge">3 zdjęcia</span></div>
+        <div class="nr-card__body"><p class="nr-card__name">Ameriga Vespucciego</p><p class="nr-card__location">Wrocław Swojczyce, Osiedle Olimpia Port</p><p class="nr-card__desc">Mieszkanie 2 pokojowe o powierzchni 40 m²</p></div>
+      </div>
+      <div class="nr-card aos" style="transition-delay: 600ms;" tabindex="0" role="button" aria-label="Otwórz galerię Wichrowa" data-nr-name="Wichrowa" data-nr-loc="Wrocław Fabryczna, Osiedle Planty Racławickie" data-nr-photos='["public/nasze-realizacje/wichrowa.....jpeg","public/nasze-realizacje/wichrowa....jpeg","public/nasze-realizacje/wichrowa...jpeg","public/nasze-realizacje/wichrowa..jpeg","public/nasze-realizacje/wichrowa.jpeg","public/nasze-realizacje/wichrowa1...jpeg","public/nasze-realizacje/wichrowa1..jpeg","public/nasze-realizacje/wichrowa1.jpeg"]'>
+        <div class="nr-card__img-wrap"><img src="public/nasze-realizacje/wichrowa.....jpeg" alt="Wykończenie mieszkania Wichrowa Wrocław Fabryczna Osiedle Planty Racławickie" loading="lazy"><span class="nr-card__badge">8 zdjęć</span></div>
+        <div class="nr-card__body"><p class="nr-card__name">Wichrowa</p><p class="nr-card__location">Wrocław Fabryczna, Osiedle Planty Racławickie</p><p class="nr-card__desc">Mieszkanie 2 pokojowe o powierzchni 38,37 m²</p></div>
       </div>
     </div>
-
-    <!-- Ghost CTA -->
-    <div class="text-center aos">
-      <a href="#kontakt"
-         class="btn-ghost inline-block font-sans text-sm text-charcoal uppercase tracking-[0.15em] px-12 py-4 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass"
-         style="border: 1px solid #B8956A;">
-        Skontaktuj się z nami
-      </a>
-    </div>
-
   </div>
 </section>
 
@@ -1995,24 +2134,6 @@
     });
   })();
 
-  const realizationCarousel = document.getElementById('realization-carousel');
-  if (realizationCarousel) {
-    const slides = Array.from(realizationCarousel.querySelectorAll('.realization-slide'));
-    const thumbs = Array.from(document.querySelectorAll('.realization-thumb'));
-    const prevButton = realizationCarousel.querySelector('.realization-nav.prev');
-    const nextButton = realizationCarousel.querySelector('.realization-nav.next');
-    let activeSlide = 0;
-
-    const renderSlide = index => {
-      activeSlide = (index + slides.length) % slides.length;
-      slides.forEach((slide, slideIndex) => slide.classList.toggle('active', slideIndex === activeSlide));
-      thumbs.forEach((thumb, thumbIndex) => thumb.classList.toggle('active', thumbIndex === activeSlide));
-    };
-
-    prevButton?.addEventListener('click', () => renderSlide(activeSlide - 1));
-    nextButton?.addEventListener('click', () => renderSlide(activeSlide + 1));
-    thumbs.forEach((thumb, index) => thumb.addEventListener('click', () => renderSlide(index)));
-  }
 </script>
 
 <script>
@@ -2312,6 +2433,85 @@
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeLightbox();
   });
+</script>
+
+<!-- NR LIGHTBOX -->
+<div id="nr-lb" role="dialog" aria-modal="true" aria-label="Galeria realizacji">
+  <button class="nr-lb__close" id="nr-lb__close" aria-label="Zamknij galerię">&times;</button>
+  <button class="nr-lb__nav nr-lb__nav--prev" id="nr-lb__prev" aria-label="Poprzednie zdjęcie">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <div id="nr-lb__inner">
+    <img id="nr-lb__img" src="" alt="">
+    <p id="nr-lb__footer"></p>
+  </div>
+  <button class="nr-lb__nav nr-lb__nav--next" id="nr-lb__next" aria-label="Następne zdjęcie">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+</div>
+<script>
+  (function() {
+    const lb = document.getElementById('nr-lb')
+    const lbImg = document.getElementById('nr-lb__img')
+    const lbFooter = document.getElementById('nr-lb__footer')
+    const lbClose = document.getElementById('nr-lb__close')
+    const lbPrev = document.getElementById('nr-lb__prev')
+    const lbNext = document.getElementById('nr-lb__next')
+    let nrPhotos = [], nrIndex = 0, nrName = '', nrLoc = ''
+
+    const nrAltFor = i => `Wykończenie mieszkania ${nrName} ${nrLoc} — zdjęcie ${i + 1}`
+
+    const nrShow = i => {
+      nrIndex = (i + nrPhotos.length) % nrPhotos.length
+      lbImg.src = nrPhotos[nrIndex]
+      lbImg.alt = nrAltFor(nrIndex)
+      lbFooter.textContent = `${nrName} · ${nrIndex + 1} / ${nrPhotos.length}`
+      lbPrev.style.opacity = nrPhotos.length > 1 ? '1' : '0'
+      lbNext.style.opacity = nrPhotos.length > 1 ? '1' : '0'
+    }
+
+    const nrOpen = (photos, name, loc, startIndex) => {
+      nrPhotos = photos
+      nrName = name
+      nrLoc = loc
+      document.body.style.overflow = 'hidden'
+      lb.classList.add('active')
+      nrShow(startIndex || 0)
+    }
+
+    const nrClose = () => {
+      lb.classList.remove('active')
+      document.body.style.overflow = ''
+    }
+
+    lbClose.addEventListener('click', nrClose)
+    lbPrev.addEventListener('click', e => { e.stopPropagation(); nrShow(nrIndex - 1) })
+    lbNext.addEventListener('click', e => { e.stopPropagation(); nrShow(nrIndex + 1) })
+    lb.addEventListener('click', e => { if (e.target === lb) nrClose() })
+
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('active')) return
+      if (e.key === 'Escape') nrClose()
+      if (e.key === 'ArrowLeft') nrShow(nrIndex - 1)
+      if (e.key === 'ArrowRight') nrShow(nrIndex + 1)
+    })
+
+    let touchStartX = 0
+    lb.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].clientX }, { passive: true })
+    lb.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - touchStartX
+      if (Math.abs(dx) > 50) nrShow(dx < 0 ? nrIndex + 1 : nrIndex - 1)
+    })
+
+    document.querySelectorAll('.nr-card').forEach(card => {
+      const activate = () => {
+        const photos = JSON.parse(card.dataset.nrPhotos)
+        nrOpen(photos, card.dataset.nrName, card.dataset.nrLoc, 0)
+      }
+      card.addEventListener('click', activate)
+      card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate() } })
+    })
+  })()
 </script>
 
 </body>
