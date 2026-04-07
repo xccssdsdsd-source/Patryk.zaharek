@@ -1,0 +1,33 @@
+name: Validate repository
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check tracked repository hygiene
+        run: |
+          set -e
+          if git ls-files | grep -E '^(node_modules/|preview-.*\.(err|out)\.log$|Patryk Zacharek$|Patryk_Zaharek$)'; then
+            echo "Repository contains tracked generated files, dependencies, or broken gitlinks."
+            exit 1
+          fi
+
+      - name: Validate repository
+        run: npm test

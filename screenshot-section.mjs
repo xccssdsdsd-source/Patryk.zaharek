@@ -9,9 +9,7 @@ const url = process.argv[2] || 'http://localhost:3000';
 const selector = process.argv[3] || 'body';
 const label = process.argv[4] || 'section';
 
-const browser = await chromium.launch({
-  executablePath: 'C:/Users/kajet/AppData/Local/ms-playwright/chromium-1208/chrome-win64/chrome.exe',
-});
+const browser = await chromium.launch();
 const page = await browser.newPage();
 await page.setViewportSize({ width: 1440, height: 900 });
 await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });

@@ -1,0 +1,11 @@
+node_modules/
+
+temporary screenshots/
+*.log
+
+Patryk.zaharek/
+Patryk Zacharek/
+Patryk_Zaharek/
+
+.DS_Store
+Thumbs.db

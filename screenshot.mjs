@@ -21,9 +21,7 @@ while (fs.existsSync(path.join(screenshotDir, label ? `screenshot-${n}-${label}.
 const filename = label ? `screenshot-${n}-${label}.png` : `screenshot-${n}.png`;
 const outPath = path.join(screenshotDir, filename);
 
-const browser = await chromium.launch({
-  executablePath: 'C:/Users/kajet/AppData/Local/ms-playwright/chromium-1208/chrome-win64/chrome.exe',
-});
+const browser = await chromium.launch();
 
 const page = await browser.newPage();
 await page.setViewportSize({ width: 1440, height: 900 });
