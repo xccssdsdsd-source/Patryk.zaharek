@@ -11,7 +11,8 @@
   "author": "",
   "license": "ISC",
   "type": "commonjs",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "playwright": "^1.58.2"
   }
 }
