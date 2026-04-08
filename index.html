@@ -1093,6 +1093,13 @@
     }
     .nr-tile:hover .nr-tile__panel { transform: translateY(0); }
     @media (max-width: 540px) { .nr-tile__panel { transform: translateY(0) !important; } }
+    @media (max-width: 540px) {
+      .nr-tile { height: 300px; }
+      .nr-tile__panel { padding: 16px 18px; }
+      .nr-tile__name { font-size: 1.125rem; }
+      .nr-tile__loc { font-size: 0.8rem; letter-spacing: 0.08em; color: #aaa; }
+      .nr-tile__desc { font-size: 0.875rem; margin-top: 5px; color: #ccc; }
+    }
     .nr-tile__name {
       font-family: Georgia, 'Times New Roman', serif;
       font-size: 1.0625rem;
