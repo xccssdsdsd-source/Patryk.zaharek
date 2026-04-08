@@ -34,8 +34,7 @@
 
   <link rel="icon" type="image/webp" href="favicon.webp">
   <link rel="preload" as="image" href="ImageDownloader_www.instagram.com_650500079_18048934589663850_3496726104653903685_n.jpg">
-  <link rel="preload" href="styles/tailwind.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="styles/tailwind.css"></noscript>
+  <link rel="stylesheet" href="styles/tailwind.css">
 
   <style>
     img { display: block; max-width: 100%; height: auto; }
@@ -655,17 +654,38 @@
       z-index: 9999;
       align-items: center;
       justify-content: center;
-      cursor: zoom-out;
+      padding: 2rem;
     }
     .lightbox-overlay.active {
       display: flex;
     }
+    .lightbox-stage {
+      position: relative;
+      width: min(92vw, 1480px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.9rem;
+    }
     .lightbox-overlay img {
-      max-width: 92vw;
-      max-height: 90vh;
+      max-width: min(92vw, 1480px);
+      max-height: 84vh;
+      width: auto;
+      height: auto;
       object-fit: contain;
       border-radius: 4px;
       box-shadow: 0 24px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(184,149,106,0.12);
+      transition: opacity 0.18s ease;
+      cursor: default;
+      background: rgba(9, 9, 9, 0.28);
+    }
+    .lightbox-caption {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      font-size: 0.82rem;
+      color: rgba(250,248,245,0.72);
+      letter-spacing: 0.06em;
+      text-align: center;
     }
     .lightbox-close {
       position: fixed;
@@ -682,6 +702,37 @@
       padding: 0;
     }
     .lightbox-close:hover { opacity: 1; }
+    .lightbox-nav {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(26,26,26,0.55);
+      border: 1px solid rgba(184,149,106,0.3);
+      border-radius: 50%;
+      color: #FAF8F5;
+      cursor: pointer;
+      transition: background 0.25s ease, border-color 0.25s ease, opacity 0.25s ease;
+      z-index: 10;
+    }
+    .lightbox-nav:hover { background: rgba(184,149,106,0.85); border-color: #B8956A; }
+    .lightbox-nav:focus-visible { outline: 2px solid #B8956A; outline-offset: 2px; }
+    .lightbox-nav[hidden] { display: none; }
+    .lightbox-nav--prev { left: 1.5rem; }
+    .lightbox-nav--next { right: 1.5rem; }
+    .lightbox-nav svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
     @media (max-width: 767px) {
       .property-meta {
         flex-direction: column;
@@ -929,6 +980,16 @@
       .consent-embed__inner {
         min-height: 320px;
       }
+      .lightbox-overlay {
+        padding: 1rem;
+      }
+      .lightbox-overlay img,
+      .lightbox-stage {
+        width: min(94vw, 1480px);
+        max-width: min(94vw, 1480px);
+      }
+      .lightbox-nav--prev { left: 0.5rem; }
+      .lightbox-nav--next { right: 0.5rem; }
     }
     /* ── Nasze Realizacje tiles ── */
     .nr-grid {
@@ -1068,7 +1129,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      max-width: 90vw;
+      width: min(92vw, 1480px);
+      max-width: min(92vw, 1480px);
       opacity: 0;
       transform: scale(0.96);
       transition: opacity 0.3s ease, transform 0.3s ease;
@@ -1078,13 +1140,16 @@
       transform: scale(1);
     }
     #nr-lb__img {
-      max-width: 88vw;
-      max-height: 80vh;
+      max-width: min(92vw, 1480px);
+      max-height: 84vh;
+      width: auto;
+      height: auto;
       object-fit: contain;
       border-radius: 6px;
       box-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(184,149,106,0.12);
       display: block;
       transition: opacity 0.15s ease;
+      background: rgba(9, 9, 9, 0.28);
     }
     #nr-lb__footer {
       margin-top: 0.85rem;
@@ -1460,10 +1525,10 @@
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 aos stagger-2">
         <div class="overflow-hidden" style="box-shadow: 0 4px 6px rgba(184,149,106,0.07), 0 10px 40px rgba(44,44,44,0.08);">
-          <img src="wykonczenie/planowanie.webp" alt="Planowanie wykończenia mieszkania pod klucz Wrocław — P&amp;M Apartments" loading="lazy" class="w-full h-full object-cover block" style="aspect-ratio: 3 / 4;">
+          <img src="wykonczenie/planowanie.webp" alt="Planowanie wykończenia mieszkania pod klucz Wrocław — P&amp;M Apartments" loading="lazy" class="w-full object-cover block" style="aspect-ratio: 3 / 4;">
         </div>
         <div class="overflow-hidden" style="box-shadow: 0 4px 6px rgba(184,149,106,0.07), 0 10px 40px rgba(44,44,44,0.08);">
-          <img src="wykonczenie/realizacja.webp" alt="Gotowe wykończone mieszkanie Wrocław — realizacja P&amp;M Apartments" loading="lazy" class="w-full h-full object-cover block" style="aspect-ratio: 3 / 4;">
+          <img src="wykonczenie/realizacja.webp" alt="Gotowe wykończone mieszkanie Wrocław — realizacja P&amp;M Apartments" loading="lazy" class="w-full object-cover block" style="aspect-ratio: 3 / 4;">
         </div>
       </div>
     </div>
@@ -1774,46 +1839,46 @@
 
         <div class="gallery-slider">
           <div class="gallery-track" id="gallery-jankiel-track">
-            <a href="Jankiel/1.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 1">
+            <a href="Jankiel/1.jpg" onclick="openLightbox(this);return false;" title="Zdjęcie 1">
               <img src="Jankiel/1.jpg" alt="Mieszkanie na sprzedaż Wrocław Psie Pole — Osiedle Zielna salon" loading="lazy">
             </a>
-            <a href="Jankiel/2.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 2">
+            <a href="Jankiel/2.jpg" onclick="openLightbox(this);return false;" title="Zdjęcie 2">
               <img src="Jankiel/2.jpg" alt="Mieszkanie 3 pokoje Wrocław — Osiedle Zielna kuchnia" loading="lazy">
             </a>
-            <a href="Jankiel/3.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 3">
+            <a href="Jankiel/3.jpg" onclick="openLightbox(this);return false;" title="Zdjęcie 3">
               <img src="Jankiel/3.jpg" alt="Wykończone mieszkanie Wrocław — Osiedle Zielna łazienka" loading="lazy">
             </a>
-            <a href="Jankiel/4.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 4">
+            <a href="Jankiel/4.jpg" onclick="openLightbox(this);return false;" title="Zdjęcie 4">
               <img src="Jankiel/4.jpg" alt="Mieszkanie pod klucz Wrocław — Osiedle Zielna sypialnia" loading="lazy">
             </a>
-            <a href="Jankiel/5.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 5">
+            <a href="Jankiel/5.jpg" onclick="openLightbox(this);return false;" title="Zdjęcie 5">
               <img src="Jankiel/5.jpg" alt="Nowe mieszkanie Wrocław Psie Pole — Osiedle Zielna przedpokój" loading="lazy">
             </a>
-            <a href="Jankiel/6.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 6">
+            <a href="Jankiel/6.jpg" onclick="openLightbox(this);return false;" title="Zdjęcie 6">
               <img src="Jankiel/6.jpg" alt="Mieszkanie na sprzedaż Wrocław — Osiedle Zielna jadalnia" loading="lazy">
             </a>
-            <a href="Jankiel/7.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 7">
+            <a href="Jankiel/7.jpg" onclick="openLightbox(this);return false;" title="Zdjęcie 7">
               <img src="Jankiel/7.jpg" alt="Wykończenie pod klucz Wrocław — Osiedle Zielna pokój dzienny" loading="lazy">
             </a>
-            <a href="Jankiel/8.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 8">
+            <a href="Jankiel/8.jpg" onclick="openLightbox(this);return false;" title="Zdjęcie 8">
               <img src="Jankiel/8.jpg" alt="Gotowe mieszkanie Wrocław — Osiedle Zielna łazienka z prysznicem" loading="lazy">
             </a>
-            <a href="Jankiel/9.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 9">
+            <a href="Jankiel/9.jpg" onclick="openLightbox(this);return false;" title="Zdjęcie 9">
               <img src="Jankiel/9.jpg" alt="Mieszkanie wykończone Wrocław — Osiedle Zielna widok z balkonu" loading="lazy">
             </a>
-            <a href="Jankiel/10.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 10">
+            <a href="Jankiel/10.jpg" onclick="openLightbox(this);return false;" title="Zdjęcie 10">
               <img src="Jankiel/10.jpg" alt="P&amp;M Apartments sprzedaż — Osiedle Zielna garderoba" loading="lazy">
             </a>
-            <a href="Jankiel/11.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 11">
+            <a href="Jankiel/11.jpg" onclick="openLightbox(this);return false;" title="Zdjęcie 11">
               <img src="Jankiel/11.jpg" alt="Mieszkanie na sprzedaż Wrocław — Osiedle Zielna kuchnia otwarta" loading="lazy">
             </a>
-            <a href="Jankiel/12.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 12">
+            <a href="Jankiel/12.jpg" onclick="openLightbox(this);return false;" title="Zdjęcie 12">
               <img src="Jankiel/12.jpg" alt="Wykończenie wnętrz Wrocław — Osiedle Zielna pokój gościnny" loading="lazy">
             </a>
-            <a href="Jankiel/13.JPG" onclick="openLightbox(this.href);return false;" title="Zdjęcie 13">
+            <a href="Jankiel/13.JPG" onclick="openLightbox(this);return false;" title="Zdjęcie 13">
               <img src="Jankiel/13.JPG" alt="Mieszkanie pod klucz Wrocław — Osiedle Zielna korytarz" loading="lazy">
             </a>
-            <a href="Jankiel/14.JPG" onclick="openLightbox(this.href);return false;" title="Zdjęcie 14">
+            <a href="Jankiel/14.JPG" onclick="openLightbox(this);return false;" title="Zdjęcie 14">
               <img src="Jankiel/14.JPG" alt="Gotowe mieszkanie do zamieszkania Wrocław — Osiedle Zielna widok ogólny" loading="lazy">
             </a>
           </div>
@@ -1925,43 +1990,43 @@
 
         <div class="gallery-slider">
           <div class="gallery-track" id="gallery-kurkowa-track">
-            <a href="Kurkowa 36/1.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 1">
+            <a href="Kurkowa 36/1.jpg" onclick="openLightbox(this);return false;" title="Zdjęcie 1">
               <img src="Kurkowa 36/1.jpg" alt="Nowa Kurkowa - zdjęcie wnętrza 1" loading="lazy">
             </a>
-            <a href="Kurkowa 36/2.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 2">
+            <a href="Kurkowa 36/2.jpg" onclick="openLightbox(this);return false;" title="Zdjęcie 2">
               <img src="Kurkowa 36/2.jpg" alt="Nowa Kurkowa - zdjęcie wnętrza 2" loading="lazy">
             </a>
-            <a href="Kurkowa 36/3.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 3">
+            <a href="Kurkowa 36/3.jpg" onclick="openLightbox(this);return false;" title="Zdjęcie 3">
               <img src="Kurkowa 36/3.jpg" alt="Nowa Kurkowa - zdjęcie wnętrza 3" loading="lazy">
             </a>
-            <a href="Kurkowa 36/4.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 4">
+            <a href="Kurkowa 36/4.jpg" onclick="openLightbox(this);return false;" title="Zdjęcie 4">
               <img src="Kurkowa 36/4.jpg" alt="Nowa Kurkowa - zdjęcie wnętrza 4" loading="lazy">
             </a>
-            <a href="Kurkowa 36/5.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 5">
+            <a href="Kurkowa 36/5.jpg" onclick="openLightbox(this);return false;" title="Zdjęcie 5">
               <img src="Kurkowa 36/5.jpg" alt="Nowa Kurkowa - zdjęcie wnętrza 5" loading="lazy">
             </a>
-            <a href="Kurkowa 36/6.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 6">
+            <a href="Kurkowa 36/6.jpg" onclick="openLightbox(this);return false;" title="Zdjęcie 6">
               <img src="Kurkowa 36/6.jpg" alt="Nowa Kurkowa - zdjęcie wnętrza 6" loading="lazy">
             </a>
-            <a href="Kurkowa 36/7.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 7">
+            <a href="Kurkowa 36/7.jpg" onclick="openLightbox(this);return false;" title="Zdjęcie 7">
               <img src="Kurkowa 36/7.jpg" alt="Nowa Kurkowa - zdjęcie wnętrza 7" loading="lazy">
             </a>
-            <a href="Kurkowa 36/8.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 8">
+            <a href="Kurkowa 36/8.jpg" onclick="openLightbox(this);return false;" title="Zdjęcie 8">
               <img src="Kurkowa 36/8.jpg" alt="Nowa Kurkowa - zdjęcie wnętrza 8" loading="lazy">
             </a>
-            <a href="Kurkowa 36/9.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 9">
+            <a href="Kurkowa 36/9.jpg" onclick="openLightbox(this);return false;" title="Zdjęcie 9">
               <img src="Kurkowa 36/9.jpg" alt="Nowa Kurkowa - zdjęcie wnętrza 9" loading="lazy">
             </a>
-            <a href="Kurkowa 36/10.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 10">
+            <a href="Kurkowa 36/10.jpg" onclick="openLightbox(this);return false;" title="Zdjęcie 10">
               <img src="Kurkowa 36/10.jpg" alt="Nowa Kurkowa - zdjęcie wnętrza 10" loading="lazy">
             </a>
-            <a href="Kurkowa 36/11.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 11">
+            <a href="Kurkowa 36/11.jpg" onclick="openLightbox(this);return false;" title="Zdjęcie 11">
               <img src="Kurkowa 36/11.jpg" alt="Nowa Kurkowa - zdjęcie wnętrza 11" loading="lazy">
             </a>
-            <a href="Kurkowa 36/12.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 12">
+            <a href="Kurkowa 36/12.jpg" onclick="openLightbox(this);return false;" title="Zdjęcie 12">
               <img src="Kurkowa 36/12.jpg" alt="Nowa Kurkowa - zdjęcie wnętrza 12" loading="lazy">
             </a>
-            <a href="Kurkowa 36/13.jpg" onclick="openLightbox(this.href);return false;" title="Zdjęcie 13">
+            <a href="Kurkowa 36/13.jpg" onclick="openLightbox(this);return false;" title="Zdjęcie 13">
               <img src="Kurkowa 36/13.jpg" alt="Nowa Kurkowa - zdjęcie wnętrza 13" loading="lazy">
             </a>
           </div>
@@ -2787,25 +2852,114 @@
 </script>
 
 <!-- LIGHTBOX -->
-<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
-  <button class="lightbox-close" onclick="closeLightbox()" aria-label="Zamknij">&times;</button>
-  <img id="lightbox-img" src="" alt="Powiększone zdjęcie">
+<div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Galeria inwestycji">
+  <button class="lightbox-close" onclick="closeLightbox(); event.stopPropagation();" aria-label="Zamknij">&times;</button>
+  <button class="lightbox-nav lightbox-nav--prev" id="lightbox-prev" onclick="lightboxPrev(); event.stopPropagation();" aria-label="Poprzednie zdjęcie">
+    <svg viewBox="0 0 24 24"><path d="M15 6L9 12L15 18"/></svg>
+  </button>
+  <div class="lightbox-stage" id="lightbox-stage">
+    <img id="lightbox-img" src="" alt="Powiększone zdjęcie">
+    <p class="lightbox-caption" id="lightbox-caption"></p>
+  </div>
+  <button class="lightbox-nav lightbox-nav--next" id="lightbox-next" onclick="lightboxNext(); event.stopPropagation();" aria-label="Następne zdjęcie">
+    <svg viewBox="0 0 24 24"><path d="M9 6L15 12L9 18"/></svg>
+  </button>
 </div>
 <script>
-  function openLightbox(src) {
+  (function() {
     var lb = document.getElementById('lightbox');
     var img = document.getElementById('lightbox-img');
-    img.src = src;
-    lb.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('active');
-    document.body.style.overflow = '';
-  }
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeLightbox();
-  });
+    var caption = document.getElementById('lightbox-caption');
+    var prevBtn = document.getElementById('lightbox-prev');
+    var nextBtn = document.getElementById('lightbox-next');
+    var stage = document.getElementById('lightbox-stage');
+    var photos = [];
+    var activeIndex = 0;
+    var activeLabel = '';
+    var touchStartX = 0;
+
+    function updateInvestmentLightbox(index, initial) {
+      if (!photos.length) return;
+      activeIndex = (index + photos.length) % photos.length;
+      var current = photos[activeIndex];
+      var apply = function() {
+        img.src = current.src;
+        img.alt = current.alt || ('Zdjęcie ' + (activeIndex + 1));
+        caption.textContent = activeLabel
+          ? activeLabel + ' · ' + (activeIndex + 1) + ' / ' + photos.length
+          : (activeIndex + 1) + ' / ' + photos.length;
+      };
+
+      prevBtn.hidden = photos.length < 2;
+      nextBtn.hidden = photos.length < 2;
+
+      if (initial) {
+        img.style.opacity = '1';
+        apply();
+        return;
+      }
+
+      img.style.opacity = '0';
+      window.setTimeout(function() {
+        apply();
+        img.style.opacity = '1';
+      }, 120);
+    }
+
+    window.openLightbox = function(trigger) {
+      if (!trigger || !trigger.closest) return;
+      var wrap = trigger.closest('.gallery-wrap');
+      var links = wrap ? Array.from(wrap.querySelectorAll('.gallery-track a')) : [trigger];
+      photos = links.map(function(link) {
+        var preview = link.querySelector('img');
+        return {
+          src: link.getAttribute('href'),
+          alt: preview ? preview.getAttribute('alt') || '' : ''
+        };
+      });
+      activeIndex = Math.max(0, links.indexOf(trigger));
+      var card = trigger.closest('.property-card');
+      activeLabel = card ? (card.querySelector('.property-header h3') || {}).textContent || '' : '';
+      document.body.style.overflow = 'hidden';
+      lb.classList.add('active');
+      updateInvestmentLightbox(activeIndex, true);
+    };
+
+    window.closeLightbox = function() {
+      lb.classList.remove('active');
+      document.body.style.overflow = '';
+    };
+
+    window.lightboxPrev = function() {
+      if (photos.length > 1) updateInvestmentLightbox(activeIndex - 1, false);
+    };
+
+    window.lightboxNext = function() {
+      if (photos.length > 1) updateInvestmentLightbox(activeIndex + 1, false);
+    };
+
+    lb.addEventListener('click', function(e) {
+      if (e.target === lb) closeLightbox();
+    });
+
+    stage.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].clientX;
+    }, { passive: true });
+
+    stage.addEventListener('touchend', function(e) {
+      var dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 50 && photos.length > 1) {
+        dx < 0 ? window.lightboxNext() : window.lightboxPrev();
+      }
+    }, { passive: true });
+
+    document.addEventListener('keydown', function(e) {
+      if (!lb.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') window.lightboxPrev();
+      if (e.key === 'ArrowRight') window.lightboxNext();
+    });
+  })();
 </script>
 
 <!-- NR LIGHTBOX -->
@@ -2913,7 +3067,15 @@
         const loc = panel?.querySelector('.nr-tile__loc')?.textContent || ''
         nrOpen(photos, name, loc, cur)
       })
-      tile.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); next(); clearInterval(timer); timer = setInterval(next, 3000) } })
+      tile.addEventListener('keydown', e => {
+        if (e.key !== 'Enter' && e.key !== ' ') return
+        e.preventDefault()
+        const photos = Array.from(imgs).map(img => img.src)
+        const panel = tile.querySelector('.nr-tile__panel')
+        const name = panel?.querySelector('.nr-tile__name')?.textContent || ''
+        const loc = panel?.querySelector('.nr-tile__loc')?.textContent || ''
+        nrOpen(photos, name, loc, cur)
+      })
     })
   })()
 </script>
