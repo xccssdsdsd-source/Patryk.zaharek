@@ -9,6 +9,8 @@ const requiredFiles = [
   'index.html',
   'package.json',
   'serve.mjs',
+  'robots.txt',
+  'sitemap.xml',
   'styles/tailwind.css',
 ]
 
@@ -26,7 +28,7 @@ const isLocalRef = value => {
 }
 
 const resolveRef = value => {
-  const cleanValue = value.split('?')[0].split('#')[0]
+  const cleanValue = decodeURIComponent(value.split('?')[0].split('#')[0])
   if (cleanValue.startsWith('/')) {
     return path.join(repoRoot, cleanValue.slice(1))
   }
@@ -67,6 +69,31 @@ const collectCssRefs = css => {
   return [...refs]
 }
 
+const normalizeLineEndings = value => value.replace(/\r\n/g, '\n')
+
+const validateSitemap = sitemap => {
+  const normalized = normalizeLineEndings(sitemap).trim()
+  if (!normalized.startsWith('<?xml')) {
+    errors.push('sitemap.xml must start with an XML declaration.')
+  }
+  if (!/<urlset\b[^>]*xmlns=["']http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9["']/i.test(normalized)) {
+    errors.push('sitemap.xml must contain a valid <urlset> root element.')
+  }
+  if (/<html\b/i.test(normalized)) {
+    errors.push('sitemap.xml must not contain HTML markup.')
+  }
+  if (!/<loc>https:\/\/pm-apartments\.pl\/<\/loc>/i.test(normalized)) {
+    errors.push('sitemap.xml must include the canonical https://pm-apartments.pl/ URL.')
+  }
+}
+
+const validateRobots = robots => {
+  const normalized = normalizeLineEndings(robots)
+  if (!/^Sitemap:\s+https:\/\/pm-apartments\.pl\/sitemap\.xml$/mi.test(normalized)) {
+    errors.push('robots.txt must point to https://pm-apartments.pl/sitemap.xml.')
+  }
+}
+
 for (const relativePath of requiredFiles) {
   try {
     await fs.access(path.join(repoRoot, relativePath))
@@ -92,6 +119,12 @@ for (const ref of collectCssRefs(siteCss)) {
     errors.push(`Missing asset referenced from styles/tailwind.css: ${ref}`)
   }
 }
+
+const sitemapXml = await fs.readFile(path.join(repoRoot, 'sitemap.xml'), 'utf8')
+validateSitemap(sitemapXml)
+
+const robotsTxt = await fs.readFile(path.join(repoRoot, 'robots.txt'), 'utf8')
+validateRobots(robotsTxt)
 
 if (errors.length > 0) {
   for (const error of errors) {

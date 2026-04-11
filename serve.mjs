@@ -8,6 +8,8 @@ const PORT = process.env.PORT || 3000;
 
 const MIME = {
   '.html': 'text/html',
+  '.txt': 'text/plain; charset=utf-8',
+  '.xml': 'application/xml; charset=utf-8',
   '.css': 'text/css',
   '.js': 'application/javascript',
   '.mjs': 'application/javascript',
