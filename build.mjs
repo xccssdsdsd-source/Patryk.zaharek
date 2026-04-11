@@ -11,7 +11,7 @@ const EXCLUDE = new Set([
   'screenshot.mjs', 'screenshot-section.mjs', 'crop.mjs',
   'tailwind.config.js', 'tailwind-input.css',
   'package.json', 'package-lock.json',
-  'wrangler.jsonc', '.gitignore', 'CLAUDE.md', 'memory',
+  '.gitignore', 'CLAUDE.md', 'memory',
   'Patryk.zaharek', 'Patryk_Zaharek', 'public', 'scripts',
 ])
 
