@@ -6,8 +6,7 @@
   "scripts": {
     "serve": "node serve.mjs",
     "test": "node scripts/validate-repo.mjs",
-    "build": "node build.mjs",
-    "deploy": "node build.mjs && npx wrangler deploy"
+    "build": "node build.mjs"
   },
   "keywords": [],
   "author": "",
