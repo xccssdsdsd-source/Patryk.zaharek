@@ -2149,7 +2149,7 @@
 
       <!-- Right — Form -->
       <div class="aos stagger-2">
-        <form class="flex flex-col gap-8" onsubmit="(function(f){const n=f.querySelector('[name=name]').value.trim(),e=f.querySelector('[name=replyto]').value.trim(),m=f.querySelector('[name=message]').value.trim();const s=encodeURIComponent('Wiadomość ze strony'+(n?' od '+n:'')),b=encodeURIComponent((n?'Imię: '+n+'\nEmail: '+e+'\n\n':'')+m);window.location='https://mail.google.com/mail/?view=cm&to=kontakt%40pm-apartments.pl&su='+s+'&body='+b;return false;})(this);">
+        <form class="flex flex-col gap-8" onsubmit="event.preventDefault();const n=this.querySelector('[name=name]').value.trim(),e=this.querySelector('[name=replyto]').value.trim(),m=this.querySelector('[name=message]').value.trim(),s=encodeURIComponent('Wiadomość ze strony'+(n?' od '+n:'')),b=encodeURIComponent((n?'Imię: '+n+'\nEmail: '+e+'\n\n':'')+m);window.open('https://mail.google.com/mail/?view=cm&to=kontakt%40pm-apartments.pl&su='+s+'&body='+b,'_blank')">
 
           <div>
             <input
