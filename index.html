@@ -35,8 +35,9 @@
   <link rel="icon" type="image/png" sizes="180x180" href="favicon.png">
   <link rel="icon" type="image/webp" href="favicon.webp">
   <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
   <link rel="preload" as="image" href="hero-main.webp" fetchpriority="high">
-  <link rel="preload" as="image" href="ImageDownloader_www.instagram.com_650500079_18048934589663850_3496726104653903685_n.jpg">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -58,6 +59,7 @@
       #hero > img { object-position: 70% 30%; }
       #hero h1 { font-size: clamp(1.9rem, 8vw, 2.6rem) !important; }
     }
+    .cv-auto { content-visibility: auto; contain-intrinsic-size: auto 800px; }
   </style>
 
   <style>
@@ -92,8 +94,7 @@
 
     /* Navbar */
     #navbar {
-      transition: background-color 0.5s ease, backdrop-filter 0.5s ease,
-                  box-shadow 0.5s ease;
+      transition: background-color 0.5s ease, box-shadow 0.5s ease;
     }
     #navbar.scrolled {
       background-color: rgba(250, 248, 245, 0.92);
@@ -120,14 +121,16 @@
 
     /* Grain overlay */
     .grain { position: relative; }
-    .grain::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-      opacity: 0.04;
-      pointer-events: none;
-      z-index: 1;
+    @media (min-width: 768px) {
+      .grain::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+        opacity: 0.04;
+        pointer-events: none;
+        z-index: 1;
+      }
     }
 
     /* Text placeholder line */
@@ -1245,7 +1248,7 @@
 
   <!-- Logo -->
   <a href="#hero" class="nav-logo flex items-center gap-3 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="text-decoration: none;">
-    <img src="favicon.webp" alt="P&amp;M Apartments — wykończenie mieszkań pod klucz Wrocław logo" loading="lazy" class="rounded-full object-cover object-top flex-shrink-0" style="width: 34px; height: 34px; border: 1px solid rgba(184,149,106,0.5);">
+    <img src="favicon.webp" alt="P&amp;M Apartments — wykończenie mieszkań pod klucz Wrocław logo" loading="lazy" fetchpriority="low" decoding="async" class="rounded-full object-cover object-top flex-shrink-0" style="width: 34px; height: 34px; border: 1px solid rgba(184,149,106,0.5);">
     <span class="font-serif text-cream text-base lg:text-lg uppercase" style="transition: color 0.3s ease; letter-spacing: 0.1em;">P&amp;M Apartments</span>
   </a>
 
@@ -1328,7 +1331,7 @@
 <!-- ═══════════════════════════════════════════
      2. O NAS
 ═══════════════════════════════════════════ -->
-<section id="o-nas" class="aos py-24 lg:py-28" style="background-color: #2C2C2C;">
+<section id="o-nas" class="aos cv-auto py-24 lg:py-28" style="background-color: #2C2C2C;">
   <div class="max-w-6xl mx-auto px-8">
 
     <div class="text-center mb-16">
@@ -1458,7 +1461,7 @@
 </section>
 
 
-<section id="wykończenie" class="py-24 lg:py-32" style="background-color: #FAF8F5; border-top: 1px solid rgba(184,149,106,0.15);">
+<section id="wykończenie" class="cv-auto py-24 lg:py-32" style="background-color: #FAF8F5; border-top: 1px solid rgba(184,149,106,0.15);">
   <div class="max-w-6xl mx-auto px-8">
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center mb-20">
@@ -1609,7 +1612,7 @@
 <!-- ═══════════════════════════════════════════
      4. O WŁAŚCICIELU
 ═══════════════════════════════════════════ -->
-<section id="wlasciciel" class="py-24 lg:py-32" style="background-color: #E8E4DF; border-top: 1px solid rgba(184,149,106,0.15);">
+<section id="wlasciciel" class="cv-auto py-24 lg:py-32" style="background-color: #E8E4DF; border-top: 1px solid rgba(184,149,106,0.15);">
   <div class="max-w-6xl mx-auto px-8">
     <div class="grid grid-cols-1 md:grid-cols-5 gap-10 lg:gap-16 items-center">
 
@@ -1666,7 +1669,7 @@
 <!-- ═══════════════════════════════════════════
      5. NASZE REALIZACJE
 ═══════════════════════════════════════════ -->
-<section id="oferty" style="padding: 120px 0; position: relative; background: #ffffff; border-top: 1px solid rgba(201,169,110,0.15);">
+<section id="oferty" class="cv-auto" style="padding: 120px 0; position: relative; background: #ffffff; border-top: 1px solid rgba(201,169,110,0.15);">
   <div style="position:absolute;inset:0;background:none;pointer-events:none;"></div>
   <div class="max-w-6xl mx-auto px-8">
     <div class="text-center mb-16 aos">
@@ -1754,7 +1757,7 @@
 <!-- ═══════════════════════════════════════════
      8. W SPRZEDAŻY
 ═══════════════════════════════════════════ -->
-<section id="w-sprzedazy">
+<section id="w-sprzedazy" class="cv-auto">
   <div class="max-w-6xl mx-auto px-8">
 
     <div class="text-center mb-16">
@@ -2093,7 +2096,7 @@
 <!-- ═══════════════════════════════════════════
      9. KONTAKT / CTA
 ═══════════════════════════════════════════ -->
-<section id="kontakt" class="py-24 lg:py-32" style="background-color: #2C2C2C;">
+<section id="kontakt" class="cv-auto py-24 lg:py-32" style="background-color: #2C2C2C;">
   <div class="max-w-6xl mx-auto px-8">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24 items-start">
 
