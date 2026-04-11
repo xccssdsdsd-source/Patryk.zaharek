@@ -2211,11 +2211,12 @@
 
       <!-- Right — Form -->
       <div class="aos stagger-2">
-        <form class="flex flex-col gap-8" onsubmit="return false;">
+        <form class="flex flex-col gap-8" onsubmit="(function(f){const n=f.querySelector('[name=name]').value.trim(),e=f.querySelector('[name=replyto]').value.trim(),m=f.querySelector('[name=message]').value.trim();const s=encodeURIComponent('Wiadomość ze strony'+(n?' od '+n:'')),b=encodeURIComponent((n?'Imię: '+n+'\nEmail: '+e+'\n\n':'')+m);window.location='https://mail.google.com/mail/?view=cm&to=kontakt%40pm-apartments.pl&su='+s+'&body='+b;return false;})(this);">
 
           <div>
             <input
               type="text"
+              name="name"
               placeholder="Imię i Nazwisko"
               class="w-full bg-transparent font-sans text-cream text-sm py-3 cursor-text"
               style="border: none; border-bottom: 1px solid rgba(250,248,245,0.18); outline: none; transition: border-color 0.3s ease; line-height: 1.7;"
@@ -2227,6 +2228,7 @@
           <div>
             <input
               type="email"
+              name="replyto"
               placeholder="Adres Email"
               class="w-full bg-transparent font-sans text-cream text-sm py-3 cursor-text"
               style="border: none; border-bottom: 1px solid rgba(250,248,245,0.18); outline: none; transition: border-color 0.3s ease; line-height: 1.7;"
@@ -2237,6 +2239,7 @@
 
           <div>
             <textarea
+              name="message"
               placeholder="Wiadomość"
               rows="4"
               class="w-full bg-transparent font-sans text-cream text-sm py-3 resize-none cursor-text"
