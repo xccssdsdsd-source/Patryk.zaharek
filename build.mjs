@@ -1,107 +1,102 @@
-import { cpSync, rmSync, mkdirSync, readdirSync, readFileSync, writeFileSync, renameSync } from 'fs'
-import { join, basename, extname, relative, dirname } from 'path'
+import { rmSync, mkdirSync, readdirSync, readFileSync, writeFileSync, copyFileSync } from 'fs'
+import { join, relative, dirname } from 'path'
 import { execSync } from 'child_process'
 
-execSync('./node_modules/.bin/tailwindcss -i tailwind-input.css -o tailwind.css', { stdio: 'inherit' })
+const SRC = '.'
+const DIST = 'dist'
 
 const EXCLUDE = new Set([
   'node_modules', '.git', '.github', '.sixth', 'dist',
   'temporary screenshots', 'build.mjs', 'serve.mjs',
   'screenshot.mjs', 'screenshot-section.mjs', 'crop.mjs',
-  'tailwind.config.js', 'tailwind-input.css',
+  'tailwind.config.js', 'tailwind-input.css', 'tailwind.css',
   'package.json', 'package-lock.json',
-  'wrangler.jsonc', '.gitignore', 'CLAUDE.md'
+  'wrangler.jsonc', '.gitignore', 'CLAUDE.md', 'memory',
+  'Patryk.zaharek', 'Patryk_Zaharek', 'public', 'scripts',
 ])
 
-rmSync('dist', { recursive: true, force: true })
-mkdirSync('dist')
+execSync('npx tailwindcss -i tailwind-input.css -o styles/tailwind.css', { stdio: 'inherit', shell: true })
 
-const filter = src => {
-  const name = basename(src)
-  if (EXCLUDE.has(name)) return false
-  if (name.endsWith('.log')) return false
-  return true
+rmSync(DIST, { recursive: true, force: true })
+mkdirSync(DIST)
+
+function sanitizeDir(seg) {
+  return seg.replace(/ /g, '-')
 }
 
-for (const entry of readdirSync('.')) {
-  if (!filter(entry)) continue
-  cpSync(entry, join('dist', entry), { recursive: true, filter })
+function sanitizeFilename(name) {
+  const dot = name.lastIndexOf('.')
+  if (dot === -1) return name.replace(/ /g, '-')
+  let stem = name.slice(0, dot)
+  const ext = name.slice(dot + 1).toLowerCase()
+  const trailing = stem.match(/\.+$/)
+  if (trailing) stem = stem.slice(0, -trailing[0].length) + '-' + (trailing[0].length + 1)
+  return stem.replace(/ /g, '-') + '.' + ext
 }
 
-const IMAGE_EXTS = new Set(['.jpg', '.jpeg', '.webp', '.png', '.JPG', '.JPEG', '.WEBP', '.PNG'])
-
-function sanitizeFilename(filename) {
-  const lastDot = filename.lastIndexOf('.')
-  if (lastDot === -1) return filename.replace(/ /g, '-')
-  let stem = filename.slice(0, lastDot)
-  const ext = filename.slice(lastDot + 1).toLowerCase()
-  const trailingDots = stem.match(/\.+$/)
-  const dotCount = trailingDots ? trailingDots[0].length : 0
-  if (dotCount > 0) stem = stem.slice(0, -dotCount) + '-' + (dotCount + 1)
-  stem = stem.replace(/ /g, '-')
-  return stem + '.' + ext
-}
-
-function sanitizeRelPath(relPath) {
-  return relPath.split('/').map((part, i, arr) =>
-    i === arr.length - 1 ? sanitizeFilename(part) : part.replace(/ /g, '-')
+function sanitizePath(rel) {
+  return rel.split('/').map((seg, i, arr) =>
+    i === arr.length - 1 ? sanitizeFilename(seg) : sanitizeDir(seg)
   ).join('/')
 }
 
-function* walkImages(dir, base) {
-  for (const entry of readdirSync(dir, { withFileTypes: true })) {
-    const full = join(dir, entry.name)
-    if (entry.isDirectory()) {
-      yield* walkImages(full, base)
-    } else if (IMAGE_EXTS.has(extname(entry.name))) {
-      yield relative(base, full).replace(/\\/g, '/')
-    }
+function escapeRe(s) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+function* walkSrc(dir, base) {
+  for (const e of readdirSync(dir, { withFileTypes: true })) {
+    if (EXCLUDE.has(e.name) || e.name.endsWith('.log')) continue
+    const full = join(dir, e.name)
+    if (e.isDirectory()) yield* walkSrc(full, base)
+    else yield relative(base, full).replace(/\\/g, '/')
   }
 }
 
-function escapeRegex(str) {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+function* walkDist(dir, base) {
+  for (const e of readdirSync(dir, { withFileTypes: true })) {
+    const full = join(dir, e.name)
+    if (e.isDirectory()) yield* walkDist(full, base)
+    else yield relative(base, full).replace(/\\/g, '/')
+  }
 }
 
 const renames = []
+let copied = 0
 
-for (const rel of walkImages('dist', 'dist')) {
-  const sanitized = sanitizeRelPath(rel)
-  if (sanitized === rel) continue
-  const oldFull = join('dist', rel)
-  const newFull = join('dist', sanitized)
-  mkdirSync(dirname(newFull), { recursive: true })
-  renameSync(oldFull, newFull)
-  renames.push({ old: rel, new: sanitized })
-  console.log(`RENAME  ${rel}  →  ${sanitized}`)
+for (const rel of walkSrc(SRC, SRC)) {
+  const sanitized = sanitizePath(rel)
+  const dest = join(DIST, sanitized)
+  mkdirSync(dirname(dest), { recursive: true })
+  copyFileSync(join(SRC, rel), dest)
+  copied++
+  if (sanitized !== rel) {
+    renames.push({ old: rel, new: sanitized })
+    console.log(`RENAME  ${rel}  →  ${sanitized}`)
+  }
 }
 
 const htmlPatches = []
 
-for (const entry of walkHtml('dist')) {
-  let content = readFileSync(entry, 'utf8')
+for (const rel of walkDist(DIST, DIST)) {
+  if (!rel.endsWith('.html')) continue
+  const file = join(DIST, rel)
+  let content = readFileSync(file, 'utf8')
   let patched = content
-  for (const { old: oldRel, new: newRel } of renames) {
-    const encodedOld = oldRel.split('/').map((p, i, a) => i === a.length - 1 ? p : encodeURIComponent(p)).join('/')
-    const encodedNew = newRel
-    for (const variant of [oldRel, encodedOld]) {
-      const re = new RegExp(escapeRegex(variant), 'g')
-      patched = patched.replace(re, encodedNew)
+  for (const { old: o, new: n } of renames) {
+    const encodedDirs = o.split('/').map((seg, i, arr) =>
+      i === arr.length - 1 ? seg : encodeURIComponent(seg)
+    ).join('/')
+    const encodedFull = o.split('/').map(encodeURIComponent).join('/')
+    for (const variant of new Set([o, encodedDirs, encodedFull])) {
+      patched = patched.replace(new RegExp(escapeRe(variant), 'g'), n)
     }
   }
   if (patched !== content) {
-    writeFileSync(entry, patched, 'utf8')
-    htmlPatches.push(entry)
-    console.log(`PATCH   ${entry}`)
+    writeFileSync(file, patched, 'utf8')
+    htmlPatches.push(rel)
+    console.log(`PATCH   ${rel}`)
   }
 }
 
-function* walkHtml(dir) {
-  for (const entry of readdirSync(dir, { withFileTypes: true })) {
-    const full = join(dir, entry.name)
-    if (entry.isDirectory()) yield* walkHtml(full)
-    else if (entry.name.endsWith('.html')) yield full
-  }
-}
-
-console.log(`\ndist/ ready — ${renames.length} files renamed, ${htmlPatches.length} HTML files patched`)
+console.log(`\ndist/ ready — ${copied} files copied, ${renames.length} renames, ${htmlPatches.length} HTML patches`)
