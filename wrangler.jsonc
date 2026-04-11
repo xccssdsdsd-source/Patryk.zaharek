@@ -1,5 +1,10 @@
 {
+  "name": "patrykzaharek",
+  "compatibility_date": "2026-04-11",
+  "assets": {
+    "directory": "./dist"
+  },
   "build": {
-    "command": "node build.mjs && npx wrangler deploy"
+    "command": "node build.mjs"
   }
 }
