@@ -1,8 +1,5 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "patrykzaharek",
-  "compatibility_date": "2026-04-11",
-  "assets": {
-    "directory": "."
+  "observability": {
+    "enabled": false
   }
 }
