@@ -9,7 +9,7 @@ const EXCLUDE = new Set([
   'node_modules', '.git', '.github', '.sixth', 'dist',
   'temporary screenshots', 'build.mjs', 'serve.mjs',
   'screenshot.mjs', 'screenshot-section.mjs', 'crop.mjs',
-  'tailwind.config.js', 'tailwind-input.css', 'tailwind.css',
+  'tailwind.config.js', 'tailwind-input.css',
   'package.json', 'package-lock.json',
   'wrangler.jsonc', '.gitignore', 'CLAUDE.md', 'memory',
   'Patryk.zaharek', 'Patryk_Zaharek', 'public', 'scripts',
