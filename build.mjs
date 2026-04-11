@@ -2,7 +2,7 @@ import { cpSync, rmSync, mkdirSync, readdirSync } from 'fs'
 import { join, basename } from 'path'
 import { execSync } from 'child_process'
 
-execSync('npx tailwindcss -i tailwind-input.css -o tailwind.css', { stdio: 'inherit' })
+execSync('./node_modules/.bin/tailwindcss -i tailwind-input.css -o tailwind.css', { stdio: 'inherit' })
 
 const EXCLUDE = new Set([
   'node_modules', '.git', '.github', '.sixth', 'dist',
