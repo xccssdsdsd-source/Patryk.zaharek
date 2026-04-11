@@ -1,5 +1,5 @@
 {
-  "observability": {
-    "enabled": false
-  }
+  "name": "patrykzaharek",
+  "compatibility_date": "2026-04-11",
+  "main": "src/index.ts"
 }
