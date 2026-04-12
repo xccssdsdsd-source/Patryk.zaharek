@@ -27,21 +27,49 @@ const MIME = {
 
 const server = http.createServer((req, res) => {
   let urlPath = req.url.split('?')[0];
-  if (urlPath === '/') urlPath = '/index.html';
+  const decodedPath = decodeURIComponent(urlPath);
+  const candidates = [];
 
-  const filePath = path.join(__dirname, decodeURIComponent(urlPath));
-  const ext = path.extname(filePath).toLowerCase();
-  const contentType = MIME[ext] || 'application/octet-stream';
+  if (decodedPath === '/') {
+    candidates.push('/index.html');
+  } else if (path.extname(decodedPath)) {
+    candidates.push(decodedPath);
+  } else {
+    candidates.push(decodedPath.endsWith('/') ? decodedPath + 'index.html' : decodedPath + '/index.html');
+    candidates.push(decodedPath);
+  }
 
-  fs.readFile(filePath, (err, data) => {
-    if (err) {
+  function tryRead(index) {
+    if (index >= candidates.length) {
       res.writeHead(404, { 'Content-Type': 'text/plain' });
       res.end('Not found: ' + urlPath);
       return;
     }
-    res.writeHead(200, { 'Content-Type': contentType });
-    res.end(data);
-  });
+
+    const candidate = candidates[index];
+    const filePath = path.join(__dirname, candidate);
+
+    fs.stat(filePath, (statErr, stats) => {
+      if (statErr || !stats.isFile()) {
+        tryRead(index + 1);
+        return;
+      }
+
+      const ext = path.extname(filePath).toLowerCase();
+      const contentType = MIME[ext] || 'application/octet-stream';
+
+      fs.readFile(filePath, (readErr, data) => {
+        if (readErr) {
+          tryRead(index + 1);
+          return;
+        }
+        res.writeHead(200, { 'Content-Type': contentType });
+        res.end(data);
+      });
+    });
+  }
+
+  tryRead(0);
 });
 
 server.listen(PORT, () => {
