@@ -1,3 +1,13 @@
+<!-- PAGESPEED FIX LOG:
+  [FCP] +preconnect googletagmanager.com / google-analytics.com (skracają handshake TLS dla async GTM — szybszy idle->network).
+  [FCP] +inline critical above-fold CSS (#navbar, #hero, hero img absolute-cover, h1, CTA) → above-the-fold paint NIE czeka już na synchroniczny Tailwind CDN (~300 KB JS generujący CSS runtime). Hero widoczny ~800–1500 ms wcześniej.
+  [LCP] hero-main.webp już miał preload + fetchpriority="high" + loading="eager" + decoding="async" + width/height → nic do dodania. Zyski pochodzą z odblokowania renderu (critical CSS) — LCP paint nie czeka na Tailwind runtime.
+  [SKIP] defer/async na https://cdn.tailwindcss.com — CAŁA strona używa klas Tailwind (object-cover, absolute inset-0, flex, grid). defer = FOUC + gwarantowany CLS. Zakaz "nie psuj CLS=0".
+  [SKIP] media="print" onload trick — brak zewnętrznych arkuszy CSS (wszystko inline).
+  [SKIP] font-display swap / preconnect fonts.gstatic — brak @font-face i Google Fonts (system-ui, sans-serif).
+  [SKIP] loading="lazy" na hero — zakaz (CLS/LCP risk).
+  [ESTIMATED GAIN] FCP: 3.3s → ~1.9–2.2s (–1.1–1.4s). LCP: 4.7s → ~2.8–3.2s (–1.5–1.9s). Mobile score: 74 → 82–88.
+-->
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -37,7 +47,27 @@
   <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
   <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
   <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="dns-prefetch" href="https://www.google-analytics.com">
   <link rel="preload" as="image" href="hero-main.webp" fetchpriority="high">
+  <style>
+    #navbar{position:fixed;top:0;left:0;right:0;z-index:50;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+    @media(min-width:1024px){#navbar{padding-left:3rem;padding-right:3rem}}
+    #navbar .nav-logo{display:flex;align-items:center;gap:.75rem;color:#FAF8F5;text-decoration:none}
+    #navbar .nav-logo>img{width:34px;height:34px;border-radius:9999px;object-fit:cover;object-position:top;flex-shrink:0;border:1px solid rgba(184,149,106,.5)}
+    #navbar .nav-logo>span{color:#FAF8F5;font-size:1rem;text-transform:uppercase;letter-spacing:.1em}
+    @media(min-width:1024px){#navbar .nav-logo>span{font-size:1.125rem}}
+    #hero{position:relative;width:100%;overflow:hidden;height:100vh;min-height:600px}
+    #hero>img{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;object-fit:cover;display:block}
+    #hero>div:nth-of-type(1){position:absolute;top:0;right:0;bottom:0;left:0}
+    #hero>div:nth-of-type(2){position:relative;z-index:10;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:0 2rem 7rem}
+    @media(min-width:768px){#hero>div:nth-of-type(2){padding:0 4rem 8rem}}
+    @media(min-width:1024px){#hero>div:nth-of-type(2){padding-left:6rem;padding-right:6rem}}
+    #hero h1{color:#FAF8F5;line-height:1.05;margin-bottom:1.75rem;font-size:clamp(2.6rem,5.5vw,4.6rem);letter-spacing:-.03em;max-width:48rem}
+    #hero .btn-ghost{display:inline-block;color:#FAF8F5;font-size:.875rem;text-transform:uppercase;padding:1rem 2.5rem;border:1px solid #B8956A;letter-spacing:.15em;text-decoration:none}
+  </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NLX73FDMSG"></script>
   <script>
     window.dataLayer = window.dataLayer || []
