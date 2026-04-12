@@ -35,29 +35,15 @@
   <link rel="icon" type="image/png" sizes="180x180" href="favicon.png">
   <link rel="icon" type="image/webp" href="favicon.webp">
   <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
-  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
-  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+  <link rel="preload" as="style" href="styles/tailwind.css">
+  <link rel="stylesheet" href="styles/tailwind.css">
   <link rel="preload" as="image" href="hero-main.webp" fetchpriority="high">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NLX73FDMSG"></script>
-  <script>
+  <script type="text/plain" data-consent-category="analytics" data-consent-src="https://www.googletagmanager.com/gtag/js?id=G-NLX73FDMSG" async></script>
+  <script type="text/plain" data-consent-category="analytics">
     window.dataLayer = window.dataLayer || []
     function gtag(){dataLayer.push(arguments)}
     gtag('js', new Date())
-    gtag('config', 'G-NLX73FDMSG')
-  </script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            cream: '#FAF8F5',
-            charcoal: '#2C2C2C',
-            brass: '#B8956A'
-          }
-        }
-      }
-    }
+    gtag('config', 'G-NLX73FDMSG', { anonymize_ip: true })
   </script>
 
   <style>
@@ -2433,16 +2419,26 @@
   mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
 
   // ── Intersection Observer ───────────────────
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.08 });
+  const animatedNodes = Array.from(document.querySelectorAll('.aos'));
+  const shouldAnimateOnScroll =
+    'IntersectionObserver' in window &&
+    window.innerWidth >= 768 &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  document.querySelectorAll('.aos').forEach(el => observer.observe(el));
+  if (shouldAnimateOnScroll) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    animatedNodes.forEach(el => observer.observe(el));
+  } else {
+    animatedNodes.forEach(el => el.classList.add('visible'));
+  }
 
   // ── Smooth anchor scroll ────────────────────
   document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -3009,7 +3005,10 @@
     const lbClose = document.getElementById('nr-lb__close')
     const lbPrev = document.getElementById('nr-lb__prev')
     const lbNext = document.getElementById('nr-lb__next')
+    const desktopAutoplayQuery = window.matchMedia('(min-width: 768px) and (hover: hover) and (pointer: fine)')
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
     let nrPhotos = [], nrIndex = 0, nrName = '', nrLoc = ''
+    const canAutoRotateTiles = () => desktopAutoplayQuery.matches && !reducedMotionQuery.matches
 
     const nrAltFor = i => `Wykończenie mieszkania ${nrName} ${nrLoc} — zdjęcie ${i + 1}`
 
@@ -3109,7 +3108,7 @@
 
       const next = () => goTo(cur + 1)
       const startTimer = () => {
-        if (timer || total < 2 || document.hidden || !isVisible) return
+        if (timer || total < 2 || document.hidden || !isVisible || !canAutoRotateTiles()) return
         timer = setInterval(next, 3000)
       }
       const stopTimer = () => {
@@ -3147,6 +3146,22 @@
           startTimer()
         }
       })
+
+      const syncMotionMode = () => {
+        if (canAutoRotateTiles() && isVisible) {
+          startTimer()
+        } else {
+          stopTimer()
+        }
+      }
+
+      if (desktopAutoplayQuery.addEventListener) {
+        desktopAutoplayQuery.addEventListener('change', syncMotionMode)
+        reducedMotionQuery.addEventListener('change', syncMotionMode)
+      } else if (desktopAutoplayQuery.addListener) {
+        desktopAutoplayQuery.addListener(syncMotionMode)
+        reducedMotionQuery.addListener(syncMotionMode)
+      }
 
       tile.addEventListener('click', () => {
         primeUpcoming(cur)
