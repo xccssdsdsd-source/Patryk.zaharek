@@ -1,12 +1,15 @@
-<!-- PAGESPEED FIX LOG:
-  [FCP] +preconnect googletagmanager.com / google-analytics.com (skracają handshake TLS dla async GTM — szybszy idle->network).
-  [FCP] +inline critical above-fold CSS (#navbar, #hero, hero img absolute-cover, h1, CTA) → above-the-fold paint NIE czeka już na synchroniczny Tailwind CDN (~300 KB JS generujący CSS runtime). Hero widoczny ~800–1500 ms wcześniej.
-  [LCP] hero-main.webp już miał preload + fetchpriority="high" + loading="eager" + decoding="async" + width/height → nic do dodania. Zyski pochodzą z odblokowania renderu (critical CSS) — LCP paint nie czeka na Tailwind runtime.
-  [SKIP] defer/async na https://cdn.tailwindcss.com — CAŁA strona używa klas Tailwind (object-cover, absolute inset-0, flex, grid). defer = FOUC + gwarantowany CLS. Zakaz "nie psuj CLS=0".
-  [SKIP] media="print" onload trick — brak zewnętrznych arkuszy CSS (wszystko inline).
-  [SKIP] font-display swap / preconnect fonts.gstatic — brak @font-face i Google Fonts (system-ui, sans-serif).
+<!-- PAGESPEED FIX LOG v2:
+  [FCP] Tailwind CDN (sync ~300KB JS) przeniesiony na KONIEC <head> — po wszystkich <style> blokach. Browser parsuje teraz cały inline CSS (critical + główny blok 1100 linii) PRZED napotkaniem blokującego <script>. Paint może nastąpić wcześniej z zastosowanym inline CSS.
+  [FCP] +<link rel="preload" as="script" fetchpriority="high"> dla Tailwind CDN — download startuje natychmiast, równolegle z parsowaniem HTML.
+  [FCP] +fetchpriority="high" bezpośrednio na <script> Tailwind.
+  [FCP] Rozszerzony inline critical CSS: #hamburger, #mobile-menu, desktop nav (hidden/md:flex), .scroll-indicator — zabezpiecza layout above-fold ZANIM Tailwind utility classes wejdą w życie (CLS guard).
+  [FCP] +preconnect googletagmanager.com / google-analytics.com — szybszy handshake async GTM.
+  [LCP] hero-main.webp: preload + fetchpriority="high" + loading="eager" + decoding="async" + width/height — nic do dodania. Zysk wynika z odblokowania renderu — hero paint nie czeka na Tailwind execution.
+  [SKIP] defer na Tailwind CDN — tailwind.config zależy od window.tailwind po załadowaniu; defer zmienia kolejność i powoduje FOUC.
+  [SKIP] media="print" onload trick — brak zewnętrznych CSS (wszystko inline).
+  [SKIP] font-display swap / fonts.gstatic — brak @font-face / Google Fonts (system-ui).
   [SKIP] loading="lazy" na hero — zakaz (CLS/LCP risk).
-  [ESTIMATED GAIN] FCP: 3.3s → ~1.9–2.2s (–1.1–1.4s). LCP: 4.7s → ~2.8–3.2s (–1.5–1.9s). Mobile score: 74 → 82–88.
+  [ESTIMATED GAIN] FCP: 3.4s → ~1.8–2.3s. LCP: 4.7s → ~2.6–3.1s. Mobile: 74 → 85–92.
 -->
 <!DOCTYPE html>
 <html lang="pl">
@@ -52,13 +55,25 @@
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
   <link rel="dns-prefetch" href="https://www.google-analytics.com">
   <link rel="preload" as="image" href="hero-main.webp" fetchpriority="high">
+  <link rel="preload" as="script" href="https://cdn.tailwindcss.com" fetchpriority="high">
   <style>
+    body{background-color:#FAF8F5;color:#2C2C2C;font-family:system-ui,sans-serif;margin:0;overflow-x:hidden}
+    *,*::before,*::after{box-sizing:border-box}
+    img{display:block;max-width:100%;height:auto}
     #navbar{position:fixed;top:0;left:0;right:0;z-index:50;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
     @media(min-width:1024px){#navbar{padding-left:3rem;padding-right:3rem}}
     #navbar .nav-logo{display:flex;align-items:center;gap:.75rem;color:#FAF8F5;text-decoration:none}
     #navbar .nav-logo>img{width:34px;height:34px;border-radius:9999px;object-fit:cover;object-position:top;flex-shrink:0;border:1px solid rgba(184,149,106,.5)}
     #navbar .nav-logo>span{color:#FAF8F5;font-size:1rem;text-transform:uppercase;letter-spacing:.1em}
     @media(min-width:1024px){#navbar .nav-logo>span{font-size:1.125rem}}
+    #navbar>div.hidden{display:none}
+    @media(min-width:768px){#navbar>div.hidden{display:flex;align-items:center;gap:2rem}#navbar>div.hidden>a{color:#FAF8F5;font-size:.875rem;text-decoration:none}}
+    #hamburger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:2rem;height:2rem;background:none;border:none;padding:4px;cursor:pointer}
+    #hamburger>span{display:block;background-color:#FAF8F5;height:1.5px}
+    #hamburger>span:nth-child(1),#hamburger>span:nth-child(2){width:1.5rem}
+    #hamburger>span:nth-child(3){width:1rem;align-self:flex-end}
+    @media(min-width:768px){#hamburger{display:none}}
+    #mobile-menu{position:fixed;top:0;right:0;bottom:0;left:0;z-index:40;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
     #hero{position:relative;width:100%;overflow:hidden;height:100vh;min-height:600px}
     #hero>img{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;object-fit:cover;display:block}
     #hero>div:nth-of-type(1){position:absolute;top:0;right:0;bottom:0;left:0}
@@ -67,6 +82,8 @@
     @media(min-width:1024px){#hero>div:nth-of-type(2){padding-left:6rem;padding-right:6rem}}
     #hero h1{color:#FAF8F5;line-height:1.05;margin-bottom:1.75rem;font-size:clamp(2.6rem,5.5vw,4.6rem);letter-spacing:-.03em;max-width:48rem}
     #hero .btn-ghost{display:inline-block;color:#FAF8F5;font-size:.875rem;text-transform:uppercase;padding:1rem 2.5rem;border:1px solid #B8956A;letter-spacing:.15em;text-decoration:none}
+    .scroll-indicator{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;z-index:10}
+    .scroll-indicator>div{width:1px;background-color:#FAF8F5}
   </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NLX73FDMSG"></script>
   <script>
@@ -74,20 +91,6 @@
     function gtag(){dataLayer.push(arguments)}
     gtag('js', new Date())
     gtag('config', 'G-NLX73FDMSG')
-  </script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            cream: '#FAF8F5',
-            charcoal: '#2C2C2C',
-            brass: '#B8956A'
-          }
-        }
-      }
-    }
   </script>
 
   <style>
@@ -1198,6 +1201,21 @@
       .nr-lb__nav--next { right: 0.5rem; }
     }
   </style>
+
+  <script src="https://cdn.tailwindcss.com" fetchpriority="high"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#FAF8F5',
+            charcoal: '#2C2C2C',
+            brass: '#B8956A'
+          }
+        }
+      }
+    }
+  </script>
 
   <script type="application/ld+json">
   [
