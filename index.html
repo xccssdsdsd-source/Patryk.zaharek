@@ -2186,12 +2186,14 @@
 
       <!-- Right — Form -->
       <div class="aos stagger-2">
-        <form class="flex flex-col gap-8" onsubmit="event.preventDefault();const n=this.querySelector('[name=name]').value.trim(),e=this.querySelector('[name=replyto]').value.trim(),m=this.querySelector('[name=message]').value.trim(),s=encodeURIComponent('Wiadomość ze strony'+(n?' od '+n:'')),b=encodeURIComponent((n?'Imię: '+n+'\nEmail: '+e+'\n\n':'')+m);window.open('https://mail.google.com/mail/?view=cm&to=kontakt%40pm-apartments.pl&su='+s+'&body='+b,'_blank')">
+        <form id="contact-form" class="flex flex-col gap-8" novalidate>
 
           <div>
             <input
               type="text"
+              id="contact-name"
               name="name"
+              required
               placeholder="Imię i Nazwisko"
               class="w-full bg-transparent font-sans text-cream text-sm py-3 cursor-text"
               style="border: none; border-bottom: 1px solid rgba(250,248,245,0.18); outline: none; transition: border-color 0.3s ease; line-height: 1.7;"
@@ -2203,7 +2205,9 @@
           <div>
             <input
               type="email"
-              name="replyto"
+              id="contact-email"
+              name="email"
+              required
               placeholder="Adres Email"
               class="w-full bg-transparent font-sans text-cream text-sm py-3 cursor-text"
               style="border: none; border-bottom: 1px solid rgba(250,248,245,0.18); outline: none; transition: border-color 0.3s ease; line-height: 1.7;"
@@ -2214,7 +2218,9 @@
 
           <div>
             <textarea
+              id="contact-message"
               name="message"
+              required
               placeholder="Wiadomość"
               rows="4"
               class="w-full bg-transparent font-sans text-cream text-sm py-3 resize-none cursor-text"
@@ -2226,15 +2232,66 @@
 
           <div>
             <button
+              id="contact-submit"
               type="submit"
               class="btn-solid font-sans text-cream text-sm uppercase tracking-[0.15em] px-12 py-4 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass"
               style="border: none; letter-spacing: 0.15em;"
             >
               Wyślij Wiadomość
             </button>
+            <p id="contact-status" role="status" aria-live="polite" class="font-sans text-sm mt-5" style="display:none;line-height:1.7;"></p>
           </div>
 
         </form>
+        <script>
+          (() => {
+            const form = document.getElementById('contact-form')
+            const btn = document.getElementById('contact-submit')
+            const status = document.getElementById('contact-status')
+            const showStatus = (msg, ok) => {
+              status.textContent = msg
+              status.style.color = ok ? '#B8956A' : '#E57373'
+              status.style.display = 'block'
+            }
+            form.addEventListener('submit', async (e) => {
+              e.preventDefault()
+              const name = document.getElementById('contact-name').value.trim()
+              const email = document.getElementById('contact-email').value.trim()
+              const message = document.getElementById('contact-message').value.trim()
+              if (!name || !email || !message) {
+                showStatus('Prosimy wypełnić wszystkie pola formularza.', false)
+                return
+              }
+              btn.disabled = true
+              btn.style.opacity = '0.6'
+              btn.style.cursor = 'wait'
+              const originalLabel = btn.textContent
+              btn.textContent = 'Wysyłanie…'
+              status.style.display = 'none'
+              try {
+                const res = await fetch('/api/contact', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ name, email, message })
+                })
+                const data = await res.json().catch(() => ({}))
+                if (res.ok && data.success) {
+                  showStatus('Dziękujemy! Wiadomość została wysłana. Odpowiemy wkrótce.', true)
+                  form.reset()
+                } else {
+                  showStatus(data.error || 'Nie udało się wysłać wiadomości. Spróbuj ponownie.', false)
+                }
+              } catch {
+                showStatus('Błąd połączenia. Sprawdź internet i spróbuj ponownie.', false)
+              } finally {
+                btn.disabled = false
+                btn.style.opacity = ''
+                btn.style.cursor = ''
+                btn.textContent = originalLabel
+              }
+            })
+          })()
+        </script>
       </div>
 
     </div>
