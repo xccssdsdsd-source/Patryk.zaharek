@@ -90,6 +90,7 @@
       #hero h1 { font-size: clamp(1.9rem, 8vw, 2.6rem) !important; }
     }
     .cv-auto { content-visibility: auto; contain-intrinsic-size: auto 800px; }
+    .cv-auto.cv-off { content-visibility: visible; contain-intrinsic-size: auto; }
   </style>
 
   <style>
@@ -2475,10 +2476,17 @@
       const id = a.getAttribute('href');
       if (id === '#') return;
       const target = document.querySelector(id);
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      if (!target) return;
+      e.preventDefault();
+      const cvEls = document.querySelectorAll('.cv-auto');
+      cvEls.forEach(el => el.classList.add('cv-off'));
+      void document.body.offsetHeight;
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const cleanup = () => { cvEls.forEach(el => el.classList.remove('cv-off')) };
+      let idle;
+      const onScroll = () => { clearTimeout(idle); idle = setTimeout(() => { window.removeEventListener('scroll', onScroll); cleanup() }, 200) };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      setTimeout(() => { window.removeEventListener('scroll', onScroll); cleanup() }, 2500);
     });
   });
 
