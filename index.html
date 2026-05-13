@@ -1834,8 +1834,125 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span>55,31 m²</span>
         <span>13 993 zł/m²</span>
         <span>774 000 zł</span>
+        <!-- PRICE HISTORY FEATURE — Osiedle Zielna -->
+        <div
+          style="
+            position:relative;
+            display:inline-flex;
+            align-items:center;
+            margin-left:8px;
+          "
+        >
+          <button
+            type="button"
+            id="price-history-trigger-jankiel"
+            aria-controls="price-history-popover-jankiel"
+            aria-expanded="false"
+            style="
+              cursor:pointer;
+              font-size:0.75rem;
+              color:#374151;
+              background:#F3F4F6;
+              border:1px solid #D1D5DB;
+              border-radius:999px;
+              padding:4px 10px;
+              user-select:none;
+              line-height:1.2;
+            "
+          >Historia ceny</button>
+
+          <div
+            id="price-history-popover-jankiel"
+            style="
+              display:none;
+              position:absolute;
+              top:calc(100% + 8px);
+              left:0;
+              background:#fff;
+              border:1px solid #E5E7EB;
+              border-radius:12px;
+              padding:18px 20px;
+              min-width:320px;
+              max-width:380px;
+              width:max-content;
+              box-shadow:0 20px 60px rgba(0,0,0,0.2);
+              z-index:30;
+            "
+          >
+            <h3 style="margin:0 0 12px;font-size:1rem;font-weight:600;color:#111;">
+              Historia ceny — Osiedle Zielna
+            </h3>
+            <table style="width:100%;border-collapse:collapse;font-size:0.875rem;">
+              <thead>
+                <tr style="border-bottom:1px solid #E5E7EB;">
+                  <th style="text-align:left;padding:6px 0;color:#6B7280;font-weight:500;">Data</th>
+                  <th style="text-align:right;padding:6px 0;color:#6B7280;font-weight:500;">Cena</th>
+                  <th style="text-align:right;padding:6px 0;color:#6B7280;font-weight:500;">Zmiana</th>
+                </tr>
+              </thead>
+              <tbody id="price-history-body-jankiel"></tbody>
+            </table>
+          </div>
+        </div>
         <span>Garaż: 32 000 zł</span>
       </div>
+
+      <script>
+      (function() {
+        var PRICE_HISTORY = [
+          { price: "774\u00a0000\u00a0z\u0142", note: "Cena sprzeda\u017cy" }
+        ];
+
+        var tbody = document.getElementById('price-history-body-jankiel');
+        var trigger = document.getElementById('price-history-trigger-jankiel');
+        var popover = document.getElementById('price-history-popover-jankiel');
+        if (!tbody || !trigger || !popover) return;
+
+        function closePopover() {
+          popover.style.display = 'none';
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+
+        trigger.addEventListener('click', function(event) {
+          event.stopPropagation();
+          var isOpen = popover.style.display === 'block';
+          popover.style.display = isOpen ? 'none' : 'block';
+          trigger.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+        });
+
+        popover.addEventListener('click', function(event) {
+          event.stopPropagation();
+        });
+
+        document.addEventListener('click', closePopover);
+
+        PRICE_HISTORY.forEach(function(entry, i) {
+          var isFirst = i === 0;
+          var prev = PRICE_HISTORY[i + 1];
+          var change = '';
+          var diff = 0;
+          if (prev) {
+            var curr = parseInt(entry.price.replace(/\D/g,''));
+            var prevVal = parseInt(prev.price.replace(/\D/g,''));
+            diff = curr - prevVal;
+            change = (diff > 0 ? '+' : '') + diff.toLocaleString('pl-PL') + '\u00a0z\u0142';
+          }
+          var tr = document.createElement('tr');
+          tr.style.borderBottom = '1px solid #F3F4F6';
+          tr.innerHTML =
+            '<td style="padding:8px 0;color:#374151;">' +
+              (entry.note ? entry.note : '&mdash;') +
+            '</td>' +
+            '<td style="padding:8px 0;text-align:right;font-weight:' + (isFirst ? '700' : '400') + ';color:' + (isFirst ? '#111' : '#6B7280') + ';">' +
+              entry.price +
+            '</td>' +
+            '<td style="padding:8px 0;text-align:right;color:' + (diff < 0 ? '#10B981' : (diff > 0 ? '#EF4444' : '#6B7280')) + ';">' +
+              (change || '&mdash;') +
+            '</td>';
+          tbody.appendChild(tr);
+        });
+      })();
+      </script>
 
       <!-- GALERIA ZDJĘĆ – SLIDER -->
       <div class="gallery-wrap" id="gallery-jankiel">
@@ -1997,8 +2114,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         >
           <button
             type="button"
-            id="price-history-trigger"
-            aria-controls="price-history-popover"
+            id="price-history-trigger-kurkowa"
+            aria-controls="price-history-popover-kurkowa"
             aria-expanded="false"
             style="
               cursor:pointer;
@@ -2014,7 +2131,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           >Historia ceny</button>
 
           <div
-            id="price-history-popover"
+            id="price-history-popover-kurkowa"
             style="
               display:none;
               position:absolute;
@@ -2042,7 +2159,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   <th style="text-align:right;padding:6px 0;color:#6B7280;font-weight:500;">Zmiana</th>
                 </tr>
               </thead>
-              <tbody id="price-history-body"></tbody>
+              <tbody id="price-history-body-kurkowa"></tbody>
             </table>
           </div>
         </div>
@@ -2053,9 +2170,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             { price: "829\u00a0000\u00a0z\u0142", note: "Cena wywo\u0142awcza" }
           ];
 
-          var tbody = document.getElementById('price-history-body');
-          var trigger = document.getElementById('price-history-trigger');
-          var popover = document.getElementById('price-history-popover');
+          var tbody = document.getElementById('price-history-body-kurkowa');
+          var trigger = document.getElementById('price-history-trigger-kurkowa');
+          var popover = document.getElementById('price-history-popover-kurkowa');
           if (!tbody || !trigger || !popover) return;
 
           function closePopover() {
