@@ -1885,9 +1885,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <table style="width:100%;border-collapse:collapse;font-size:0.875rem;">
               <thead>
                 <tr style="border-bottom:1px solid #E5E7EB;">
-                  <th style="text-align:left;padding:6px 0;color:#6B7280;font-weight:500;">Data</th>
+                  <th style="text-align:left;padding:6px 0;color:#6B7280;font-weight:500;">Status</th>
                   <th style="text-align:right;padding:6px 0;color:#6B7280;font-weight:500;">Cena</th>
-                  <th style="text-align:right;padding:6px 0;color:#6B7280;font-weight:500;">Zmiana</th>
                 </tr>
               </thead>
               <tbody id="price-history-body-jankiel"></tbody>
@@ -1928,15 +1927,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         PRICE_HISTORY.forEach(function(entry, i) {
           var isFirst = i === 0;
-          var prev = PRICE_HISTORY[i + 1];
-          var change = '';
-          var diff = 0;
-          if (prev) {
-            var curr = parseInt(entry.price.replace(/\D/g,''));
-            var prevVal = parseInt(prev.price.replace(/\D/g,''));
-            diff = curr - prevVal;
-            change = (diff > 0 ? '+' : '') + diff.toLocaleString('pl-PL') + '\u00a0z\u0142';
-          }
           var tr = document.createElement('tr');
           tr.style.borderBottom = '1px solid #F3F4F6';
           tr.innerHTML =
@@ -1945,9 +1935,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             '</td>' +
             '<td style="padding:8px 0;text-align:right;font-weight:' + (isFirst ? '700' : '400') + ';color:' + (isFirst ? '#111' : '#6B7280') + ';">' +
               entry.price +
-            '</td>' +
-            '<td style="padding:8px 0;text-align:right;color:' + (diff < 0 ? '#10B981' : (diff > 0 ? '#EF4444' : '#6B7280')) + ';">' +
-              (change || '&mdash;') +
             '</td>';
           tbody.appendChild(tr);
         });
@@ -2154,9 +2141,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <table style="width:100%;border-collapse:collapse;font-size:0.875rem;">
               <thead>
                 <tr style="border-bottom:1px solid #E5E7EB;">
-                  <th style="text-align:left;padding:6px 0;color:#6B7280;font-weight:500;">Data</th>
+                  <th style="text-align:left;padding:6px 0;color:#6B7280;font-weight:500;">Status</th>
                   <th style="text-align:right;padding:6px 0;color:#6B7280;font-weight:500;">Cena</th>
-                  <th style="text-align:right;padding:6px 0;color:#6B7280;font-weight:500;">Zmiana</th>
                 </tr>
               </thead>
               <tbody id="price-history-body-kurkowa"></tbody>
@@ -2195,15 +2181,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
           PRICE_HISTORY.forEach(function(entry, i) {
             var isFirst = i === 0;
-            var prev = PRICE_HISTORY[i + 1];
-            var change = '';
-            var diff = 0;
-            if (prev) {
-              var curr = parseInt(entry.price.replace(/\D/g,''));
-              var prevVal = parseInt(prev.price.replace(/\D/g,''));
-              diff = curr - prevVal;
-              change = (diff > 0 ? '+' : '') + diff.toLocaleString('pl-PL') + '\u00a0z\u0142';
-            }
             var tr = document.createElement('tr');
             tr.style.borderBottom = '1px solid #F3F4F6';
             tr.innerHTML =
@@ -2212,9 +2189,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               '</td>' +
               '<td style="padding:8px 0;text-align:right;font-weight:' + (isFirst ? '700' : '400') + ';color:' + (isFirst ? '#111' : '#6B7280') + ';">' +
                 entry.price +
-              '</td>' +
-              '<td style="padding:8px 0;text-align:right;color:' + (diff < 0 ? '#10B981' : (diff > 0 ? '#EF4444' : '#6B7280')) + ';">' +
-                (change || '&mdash;') +
               '</td>';
             tbody.appendChild(tr);
           });
