@@ -130,9 +130,26 @@
       .aos { opacity: 1 !important; transform: none !important; transition: none !important; }
     }
 
-    /* Navbar */
+    /* Navbar entry */
+    @keyframes navFadeDown {
+      from { opacity: 0; transform: translateY(-14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
     #navbar {
       transition: background-color 0.5s ease, box-shadow 0.5s ease;
+      animation: navFadeDown 0.7s cubic-bezier(0.16,1,0.3,1) 0.1s both;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #navbar { animation: none; }
+    }
+
+    /* Nav link — brass underline grow + slight lift */
+    .nav-link {
+      transition: color 0.3s ease, transform 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    .nav-link:hover { transform: translateY(-1px); }
+    .nav-link::after {
+      transition: width 0.35s cubic-bezier(0.76,0,0.24,1);
     }
     #navbar.scrolled {
       background-color: rgba(250, 248, 245, 0.92);
@@ -150,12 +167,65 @@
     }
     #mobile-menu.open { opacity: 1 !important; pointer-events: auto !important; transform: translateY(0); }
 
+    /* Hero animations */
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes heroFadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    .hero-h1 {
+      opacity: 0;
+      animation: heroFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+    }
+    .hero-cta {
+      opacity: 0;
+      animation: heroFadeIn 0.8s ease 1s forwards;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-h1, .hero-cta { opacity: 1; animation: none; }
+    }
+
     /* Scroll indicator pulse */
     @keyframes scrollPulse {
-      0%, 100% { opacity: 0.5; transform: translateY(0); }
-      50% { opacity: 1; transform: translateY(6px); }
+      0%, 100% { opacity: 0.5; transform: translateX(-50%) translateY(0); }
+      50% { opacity: 1; transform: translateX(-50%) translateY(6px); }
     }
     .scroll-indicator { animation: scrollPulse 2s ease-in-out infinite; }
+
+    /* Ghost button — brass fill + letter-spacing expand */
+    .btn-ghost {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      transition: color 0.42s cubic-bezier(0.16,1,0.3,1),
+                  letter-spacing 0.42s cubic-bezier(0.16,1,0.3,1),
+                  border-color 0.42s cubic-bezier(0.16,1,0.3,1);
+    }
+    .btn-ghost::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #B8956A;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.42s cubic-bezier(0.76,0,0.24,1);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .btn-ghost span {
+      position: relative;
+      z-index: 1;
+    }
+    .btn-ghost:hover::before { transform: scaleX(1); }
+    .btn-ghost:hover {
+      color: #FAF8F5 !important;
+      letter-spacing: 0.22em;
+      border-color: #B8956A;
+    }
+    .btn-ghost:active { transform: scale(0.97); }
 
     /* Grain overlay */
     .grain { position: relative; }
@@ -281,7 +351,6 @@
       width: 0;
       height: 1px;
       background: #B8956A;
-      transition: width 0.3s ease;
     }
     .nav-link:hover::after { width: 100%; }
 
@@ -977,7 +1046,28 @@
       .lightbox-nav--prev { left: 0.5rem; }
       .lightbox-nav--next { right: 0.5rem; }
     }
-    /* ── Nasze Realizacje tiles ── */
+    /* ── Nasze Realizacje tiles — premium reveal ── */
+    @keyframes tileReveal {
+      0%   { opacity: 0; transform: scale(0.92) translateY(24px); filter: blur(6px); clip-path: inset(8% 4% 8% 4%); }
+      60%  { filter: blur(0); clip-path: inset(0% 0% 0% 0%); }
+      100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); clip-path: inset(0% 0% 0% 0%); }
+    }
+    .nr-tile.aos {
+      opacity: 0;
+      transform: scale(0.92) translateY(24px);
+      filter: blur(6px);
+      transition: none !important;
+    }
+    .nr-tile.aos.visible {
+      opacity: 1;
+      transform: none;
+      filter: none;
+      animation: tileReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-delay: var(--tile-delay, 0ms);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .nr-tile.aos, .nr-tile.aos.visible { opacity: 1; transform: none; filter: none; animation: none; }
+    }
     .nr-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1336,15 +1426,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- Content -->
   <div class="relative z-10 h-full flex flex-col justify-end px-8 md:px-16 lg:px-24 pb-28 md:pb-32">
     <div class="max-w-3xl">
-      <h1 class="font-serif text-cream leading-[1.05] mb-7" style="font-size: clamp(2.6rem, 5.5vw, 4.6rem); letter-spacing: -0.03em;">
+      <h1 class="hero-h1 font-serif text-cream leading-[1.05] mb-7" style="font-size: clamp(2.6rem, 5.5vw, 4.6rem); letter-spacing: -0.03em;">
         Wykończenie mieszkań pod klucz we Wrocławiu
       </h1>
 
       <!-- Ghost CTA -->
       <a href="#kontakt"
-         class="btn-ghost inline-block font-sans text-sm text-cream uppercase tracking-[0.15em] px-10 py-4 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass"
+         class="hero-cta btn-ghost inline-block font-sans text-sm text-cream uppercase tracking-[0.15em] px-10 py-4 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass"
          style="border: 1px solid #B8956A; letter-spacing: 0.15em;">
-        Umów Spotkanie
+        <span>Umów Spotkanie</span>
       </a>
     </div>
   </div>
@@ -1710,7 +1800,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div style="width:60px; height:1px; background:#c9a96e; margin:24px auto 0;"></div>
     </div>
     <div class="nr-grid">
-      <div class="nr-tile aos" style="transition-delay: 0ms;" tabindex="0" role="img" aria-label="Kurkowa 36/62 – wykończenie mieszkania Wrocław, P&M Apartments">
+      <div class="nr-tile aos" style="--tile-delay: 0ms;" tabindex="0" role="img" aria-label="Kurkowa 36/62 – wykończenie mieszkania Wrocław, P&M Apartments">
         <div class="nr-tile__imgs">
           <img src="Kurkowa%2036/1.webp" alt="Kurkowa 36/62 – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Kurkowa 36/62, Wrocław Śródmieście, Nowa Kurkowa – Mieszkanie 2-pokojowe, 38,57 m²" class="nr-tile__img active" loading="lazy" decoding="async" fetchpriority="low">
           <img src="Kurkowa%2036/2.webp" alt="Kurkowa 36/62 – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Kurkowa 36/62, Wrocław Śródmieście, Nowa Kurkowa – Mieszkanie 2-pokojowe, 38,57 m²" class="nr-tile__img" loading="lazy" decoding="async">
@@ -1729,7 +1819,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="nr-tile__badge">1 / 13</span>
         <div class="nr-tile__panel"><p class="nr-tile__name">Kurkowa 36/62</p><p class="nr-tile__loc">Wrocław Śródmieście, Nowa Kurkowa</p><p class="nr-tile__desc">Mieszkanie 2-pokojowe, 38,57 m²</p></div>
       </div>
-      <div class="nr-tile aos" style="transition-delay: 100ms;" tabindex="0" role="img" aria-label="Jankiela 4 – wykończenie mieszkania Wrocław, P&M Apartments">
+      <div class="nr-tile aos" style="--tile-delay: 70ms;" tabindex="0" role="img" aria-label="Jankiela 4 – wykończenie mieszkania Wrocław, P&M Apartments">
         <div class="nr-tile__imgs">
           <img src="Nasze%20realizacje/Jankiela4.....webp" alt="Jankiela 4 – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Jankiela 4, Wrocław Psie Pole, Osiedle Zielna – Mieszkanie 3-pokojowe, 55,31 m²" class="nr-tile__img active" loading="lazy" decoding="async" fetchpriority="low">
           <img src="Nasze%20realizacje/Jankiela4....webp" alt="Jankiela 4 – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Jankiela 4, Wrocław Psie Pole, Osiedle Zielna – Mieszkanie 3-pokojowe, 55,31 m²" class="nr-tile__img" loading="lazy" decoding="async">
@@ -1739,7 +1829,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="nr-tile__badge">1 / 4</span>
         <div class="nr-tile__panel"><p class="nr-tile__name">Jankiela 4</p><p class="nr-tile__loc">Wrocław Psie Pole, Osiedle Zielna</p><p class="nr-tile__desc">Mieszkanie 3-pokojowe, 55,31 m²</p></div>
       </div>
-      <div class="nr-tile aos" style="transition-delay: 200ms;" tabindex="0" role="img" aria-label="Nefrytowa 77 – wykończenie mieszkania Wrocław, P&M Apartments">
+      <div class="nr-tile aos" style="--tile-delay: 140ms;" tabindex="0" role="img" aria-label="Nefrytowa 77 – wykończenie mieszkania Wrocław, P&M Apartments">
         <div class="nr-tile__imgs">
           <img src="Nasze%20realizacje/Nefrytowa....webp" alt="Nefrytowa 77 – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Nefrytowa 77, Wrocław Ołtaszyn – Mieszkanie 2-pokojowe, 43,82 m²" class="nr-tile__img active" loading="lazy" decoding="async" fetchpriority="low">
           <img src="Nasze%20realizacje/Nefrytowa...webp" alt="Nefrytowa 77 – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Nefrytowa 77, Wrocław Ołtaszyn – Mieszkanie 2-pokojowe, 43,82 m²" class="nr-tile__img" loading="lazy" decoding="async">
@@ -1749,7 +1839,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="nr-tile__badge">1 / 4</span>
         <div class="nr-tile__panel"><p class="nr-tile__name">Nefrytowa 77</p><p class="nr-tile__loc">Wrocław Ołtaszyn</p><p class="nr-tile__desc">Mieszkanie 2-pokojowe, 43,82 m²</p></div>
       </div>
-      <div class="nr-tile aos" style="transition-delay: 300ms;" tabindex="0" role="img" aria-label="Kurlandzka 32 – wykończenie mieszkania Wrocław, P&M Apartments">
+      <div class="nr-tile aos" style="--tile-delay: 210ms;" tabindex="0" role="img" aria-label="Kurlandzka 32 – wykończenie mieszkania Wrocław, P&M Apartments">
         <div class="nr-tile__imgs">
           <img src="Nasze%20realizacje/Kurlandzka....webp" alt="Kurlandzka 32 – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Kurlandzka 32, Wrocław Ołtaszyn – Mieszkanie 2-pokojowe, 43,82 m²" class="nr-tile__img active" loading="lazy" decoding="async" fetchpriority="low">
           <img src="Nasze%20realizacje/Kurlandzka...webp" alt="Kurlandzka 32 – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Kurlandzka 32, Wrocław Ołtaszyn – Mieszkanie 2-pokojowe, 43,82 m²" class="nr-tile__img" loading="lazy" decoding="async">
@@ -1758,7 +1848,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="nr-tile__badge">1 / 3</span>
         <div class="nr-tile__panel"><p class="nr-tile__name">Kurlandzka 32</p><p class="nr-tile__loc">Wrocław Ołtaszyn</p><p class="nr-tile__desc">Mieszkanie 2-pokojowe, 43,82 m²</p></div>
       </div>
-      <div class="nr-tile aos" style="transition-delay: 400ms;" tabindex="0" role="img" aria-label="Kajdasza – wykończenie mieszkania Wrocław, P&M Apartments">
+      <div class="nr-tile aos" style="--tile-delay: 280ms;" tabindex="0" role="img" aria-label="Kajdasza – wykończenie mieszkania Wrocław, P&M Apartments">
         <div class="nr-tile__imgs">
           <img src="Nasze%20realizacje/kajdasza....webp" alt="Kajdasza – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Kajdasza, Wrocław Jagodno – Mieszkanie 2-pokojowe z osobną kuchnią, 49,01 m²" class="nr-tile__img active" loading="lazy" decoding="async" fetchpriority="low">
           <img src="Nasze%20realizacje/kajdasza...webp" alt="Kajdasza – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Kajdasza, Wrocław Jagodno – Mieszkanie 2-pokojowe z osobną kuchnią, 49,01 m²" class="nr-tile__img" loading="lazy" decoding="async">
@@ -1768,7 +1858,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="nr-tile__badge">1 / 4</span>
         <div class="nr-tile__panel"><p class="nr-tile__name">Kajdasza</p><p class="nr-tile__loc">Wrocław Jagodno</p><p class="nr-tile__desc">Mieszkanie 2-pokojowe z osobną kuchnią, 49,01 m²</p></div>
       </div>
-      <div class="nr-tile aos" style="transition-delay: 500ms;" tabindex="0" role="img" aria-label="Ameriga Vespucciego 41 m² – wykończenie mieszkania Wrocław, P&M Apartments">
+      <div class="nr-tile aos" style="--tile-delay: 350ms;" tabindex="0" role="img" aria-label="Ameriga Vespucciego 41 m² – wykończenie mieszkania Wrocław, P&M Apartments">
         <div class="nr-tile__imgs">
           <img src="Nasze%20realizacje/ameriga%20Vespucciego.webp" alt="Ameriga Vespucciego – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Ameriga Vespucciego, Wrocław Swojczyce, Osiedle Olimpia Port – Mieszkanie 2-pokojowe, 41 m²" class="nr-tile__img active" loading="lazy" decoding="async" fetchpriority="low">
           <img src="Nasze%20realizacje/ameriga%20Vespucciego....webp" alt="Ameriga Vespucciego – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Ameriga Vespucciego, Wrocław Swojczyce, Osiedle Olimpia Port – Mieszkanie 2-pokojowe, 41 m²" class="nr-tile__img" loading="lazy" decoding="async">
@@ -1778,7 +1868,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="nr-tile__badge">1 / 4</span>
         <div class="nr-tile__panel"><p class="nr-tile__name">Ameriga Vespucciego</p><p class="nr-tile__loc">Wrocław Swojczyce, Osiedle Olimpia Port</p><p class="nr-tile__desc">Mieszkanie 2-pokojowe, 41 m²</p></div>
       </div>
-      <div class="nr-tile aos" style="transition-delay: 600ms;" tabindex="0" role="img" aria-label="Ameriga Vespucciego 40 m² – wykończenie mieszkania Wrocław, P&M Apartments">
+      <div class="nr-tile aos" style="--tile-delay: 420ms;" tabindex="0" role="img" aria-label="Ameriga Vespucciego 40 m² – wykończenie mieszkania Wrocław, P&M Apartments">
         <div class="nr-tile__imgs">
           <img src="Nasze%20realizacje/ameriga%20Vespucciego1...webp" alt="Ameriga Vespucciego – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Ameriga Vespucciego, Wrocław Swojczyce, Osiedle Olimpia Port – Mieszkanie 2-pokojowe, 40 m²" class="nr-tile__img active" loading="lazy" decoding="async" fetchpriority="low">
           <img src="Nasze%20realizacje/ameriga%20Vespucciego1..webp" alt="Ameriga Vespucciego – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Ameriga Vespucciego, Wrocław Swojczyce, Osiedle Olimpia Port – Mieszkanie 2-pokojowe, 40 m²" class="nr-tile__img" loading="lazy" decoding="async">
@@ -1787,7 +1877,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="nr-tile__badge">1 / 3</span>
         <div class="nr-tile__panel"><p class="nr-tile__name">Ameriga Vespucciego</p><p class="nr-tile__loc">Wrocław Swojczyce, Osiedle Olimpia Port</p><p class="nr-tile__desc">Mieszkanie 2-pokojowe, 40 m²</p></div>
       </div>
-      <div class="nr-tile aos" style="transition-delay: 700ms;" tabindex="0" role="img" aria-label="Wichrowa – wykończenie mieszkania Wrocław, P&M Apartments">
+      <div class="nr-tile aos" style="--tile-delay: 490ms;" tabindex="0" role="img" aria-label="Wichrowa – wykończenie mieszkania Wrocław, P&M Apartments">
         <div class="nr-tile__imgs">
           <img src="Nasze%20realizacje/wichrowa.....webp" alt="Wichrowa – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Wichrowa, Wrocław Fabryczna, Osiedle Planty Racławickie – Mieszkanie 2-pokojowe, 38,37 m²" class="nr-tile__img active" loading="lazy" decoding="async" fetchpriority="low">
           <img src="Nasze%20realizacje/wichrowa....webp" alt="Wichrowa – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Wichrowa, Wrocław Fabryczna, Osiedle Planty Racławickie – Mieszkanie 2-pokojowe, 38,37 m²" class="nr-tile__img" loading="lazy" decoding="async">
