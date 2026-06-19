@@ -1,0 +1,10 @@
+# P&M Apartments
+
+Firma wykończeniowa i deweloperska z Wrocławia. Specjalizujemy się w wykończeniu mieszkań pod klucz oraz sprzedaży gotowych mieszkań w wysokim standardzie. 14 lat doświadczenia.
+
+## Strony
+
+- [Strona główna](https://pm-apartments.pl/): Oferta wykończenia pod klucz i mieszkań na sprzedaż we Wrocławiu
+- [O nas](https://pm-apartments.pl/o-nas/): Historia firmy, zespół i doświadczenie
+- [Kontakt](https://pm-apartments.pl/kontakt/): Formularz kontaktowy, telefon i adres
+- [Polityka prywatności](https://pm-apartments.pl/polityka-prywatnosci/): Informacje o przetwarzaniu danych osobowych
