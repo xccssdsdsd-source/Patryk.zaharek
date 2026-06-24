@@ -405,6 +405,32 @@
       box-shadow: 0 12px 28px rgba(0,0,0,0.10);
     }
 
+    .opinia-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 22px 48px -30px rgba(184,149,106,0.5);
+    }
+    .opinia-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 28px 56px -28px rgba(184,149,106,0.6);
+      border-color: rgba(184,149,106,0.35);
+    }
+    .opinia-quote {
+      transition: transform 0.35s ease, opacity 0.35s ease;
+      transform-origin: left center;
+    }
+    .opinia-card:hover .opinia-quote {
+      transform: scale(1.12);
+      opacity: 0.4;
+    }
+    .opinia-name {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 3.2em;
+      line-height: 1.6;
+    }
+
     /* ── W sprzedaży ── */
     #w-sprzedazy {
       padding: 6rem 0;
@@ -2438,6 +2464,49 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <!-- Kolejne nieruchomości dodawaj jako nowe div.property-card wewnątrz div.properties-list -->
 
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     8.5 OPINIE
+═══════════════════════════════════════════ -->
+<section id="opinie" class="cv-auto py-24 lg:py-32" style="background-color: #F3F0EB;">
+  <div class="max-w-6xl mx-auto px-8">
+    <div class="text-center mb-16">
+      <p class="aos font-sans uppercase tracking-[0.25em] text-xs mb-5" style="color: #B8956A;">Opinie klientów</p>
+      <h2 class="aos font-serif text-charcoal" style="font-size: clamp(2rem, 3.2vw, 3rem); letter-spacing: -0.03em;">Co mówią o nas klienci</h2>
+      <div class="deco-line aos" style="margin: 24px auto 0;"></div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+      <figure class="aos stagger-1 opinia-card h-full flex flex-col px-12 py-16" style="background-color: #FBF9F5; border: 1px solid rgba(184,149,106,0.16); border-radius: 4px;">
+        <span class="opinia-quote font-serif select-none block" style="font-size: 5rem; line-height: 0.6; color: #B8956A; opacity: 0.28;">&ldquo;</span>
+        <div class="flex gap-1.5 mt-8" aria-label="Ocena 5 na 5">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#B8956A" role="presentation"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 7.1-1.01L12 2z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#B8956A"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 7.1-1.01L12 2z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#B8956A"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 7.1-1.01L12 2z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#B8956A"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 7.1-1.01L12 2z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#B8956A"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 7.1-1.01L12 2z"/></svg>
+        </div>
+        <p class="font-serif text-charcoal mt-5" style="font-size: 1.3rem; letter-spacing: -0.01em;">Paulina Halapa</p>
+        <div class="mt-7 mb-8" style="width: 48px; height: 2px; background-color: rgba(184,149,106,0.45);"></div>
+        <blockquote class="font-serif italic text-charcoal" style="font-size: 1.08rem; opacity: 0.85; line-height: 1.9;">Serdecznie polecamy Pana Patryka. Bardzo dobrze nam się współpracowało. To bardzo sumienny, rzetelny oraz konkretny Inwestor. Świetny doradca i uczciwy człowiek. Polecamy z czystym sumieniem. Dziękujemy.</blockquote>
+      </figure>
+      <figure class="aos stagger-2 opinia-card h-full flex flex-col px-12 py-16" style="background-color: #FBF9F5; border: 1px solid rgba(184,149,106,0.16); border-radius: 4px;">
+        <span class="opinia-quote font-serif select-none block" style="font-size: 5rem; line-height: 0.6; color: #B8956A; opacity: 0.28;">&ldquo;</span>
+        <div class="flex gap-1.5 mt-8" aria-label="Ocena 5 na 5">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#B8956A" role="presentation"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 7.1-1.01L12 2z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#B8956A"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 7.1-1.01L12 2z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#B8956A"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 7.1-1.01L12 2z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#B8956A"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 7.1-1.01L12 2z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#B8956A"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 7.1-1.01L12 2z"/></svg>
+        </div>
+        <p class="font-serif text-charcoal mt-5" style="font-size: 1.3rem; letter-spacing: -0.01em;">Pasja — Lokalny przewodnik</p>
+        <div class="mt-7 mb-8" style="width: 48px; height: 2px; background-color: rgba(184,149,106,0.45);"></div>
+        <blockquote class="font-serif italic text-charcoal" style="font-size: 1.08rem; opacity: 0.85; line-height: 1.9;">Jesteśmy bardzo zadowoleni z zakupu mieszkania od Pana Patryka. Wszystko przebiegło szybko i sprawnie. Jakość wykończenia jest na wysokim poziomie. Serdecznie polecam.</blockquote>
+      </figure>
+      <figure class="aos stagger-3 opinia-card h-full flex flex-col px-12 py-16" style="background-color: #FBF9F5; border: 1px solid rgba(184,149,106,0.16); border-radius: 4px;">
+        <span class="opinia-quote font-serif select-none block" style="font-size: 5rem; line-height: 0.6; color: #B8956A; opacity: 0.28;">&ldquo;</span>
+        <div class="flex gap-1.5 mt-8" aria-label="Ocena 5 na 5">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#B8956A" role="presentation"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 7.1-1.01L12 2z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#B8956A"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 7.1-1.01L12 2z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#B8956A"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 7.1-1.01L12 2z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#B8956A"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 7.1-1.01L12 2z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#B8956A"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 7.1-1.01L12 2z"/></svg>
+        </div>
+        <p class="font-serif text-charcoal mt-5" style="font-size: 1.3rem; letter-spacing: -0.01em;">Tomasz Waszak</p>
+        <div class="mt-7 mb-8" style="width: 48px; height: 2px; background-color: rgba(184,149,106,0.45);"></div>
+        <blockquote class="font-serif italic text-charcoal" style="font-size: 1.08rem; opacity: 0.85; line-height: 1.9;">Bardzo uczciwy i profesjonalny inwestor nieruchomości. Piękne mieszkanie, widać dbałość o każdy szczegół. Polecam!</blockquote>
+      </figure>
+    </div>
+  </div>
 </section>
 
 
