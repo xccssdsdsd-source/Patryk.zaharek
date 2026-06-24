@@ -21,7 +21,7 @@ while (fs.existsSync(path.join(screenshotDir, label ? `screenshot-${n}-${label}.
 const filename = label ? `screenshot-${n}-${label}.png` : `screenshot-${n}.png`;
 const outPath = path.join(screenshotDir, filename);
 
-const browser = await chromium.launch();
+const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome' });
 
 const page = await browser.newPage();
 await page.setViewportSize({ width: 1440, height: 900 });
