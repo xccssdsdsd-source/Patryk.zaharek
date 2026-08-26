@@ -152,10 +152,10 @@
       transition: width 0.35s cubic-bezier(0.76,0,0.24,1);
     }
     #navbar.scrolled {
-      background-color: rgba(250, 248, 245, 0.92);
+      background-color: rgba(250, 248, 245, 0.96);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      box-shadow: 0 1px 0 rgba(184, 149, 106, 0.15);
+      box-shadow: 0 2px 12px rgba(44, 44, 44, 0.08), 0 1px 2px rgba(184, 149, 106, 0.1);
     }
     #navbar.scrolled .nav-logo { color: #2C2C2C; }
     #navbar.scrolled .nav-link { color: #2C2C2C; }
@@ -262,8 +262,8 @@
                   box-shadow 0.4s ease;
     }
     .prop-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 24px rgba(184, 149, 106, 0.14), 0 30px 70px rgba(44, 44, 44, 0.18) !important;
+      transform: translateY(-8px);
+      box-shadow: 0 4px 12px rgba(184, 149, 106, 0.12), 0 12px 32px rgba(44, 44, 44, 0.16), 0 24px 64px rgba(44, 44, 44, 0.12) !important;
     }
 
     .realization-card img {
@@ -297,17 +297,19 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid rgba(250, 248, 245, 0.45);
-      background: rgba(26, 26, 26, 0.28);
+      border: 1px solid rgba(250, 248, 245, 0.5);
+      background: rgba(26, 26, 26, 0.45);
       color: #FAF8F5;
       cursor: pointer;
-      transition: background-color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+      transition: background-color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
     }
     .realization-nav:hover {
-      background: rgba(184, 149, 106, 0.86);
-      border-color: rgba(184, 149, 106, 0.86);
+      background: rgba(184, 149, 106, 0.92);
+      border-color: #B8956A;
+      box-shadow: 0 0 20px rgba(184, 149, 106, 0.36);
+      transform: translateY(-50%) scale(1.1);
     }
     .realization-nav.prev {
       left: 18px;
@@ -356,26 +358,55 @@
 
     /* Ghost button */
     .btn-ghost {
-      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
     .btn-ghost:hover {
       background-color: #B8956A !important;
       color: #FAF8F5 !important;
+      box-shadow: 0 4px 12px rgba(184, 149, 106, 0.28);
+    }
+    .btn-ghost:focus-visible {
+      outline: 2px solid #B8956A;
+      outline-offset: 2px;
+    }
+    .btn-ghost:active {
+      transform: scale(0.96);
     }
 
     /* Solid button */
     .btn-solid {
       background-color: #B8956A;
-      transition: background-color 0.3s ease, transform 0.15s ease;
+      transition: background-color 0.3s ease, transform 0.15s ease, box-shadow 0.3s ease;
     }
-    .btn-solid:hover { background-color: #A07D56; }
-    .btn-solid:active { transform: scale(0.98); }
+    .btn-solid:hover {
+      background-color: #A07D56;
+      box-shadow: 0 6px 16px rgba(184, 149, 106, 0.32);
+      transform: translateY(-2px);
+    }
+    .btn-solid:focus-visible {
+      outline: 2px solid #8B6A4A;
+      outline-offset: 2px;
+    }
+    .btn-solid:active {
+      transform: translateY(0) scale(0.97);
+    }
 
     /* Social icon */
     .social-icon {
-      transition: color 0.3s ease, opacity 0.3s ease;
+      transition: color 0.3s ease, opacity 0.3s ease, transform 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
-    .social-icon:hover { color: #B8956A !important; opacity: 1 !important; }
+    .social-icon:hover {
+      color: #B8956A !important;
+      opacity: 1 !important;
+      transform: translateY(-3px);
+    }
+    .social-icon:focus-visible {
+      outline: 2px solid #B8956A;
+      outline-offset: 3px;
+    }
 
     /* Process step number */
     .step-num {
@@ -398,11 +429,15 @@
 
     /* Card hover */
     .card-hover {
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     }
     .card-hover:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 28px rgba(0,0,0,0.10);
+      transform: translateY(-6px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12), 0 16px 40px rgba(0,0,0,0.08);
+    }
+    .card-hover:focus-visible {
+      outline: 2px solid #B8956A;
+      outline-offset: 2px;
     }
 
     .opinia-card {
@@ -435,7 +470,8 @@
     #w-sprzedazy {
       padding: 6rem 0;
       background-color: #2C2C2C;
-      border-top: 1px solid rgba(184,149,106,0.15);
+      border-top: 1px solid rgba(184,149,106,0.2);
+      box-shadow: inset 0 1px 0 rgba(250, 248, 245, 0.02);
     }
     .properties-list {
       display: flex;
@@ -446,9 +482,14 @@
       padding: 0 2rem;
     }
     .property-card {
-      background-color: rgba(250,248,245,0.04);
-      border: 1px solid rgba(184,149,106,0.2);
+      background-color: rgba(250,248,245,0.05);
+      border: 1px solid rgba(184,149,106,0.25);
       padding: 2.5rem;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .property-card:hover {
+      border-color: rgba(184,149,106,0.4);
+      box-shadow: 0 8px 24px rgba(184, 149, 106, 0.1), 0 2px 8px rgba(0,0,0,0.08);
     }
     .property-card--kurkowa {
       order: 1;
@@ -523,7 +564,7 @@
       font-family: 'DM Sans', system-ui, sans-serif;
       font-size: 0.9rem;
       color: #FAF8F5;
-      opacity: 0.82;
+      opacity: 0.88;
     }
     .property-description {
       margin-bottom: 1.75rem;
@@ -532,7 +573,7 @@
       font-family: 'DM Sans', system-ui, sans-serif;
       font-size: 1rem;
       color: #FAF8F5;
-      opacity: 0.72;
+      opacity: 0.82;
       line-height: 1.9;
       margin: 0;
     }
@@ -562,7 +603,7 @@
       font-family: 'DM Sans', system-ui, sans-serif;
       font-size: 0.95rem;
       color: #FAF8F5;
-      opacity: 0.72;
+      opacity: 0.82;
       line-height: 1.85;
     }
     .property-features ul {
@@ -595,18 +636,27 @@
       display: inline-block;
       font-family: 'DM Sans', system-ui, sans-serif;
       font-size: 0.8rem;
-      font-weight: 500;
+      font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.15em;
       color: #FAF8F5;
       border: 1px solid #B8956A;
       padding: 0.85rem 2rem;
       text-decoration: none;
-      transition: background-color 0.25s ease, color 0.25s ease;
+      transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease;
     }
     .btn-prospekt:hover {
       background-color: #B8956A;
       color: #2C2C2C;
+      box-shadow: 0 4px 12px rgba(184, 149, 106, 0.28);
+      transform: translateY(-2px);
+    }
+    .btn-prospekt:focus-visible {
+      outline: 2px solid #B8956A;
+      outline-offset: 2px;
+    }
+    .btn-prospekt:active {
+      transform: translateY(0) scale(0.97);
     }
     /* ── Gallery Slider ── */
     .gallery-wrap {
@@ -662,20 +712,22 @@
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      background: rgba(30,24,16,0.78);
-      border: 1px solid rgba(184,149,106,0.45);
+      background: rgba(30,24,16,0.85);
+      border: 1px solid rgba(184,149,106,0.5);
       color: #B8956A;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       z-index: 10;
-      transition: background 0.22s ease, border-color 0.22s ease, opacity 0.22s ease;
+      transition: background 0.3s ease, border-color 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease;
       backdrop-filter: blur(6px);
     }
     .gallery-btn:hover {
-      background: rgba(184,149,106,0.18);
+      background: rgba(184,149,106,0.28);
       border-color: #B8956A;
+      box-shadow: 0 0 16px rgba(184, 149, 106, 0.32);
+      transform: translateY(-50%) scale(1.08);
     }
     .gallery-btn:focus-visible {
       outline: 2px solid #B8956A;
@@ -792,15 +844,20 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(26,26,26,0.55);
-      border: 1px solid rgba(184,149,106,0.3);
+      background: rgba(26,26,26,0.65);
+      border: 1px solid rgba(184,149,106,0.4);
       border-radius: 50%;
       color: #FAF8F5;
       cursor: pointer;
-      transition: background 0.25s ease, border-color 0.25s ease, opacity 0.25s ease;
+      transition: background 0.3s ease, border-color 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease;
       z-index: 10;
     }
-    .lightbox-nav:hover { background: rgba(184,149,106,0.85); border-color: #B8956A; }
+    .lightbox-nav:hover {
+      background: rgba(184,149,106,0.92);
+      border-color: #B8956A;
+      box-shadow: 0 0 24px rgba(184, 149, 106, 0.4);
+      transform: translateY(-50%) scale(1.12);
+    }
     .lightbox-nav:focus-visible { outline: 2px solid #B8956A; outline-offset: 2px; }
     .lightbox-nav[hidden] { display: none; }
     .lightbox-nav--prev { left: 1.5rem; }
@@ -939,23 +996,34 @@
       background: transparent;
       color: #1A1A1A;
       font-size: 0.8rem;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
+      transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease;
       cursor: pointer;
       text-decoration: none;
-      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
     }
-    .cmp-button:hover,
-    .cmp-button:focus-visible {
+    .cmp-button:hover {
       background: #B8956A;
       color: #FAF8F5;
-      outline: none;
+      box-shadow: 0 4px 12px rgba(184, 149, 106, 0.28);
+      transform: translateY(-2px);
+    }
+    .cmp-button:focus-visible {
+      outline: 2px solid #B8956A;
+      outline-offset: 2px;
+    }
+    .cmp-button:active {
+      transform: translateY(0) scale(0.97);
     }
     .cmp-button--solid {
       background: #1A1A1A;
       color: #FAF8F5;
       border-color: #1A1A1A;
+    }
+    .cmp-button--solid:hover {
+      background: #2C2C2C;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
     }
     .cmp-button--muted {
       border-color: rgba(26,26,26,0.16);
@@ -1007,10 +1075,10 @@
     .cmp-toggle__track {
       position: absolute;
       inset: 0;
-      background: rgba(44,44,44,0.18);
+      background: rgba(44,44,44,0.2);
       border-radius: 999px;
       pointer-events: none;
-      transition: background-color 0.2s ease;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
     }
     .cmp-toggle__track::after {
       content: '';
@@ -1021,8 +1089,11 @@
       height: 22px;
       border-radius: 50%;
       background: #fff;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
-      transition: transform 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+    .cmp-toggle input:hover:not(:disabled) + .cmp-toggle__track {
+      box-shadow: inset 0 0 8px rgba(184, 149, 106, 0.1);
     }
     .cmp-toggle input:checked + .cmp-toggle__track {
       background: #1A1A1A;
@@ -1113,16 +1184,17 @@
       width: 100%;
       aspect-ratio: 4 / 3;
       overflow: hidden;
-      border: 1px solid rgba(201,169,110,0.2);
-      border-radius: 2px;
+      border: 1px solid rgba(201,169,110,0.25);
+      border-radius: 4px;
       cursor: pointer;
       background: #fff;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-      transition: box-shadow 0.4s ease, border-color 0.4s ease;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12), 0 8px 32px rgba(0,0,0,0.08);
+      transition: box-shadow 0.4s ease, border-color 0.4s ease, transform 0.3s ease;
     }
     .nr-tile:hover {
-      box-shadow: 0 16px 48px rgba(0,0,0,0.7);
-      border-color: rgba(201,169,110,0.5);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.18), 0 16px 56px rgba(0,0,0,0.14), 0 0 0 1px rgba(201,169,110,0.1);
+      border-color: rgba(201,169,110,0.6);
+      transform: translateY(-4px);
     }
     .nr-tile:focus-visible { outline: 2px solid #c9a96e; outline-offset: 2px; }
     .nr-tile__imgs {
@@ -1195,15 +1267,16 @@
     .nr-tile__loc {
       font-family: system-ui, sans-serif;
       font-size: 0.6875rem;
-      color: #888;
+      color: #666;
       text-transform: uppercase;
       letter-spacing: 0.12em;
       line-height: 1.4;
+      font-weight: 500;
     }
     .nr-tile__desc {
       font-family: system-ui, sans-serif;
       font-size: 0.8125rem;
-      color: #bbb;
+      color: #999;
       margin-top: 8px;
       line-height: 1.6;
     }
@@ -1467,7 +1540,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <!-- Scroll indicator -->
   <div class="scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
-    <div class="w-px bg-cream" style="height: 36px; opacity: 0.45;"></div>
+    <div class="w-px bg-cream" style="height: 36px; opacity: 0.55;"></div>
     <svg width="12" height="7" viewBox="0 0 12 7" fill="none">
       <path d="M1 1L6 6L11 1" stroke="#FAF8F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
     </svg>
@@ -1506,10 +1579,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
       <div class="aos stagger-1">
-        <p class="font-sans text-cream mb-6" style="font-size: 1rem; opacity: 0.78; line-height: 1.9;">
+        <p class="font-sans text-cream mb-6" style="font-size: 1rem; opacity: 0.85; line-height: 1.9;">
           Tworzymy przestrzenie, które zachwycają i inspirują codzienność naszych klientów.
         </p>
-        <p class="font-sans text-cream" style="font-size: 1rem; opacity: 0.78; line-height: 1.9;">
+        <p class="font-sans text-cream" style="font-size: 1rem; opacity: 0.85; line-height: 1.9;">
           Dzięki wieloletniemu doświadczeniu oraz zaangażowaniu, zrealizowaliśmy wiele projektów, które wywołały radość u naszych klientów.
         </p>
       </div>
@@ -1544,13 +1617,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="pt-20 aos">
       <h3 class="font-serif text-cream mb-8" style="font-size: clamp(1.6rem, 2.7vw, 2.4rem); letter-spacing: -0.03em;">O firmie P&amp;M Apartments</h3>
       <div class="max-w-4xl">
-        <p class="font-sans text-cream mb-6" style="font-size: 1rem; opacity: 0.78; line-height: 1.9;">
+        <p class="font-sans text-cream mb-6" style="font-size: 1rem; opacity: 0.85; line-height: 1.9;">
           Kupujemy, wykańczamy i sprzedajemy mieszkania z rynku pierwotnego we Wrocławiu. Pomagamy w pełnym procesie inwestycji: od zakupu lokalu, przez remont i aranżację wnętrza, aż po finalną sprzedaż. Dbamy o jakość, terminowość i zysk naszych klientów.
         </p>
-        <p class="font-sans text-cream mb-6" style="font-size: 1rem; opacity: 0.78; line-height: 1.9;">
+        <p class="font-sans text-cream mb-6" style="font-size: 1rem; opacity: 0.85; line-height: 1.9;">
           Nasza firma zrealizowała wiele projektów, które zaoszczędziły mnóstwo czasu i stresów towarzyszących w trakcie remontu. Stawiamy na jakość, estetykę i funkcjonalność.
         </p>
-        <p class="font-sans text-cream" style="font-size: 1rem; opacity: 0.78; line-height: 1.9;">
+        <p class="font-sans text-cream" style="font-size: 1rem; opacity: 0.85; line-height: 1.9;">
           Dążymy do doskonałości, dostarczając naszym klientom rozwiązania, które przekraczają ich oczekiwania. Nasze projekty odzwierciedlają indywidualność oraz styl, podążając za trendami na rynku. Dbamy o każdy szczegół, by nasze wnętrza były nie tylko piękne, ale także funkcjonalne.
         </p>
       </div>
@@ -1559,14 +1632,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-16">
       <div class="aos stagger-1 px-8 py-8" style="background-color: rgba(250,248,245,0.03); border: 1px solid rgba(184,149,106,0.2);">
         <h3 class="font-serif text-cream mb-5" style="font-size: clamp(1.4rem, 2.2vw, 2rem); letter-spacing: -0.03em;">Nasza misja</h3>
-        <p class="font-sans text-cream" style="font-size: 1rem; opacity: 0.78; line-height: 1.9;">
+        <p class="font-sans text-cream" style="font-size: 1rem; opacity: 0.85; line-height: 1.9;">
           Naszym celem jest tworzenie mieszkań, które zachwycają nie tylko wyglądem, ale również komfortem użytkowania. Pragniemy sprawiać, aby każdy klient czuł się w swoim lokum wyjątkowo i bezpiecznie.
         </p>
       </div>
 
       <div class="aos stagger-2 px-8 py-8" style="background-color: rgba(250,248,245,0.03); border: 1px solid rgba(184,149,106,0.2);">
         <h3 class="font-serif text-cream mb-5" style="font-size: clamp(1.4rem, 2.2vw, 2rem); letter-spacing: -0.03em;">Nasze wartości</h3>
-        <p class="font-sans text-cream mb-6" style="font-size: 1rem; opacity: 0.78; line-height: 1.9;">
+        <p class="font-sans text-cream mb-6" style="font-size: 1rem; opacity: 0.85; line-height: 1.9;">
           Kładziemy nacisk na jakość i zadowolenie klienta, wierząc, że te wartości są kluczem do sukcesu w branży.
         </p>
         <div class="flex flex-col gap-4">
@@ -1598,7 +1671,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="pt-16 aos">
       <h3 class="font-serif text-cream mb-6" style="font-size: clamp(1.6rem, 2.7vw, 2.4rem); letter-spacing: -0.03em;">Kim jesteśmy?</h3>
       <div class="max-w-5xl">
-        <p class="font-sans text-cream" style="font-size: 1rem; opacity: 0.78; line-height: 1.9;">
+        <p class="font-sans text-cream" style="font-size: 1rem; opacity: 0.85; line-height: 1.9;">
           Od ponad 14 lat działamy na rynku nieruchomości i wykończeń wnętrz. Specjalizujemy się w przygotowaniu mieszkań z rynku pierwotnego do sprzedaży — od analizy inwestycji, przez projekt i wykończenie, po skuteczną sprzedaż. Każdy projekt prowadzimy kompleksowo: planujemy harmonogram, kosztorysujemy prace, zamawiamy materiały i nadzorujemy wykonanie. Dzięki temu nasi klienci otrzymują gotowe mieszkania wykończone w wysokim standardzie, bez stresu i zbędnych formalności.
         </p>
       </div>
@@ -1616,7 +1689,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p class="font-sans uppercase tracking-[0.12em] mb-4" style="font-size: 0.72rem; color: #B8956A; line-height: 1.7;">Wrocław i okolice</p>
         <h2 class="font-serif text-charcoal mb-6" style="font-size: clamp(2rem, 3.5vw, 3.2rem); letter-spacing: -0.03em;">Wykończenie mieszkań pod klucz Wrocław — od projektu do gotowego wnętrza</h2>
         <div class="deco-line" style="margin-left: 0; margin-right: auto; margin-bottom: 24px;"></div>
-        <p class="font-sans text-charcoal mb-10" style="font-size: 1rem; opacity: 0.72; line-height: 1.9;">
+        <p class="font-sans text-charcoal mb-10" style="font-size: 1rem; opacity: 0.82; line-height: 1.9;">
           Kupujesz nowe mieszkanie i nie chcesz martwić się ekipami, materiałami i terminami? Z nami odbierzesz klucze i wprowadzisz się do gotowego, dopracowanego wnętrza.
         </p>
         <a href="#oferty"
@@ -1639,7 +1712,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-20">
       <div class="aos">
         <h3 class="font-serif text-charcoal mb-6" style="font-size: clamp(1.6rem, 2.7vw, 2.4rem); letter-spacing: -0.03em;">Co oferujemy?</h3>
-        <p class="font-sans text-charcoal mb-8" style="font-size: 1rem; opacity: 0.72; line-height: 1.9;">
+        <p class="font-sans text-charcoal mb-8" style="font-size: 1rem; opacity: 0.82; line-height: 1.9;">
           Zajmujemy się kompleksowym wykończeniem mieszkań w stanie deweloperskim. Pracujemy od projektu do gotowego efektu — dokładnie według Twoich oczekiwań.
         </p>
         <div class="flex flex-col gap-4">
@@ -1700,27 +1773,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
             <p class="font-sans font-bold text-charcoal mb-3" style="line-height: 1.7;">14 lat doświadczenia</p>
-            <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.72; line-height: 1.8;">Wykończyliśmy dziesiątki mieszkań — znamy każdy etap procesu.</p>
+            <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.82; line-height: 1.8;">Wykończyliśmy dziesiątki mieszkań — znamy każdy etap procesu.</p>
           </div>
           <div class="card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
             <p class="font-sans font-bold text-charcoal mb-3" style="line-height: 1.7;">Pełna odpowiedzialność</p>
-            <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.72; line-height: 1.8;">Jeden punkt kontaktu, bez pośredników i chaosu organizacyjnego.</p>
+            <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.82; line-height: 1.8;">Jeden punkt kontaktu, bez pośredników i chaosu organizacyjnego.</p>
           </div>
           <div class="card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
             <p class="font-sans font-bold text-charcoal mb-3" style="line-height: 1.7;">Jasny kosztorys</p>
-            <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.72; line-height: 1.8;">Przed startem ustalamy zakres i cenę — bez niespodzianek.</p>
+            <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.82; line-height: 1.8;">Przed startem ustalamy zakres i cenę — bez niespodzianek.</p>
           </div>
           <div class="card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
             <p class="font-sans font-bold text-charcoal mb-3" style="line-height: 1.7;">Terminowość i gwarancja</p>
-            <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.72; line-height: 1.8;">Dotrzymujemy terminów i udzielamy gwarancji na wykonane prace.</p>
+            <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.82; line-height: 1.8;">Dotrzymujemy terminów i udzielamy gwarancji na wykonane prace.</p>
           </div>
           <div class="card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
             <p class="font-sans font-bold text-charcoal mb-3" style="line-height: 1.7;">Stały kontakt</p>
-            <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.72; line-height: 1.8;">Zawsze odbieram telefony. Masz ze mną bezpośredni kontakt na każdym etapie.</p>
+            <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.82; line-height: 1.8;">Zawsze odbieram telefony. Masz ze mną bezpośredni kontakt na każdym etapie.</p>
           </div>
           <div class="card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
             <p class="font-sans font-bold text-charcoal mb-3" style="line-height: 1.7;">15% oszczędności na VAT</p>
-            <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.72; line-height: 1.8;">Pomagamy zoptymalizować koszty materiałów dzięki doświadczeniu inwestycyjnemu.</p>
+            <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.82; line-height: 1.8;">Pomagamy zoptymalizować koszty materiałów dzięki doświadczeniu inwestycyjnemu.</p>
           </div>
         </div>
       </div>
@@ -1732,22 +1805,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="aos stagger-1 card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
           <div class="step-num mb-4">01</div>
           <p class="font-sans font-bold text-charcoal uppercase tracking-[0.1em] text-xs mb-4" style="line-height: 1.7;">Spotkanie i omówienie potrzeb</p>
-          <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.72; line-height: 1.8;">Określamy styl, budżet, zakres prac i termin realizacji.</p>
+          <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.82; line-height: 1.8;">Określamy styl, budżet, zakres prac i termin realizacji.</p>
         </div>
         <div class="aos stagger-2 card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
           <div class="step-num mb-4">02</div>
           <p class="font-sans font-bold text-charcoal uppercase tracking-[0.1em] text-xs mb-4" style="line-height: 1.7;">Projekt i kosztorys</p>
-          <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.72; line-height: 1.8;">Przedstawiamy zakres prac i wycenę lub proponujemy własny pomysł na Twoje wnętrze.</p>
+          <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.82; line-height: 1.8;">Przedstawiamy zakres prac i wycenę lub proponujemy własny pomysł na Twoje wnętrze.</p>
         </div>
         <div class="aos stagger-3 card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
           <div class="step-num mb-4">03</div>
           <p class="font-sans font-bold text-charcoal uppercase tracking-[0.1em] text-xs mb-4" style="line-height: 1.7;">Realizacja</p>
-          <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.72; line-height: 1.8;">Wykonujemy wszystkie prace, na bieżąco informując o postępach.</p>
+          <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.82; line-height: 1.8;">Wykonujemy wszystkie prace, na bieżąco informując o postępach.</p>
         </div>
         <div class="aos stagger-4 card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
           <div class="step-num mb-4">04</div>
           <p class="font-sans font-bold text-charcoal uppercase tracking-[0.1em] text-xs mb-4" style="line-height: 1.7;">Odbiór mieszkania</p>
-          <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.72; line-height: 1.8;">Podpisujemy protokół odbioru, przekazujemy klucze i gwarancję.</p>
+          <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.82; line-height: 1.8;">Podpisujemy protokół odbioru, przekazujemy klucze i gwarancję.</p>
         </div>
       </div>
     </div>
@@ -1822,7 +1895,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="text-center mb-16 aos">
       <p class="font-sans uppercase tracking-[0.12em] mb-4" style="font-size: 0.72rem; color: #c9a96e; line-height: 1.7;">REALIZACJE</p>
       <h2 class="font-serif text-charcoal mb-4" style="font-size: clamp(1.9rem, 3.5vw, 3rem); letter-spacing: -0.03em;">Nasze realizacje</h2>
-      <p class="font-sans text-charcoal mb-4" style="font-size: 1rem; opacity: 0.72; line-height: 1.7;">Każde mieszkanie to osobna historia — sprawdź efekty naszej pracy.</p>
+      <p class="font-sans text-charcoal mb-4" style="font-size: 1rem; opacity: 0.82; line-height: 1.7;">Każde mieszkanie to osobna historia — sprawdź efekty naszej pracy.</p>
       <div style="width:60px; height:1px; background:#c9a96e; margin:24px auto 0;"></div>
     </div>
     <div class="nr-grid">
@@ -2568,114 +2641,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
 
-      <!-- Right — Form -->
+      <!-- Right — Email Link -->
       <div class="aos stagger-2">
-        <form id="contact-form" class="flex flex-col gap-8" novalidate>
-
-          <div>
-            <input
-              type="text"
-              id="contact-name"
-              name="name"
-              required
-              placeholder="Imię i Nazwisko"
-              class="w-full bg-transparent font-sans text-cream text-sm py-3 cursor-text"
-              style="border: none; border-bottom: 1px solid rgba(250,248,245,0.18); outline: none; transition: border-color 0.3s ease; line-height: 1.7;"
-              onfocus="this.style.borderBottomColor='#B8956A'"
-              onblur="this.style.borderBottomColor='rgba(250,248,245,0.18)'"
-            >
-          </div>
-
-          <div>
-            <input
-              type="email"
-              id="contact-email"
-              name="email"
-              required
-              placeholder="Adres Email"
-              class="w-full bg-transparent font-sans text-cream text-sm py-3 cursor-text"
-              style="border: none; border-bottom: 1px solid rgba(250,248,245,0.18); outline: none; transition: border-color 0.3s ease; line-height: 1.7;"
-              onfocus="this.style.borderBottomColor='#B8956A'"
-              onblur="this.style.borderBottomColor='rgba(250,248,245,0.18)'"
-            >
-          </div>
-
-          <div>
-            <textarea
-              id="contact-message"
-              name="message"
-              required
-              placeholder="Wiadomość"
-              rows="4"
-              class="w-full bg-transparent font-sans text-cream text-sm py-3 resize-none cursor-text"
-              style="border: none; border-bottom: 1px solid rgba(250,248,245,0.18); outline: none; transition: border-color 0.3s ease; line-height: 1.7;"
-              onfocus="this.style.borderBottomColor='#B8956A'"
-              onblur="this.style.borderBottomColor='rgba(250,248,245,0.18)'"
-            ></textarea>
-          </div>
-
-          <div>
-            <button
-              id="contact-submit"
-              type="submit"
-              class="btn-solid font-sans text-cream text-sm uppercase tracking-[0.15em] px-12 py-4 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass"
-              style="border: none; letter-spacing: 0.15em;"
-            >
-              Wyślij Wiadomość
-            </button>
-            <p id="contact-status" role="status" aria-live="polite" class="font-sans text-sm mt-5" style="display:none;line-height:1.7;"></p>
-          </div>
-
-        </form>
-        <script>
-          (() => {
-            const form = document.getElementById('contact-form')
-            const btn = document.getElementById('contact-submit')
-            const status = document.getElementById('contact-status')
-            const showStatus = (msg, ok) => {
-              status.textContent = msg
-              status.style.color = ok ? '#B8956A' : '#E57373'
-              status.style.display = 'block'
-            }
-            form.addEventListener('submit', async (e) => {
-              e.preventDefault()
-              const name = document.getElementById('contact-name').value.trim()
-              const email = document.getElementById('contact-email').value.trim()
-              const message = document.getElementById('contact-message').value.trim()
-              if (!name || !email || !message) {
-                showStatus('Prosimy wypełnić wszystkie pola formularza.', false)
-                return
-              }
-              btn.disabled = true
-              btn.style.opacity = '0.6'
-              btn.style.cursor = 'wait'
-              const originalLabel = btn.textContent
-              btn.textContent = 'Wysyłanie…'
-              status.style.display = 'none'
-              try {
-                const res = await fetch('/api/contact', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ name, email, message })
-                })
-                const data = await res.json().catch(() => ({}))
-                if (res.ok && data.success) {
-                  showStatus('Dziękujemy! Wiadomość została wysłana. Odpowiemy wkrótce.', true)
-                  form.reset()
-                } else {
-                  showStatus(data.error || 'Nie udało się wysłać wiadomości. Spróbuj ponownie.', false)
-                }
-              } catch {
-                showStatus('Błąd połączenia. Sprawdź internet i spróbuj ponownie.', false)
-              } finally {
-                btn.disabled = false
-                btn.style.opacity = ''
-                btn.style.cursor = ''
-                btn.textContent = originalLabel
-              }
-            })
-          })()
-        </script>
+        <a href="mailto:kontakt@pm-apartments.pl" class="btn-solid font-sans text-cream text-sm uppercase tracking-[0.15em] px-12 py-4 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass inline-block" style="border: none; letter-spacing: 0.15em;">Wyślij Wiadomość</a>
       </div>
 
     </div>
@@ -2686,7 +2654,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ═══════════════════════════════════════════
      9. FOOTER
 ═══════════════════════════════════════════ -->
-<footer style="background-color: #1A1A1A; border-top: 1px solid rgba(184,149,106,0.2);">
+<footer style="background-color: #1A1A1A; border-top: 1px solid rgba(184,149,106,0.25); box-shadow: inset 0 1px 0 rgba(250, 248, 245, 0.03);">
   <div class="max-w-6xl mx-auto px-8 py-16">
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
@@ -2723,10 +2691,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- Bottom copyright -->
     <div class="pt-8" style="border-top: 1px solid rgba(250,248,245,0.07);">
       <p class="font-sans text-cream mb-1" style="font-size: 0.68rem; opacity: 0.65; line-height: 1.7;">
-        &copy; 2025 P&amp;M Apartments Patryk Zacharek. Wszelkie prawa zastrzeżone.
+        &copy; 2026 P&amp;M Apartments Patryk Zacharek. Wszelkie prawa zastrzeżone.
       </p>
       <p class="font-sans text-cream" style="font-size: 0.65rem; opacity: 0.65; line-height: 1.7;">
-        Strona stworzona przez <a href="https://nextengroup.pl" class="underline cursor-pointer" style="transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Next Group</a>
+        Strona stworzona przez <a href="https://getbuild.pl" rel="nofollow noopener" target="_blank" class="underline cursor-pointer" style="color: inherit; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Getbuild.pl</a> &middot; 2026
       </p>
       <p class="font-sans text-cream" style="font-size: 0.68rem; opacity: 0.65; line-height: 1.7; margin-top: 1rem;">
         <button type="button" class="consent-link" data-open-consent-settings>Ustawienia prywatności i cookies</button>
