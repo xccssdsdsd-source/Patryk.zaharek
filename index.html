@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-MHNM5MFZ');</script>
-  <!-- End Google Tag Manager -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wykończenie mieszkań pod klucz Wrocław — P&amp;M Apartments</title>
@@ -75,19 +68,29 @@
   <script>
     window.dataLayer = window.dataLayer || []
     function gtag(){dataLayer.push(arguments)}
-    const loadGtag = () => {
-      if (window.__gtagLoaded) return
-      window.__gtagLoaded = true
+    gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' })
+    const loadGtm = () => {
+      if (window.__gtmLoaded) return
+      window.__gtmLoaded = true
+      dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' })
       const s = document.createElement('script')
       s.async = true
-      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-NLX73FDMSG'
+      s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-MHNM5MFZ'
       document.head.appendChild(s)
-      gtag('js', new Date())
-      gtag('config', 'G-NLX73FDMSG')
     }
-    if ('requestIdleCallback' in window) requestIdleCallback(loadGtag, { timeout: 4000 })
-    else setTimeout(loadGtag, 3000)
-    ['scroll','pointerdown','keydown','touchstart'].forEach(e => addEventListener(e, loadGtag, { once: true, passive: true }))
+    addEventListener('pm:consent-change', ({ detail: { categories: c } }) => {
+      const state = on => on ? 'granted' : 'denied'
+      gtag('consent', 'update', { analytics_storage: state(c.analytics), ad_storage: state(c.marketing), ad_user_data: state(c.marketing), ad_personalization: state(c.marketing) })
+      if (!c.analytics && !c.marketing) return
+      if (document.readyState === 'complete') loadGtm()
+      else addEventListener('load', loadGtm, { once: true })
+    })
+    try {
+      const saved = JSON.parse(localStorage.getItem('pm_consent_preferences_v1'))
+      if (!saved || saved.version !== 1 || !saved.categories) document.documentElement.classList.add('cmp-pending')
+    } catch (e) {
+      document.documentElement.classList.add('cmp-pending')
+    }
   </script>
 
   <style>
@@ -1084,6 +1087,17 @@
     .cmp-banner.active {
       transform: translateX(-50%) translateY(0);
     }
+    .cmp-pending #cmp-backdrop {
+      display: block;
+      opacity: 1;
+      pointer-events: auto;
+      transition: none;
+    }
+    .cmp-pending #cmp-banner {
+      display: block;
+      transform: translateX(-50%) translateY(0);
+      transition: none;
+    }
     .cmp-panel {
       top: 50%;
       transform: translate(-50%, -48%);
@@ -1587,10 +1601,21 @@
   </script>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MHNM5MFZ"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+<div class="cmp-backdrop" id="cmp-backdrop" hidden></div>
+
+<section class="cmp-banner" id="cmp-banner" hidden aria-labelledby="cmp-banner-title" aria-describedby="cmp-banner-copy">
+  <h2 class="cmp-title" id="cmp-banner-title">Prywatność domyślnie</h2>
+  <p class="cmp-copy" id="cmp-banner-copy">
+    Strona nie uruchamia analityki, marketingu ani osadzonych treści stron trzecich przed zgodą.
+    Możesz zaakceptować wszystkie kategorie opcjonalne, odrzucić wszystkie albo ustawić je oddzielnie.
+  </p>
+  <div class="cmp-actions">
+    <button type="button" class="cmp-button cmp-button--solid" data-consent-action="accept-all">Akceptuję wszystkie</button>
+    <button type="button" class="cmp-button cmp-button--muted" data-consent-action="reject-all">Odrzucam wszystkie</button>
+    <button type="button" class="cmp-button" data-open-consent-settings>Dostosuj ustawienia</button>
+  </div>
+</section>
+
 
 <!-- ═══════════════════════════════════════════
      NAVIGATION
@@ -2814,21 +2839,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 
-<div class="cmp-backdrop" id="cmp-backdrop" hidden></div>
-
-<section class="cmp-banner" id="cmp-banner" hidden aria-labelledby="cmp-banner-title" aria-describedby="cmp-banner-copy">
-  <h2 class="cmp-title" id="cmp-banner-title">Prywatność domyślnie</h2>
-  <p class="cmp-copy" id="cmp-banner-copy">
-    Strona nie uruchamia analityki, marketingu ani osadzonych treści stron trzecich przed zgodą.
-    Możesz zaakceptować wszystkie kategorie opcjonalne, odrzucić wszystkie albo ustawić je oddzielnie.
-  </p>
-  <div class="cmp-actions">
-    <button type="button" class="cmp-button cmp-button--solid" data-consent-action="accept-all">Akceptuję wszystkie</button>
-    <button type="button" class="cmp-button cmp-button--muted" data-consent-action="reject-all">Odrzucam wszystkie</button>
-    <button type="button" class="cmp-button" data-open-consent-settings>Dostosuj ustawienia</button>
-  </div>
-</section>
-
 <section class="cmp-panel" id="cmp-panel" hidden aria-labelledby="cmp-panel-title">
   <h2 class="cmp-title" id="cmp-panel-title">Ustawienia prywatności</h2>
   <p class="cmp-copy">
@@ -3392,8 +3402,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const initialConsent = readConsent();
     applyConsentState(initialConsent ? initialConsent.categories : DEFAULT_CATEGORIES);
     if (!initialConsent) {
-      openBanner();
+      banner.hidden = false;
+      backdrop.hidden = false;
+      banner.classList.add('active');
+      backdrop.classList.add('active');
     }
+    document.documentElement.classList.remove('cmp-pending');
 
     window.PMConsent = {
       key: CONSENT_KEY,
