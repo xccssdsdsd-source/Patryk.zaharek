@@ -632,8 +632,74 @@
       color: #FAF8F5;
       opacity: 0.88;
     }
+    .price-history {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .price-history__btn {
+      cursor: pointer;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 0.75rem;
+      color: #FAF8F5;
+      background: rgba(184,149,106,0.14);
+      border: 1px solid rgba(184,149,106,0.45);
+      border-radius: 999px;
+      padding: 4px 12px;
+      line-height: 1.2;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .price-history__btn:hover { opacity: 0.85; }
+    .price-history__btn:focus-visible { outline: 2px solid #B8956A; outline-offset: 2px; }
+    .price-history__btn:active { transform: scale(0.96); }
+    .price-history__pop {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      z-index: 30;
+      width: max-content;
+      min-width: min(300px, 80vw);
+      max-width: 380px;
+      padding: 18px 20px;
+      background: #fff;
+      border: 1px solid #E5E7EB;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(28,22,15,0.22), 0 4px 12px rgba(184,149,106,0.12);
+    }
+    .price-history__pop[hidden] { display: none; }
+    .price-history__pop p {
+      margin: 0 0 12px;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #111;
+    }
+    .price-history__pop table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 0.875rem;
+    }
+    .price-history__pop th {
+      padding: 6px 0;
+      color: #6B7280;
+      font-weight: 500;
+      text-align: left;
+      border-bottom: 1px solid #E5E7EB;
+    }
+    .price-history__pop td {
+      padding: 8px 0;
+      color: #374151;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .price-history__pop th:last-child,
+    .price-history__pop td:last-child { text-align: right; }
+    .price-history__pop td:last-child { font-weight: 700; color: #111; }
     .property-description {
       margin-bottom: 1.75rem;
+    }
+    .property-description p + p {
+      margin-top: 1rem;
     }
     .property-description p {
       font-family: 'DM Sans', system-ui, sans-serif;
@@ -1964,7 +2030,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="deco-line" style="width:60px; height:1px; background:#B8956A; margin:24px auto 0;"></div>
     </div>
     <div class="nr-grid">
-      <div class="nr-tile aos" style="--tile-delay: 0ms;" tabindex="0" role="img" aria-label="Kurkowa 36/62 – wykończenie mieszkania Wrocław, P&M Apartments">
+      <div class="nr-tile aos" style="--tile-delay: 0ms;" tabindex="0" role="img" aria-label="Hubska 100 – wykończenie mieszkania Wrocław, P&M Apartments">
+        <div class="nr-tile__imgs">
+          <img src="Hubska%20100/1.webp" alt="Hubska 100 – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Hubska 100, Wrocław Krzyki, ul. Paczkowska – Mieszkanie 2-pokojowe, 35,91 m²" class="nr-tile__img active" loading="lazy" decoding="async" fetchpriority="low">
+          <img src="Hubska%20100/2.webp" alt="Hubska 100 – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Hubska 100, Wrocław Krzyki, ul. Paczkowska – Mieszkanie 2-pokojowe, 35,91 m²" class="nr-tile__img" loading="lazy" decoding="async">
+          <img src="Hubska%20100/3.webp" alt="Hubska 100 – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Hubska 100, Wrocław Krzyki, ul. Paczkowska – Mieszkanie 2-pokojowe, 35,91 m²" class="nr-tile__img" loading="lazy" decoding="async">
+          <img src="Hubska%20100/4.webp" alt="Hubska 100 – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Hubska 100, Wrocław Krzyki, ul. Paczkowska – Mieszkanie 2-pokojowe, 35,91 m²" class="nr-tile__img" loading="lazy" decoding="async">
+          <img src="Hubska%20100/5.webp" alt="Hubska 100 – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Hubska 100, Wrocław Krzyki, ul. Paczkowska – Mieszkanie 2-pokojowe, 35,91 m²" class="nr-tile__img" loading="lazy" decoding="async">
+          <img src="Hubska%20100/6.webp" alt="Hubska 100 – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Hubska 100, Wrocław Krzyki, ul. Paczkowska – Mieszkanie 2-pokojowe, 35,91 m²" class="nr-tile__img" loading="lazy" decoding="async">
+          <img src="Hubska%20100/7.webp" alt="Hubska 100 – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Hubska 100, Wrocław Krzyki, ul. Paczkowska – Mieszkanie 2-pokojowe, 35,91 m²" class="nr-tile__img" loading="lazy" decoding="async">
+          <img src="Hubska%20100/8.webp" alt="Hubska 100 – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Hubska 100, Wrocław Krzyki, ul. Paczkowska – Mieszkanie 2-pokojowe, 35,91 m²" class="nr-tile__img" loading="lazy" decoding="async">
+          <img src="Hubska%20100/10.webp" alt="Hubska 100 – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Hubska 100, Wrocław Krzyki, ul. Paczkowska – Mieszkanie 2-pokojowe, 35,91 m²" class="nr-tile__img" loading="lazy" decoding="async">
+        </div>
+        <span class="nr-tile__badge">1 / 9</span>
+        <div class="nr-tile__panel"><p class="nr-tile__name">Hubska 100</p><p class="nr-tile__loc">Wrocław Krzyki, ul. Paczkowska</p><p class="nr-tile__desc">Mieszkanie 2-pokojowe, 35,91 m²</p></div>
+      </div>
+      <div class="nr-tile aos" style="--tile-delay: 70ms;" tabindex="0" role="img" aria-label="Kurkowa 36/62 – wykończenie mieszkania Wrocław, P&M Apartments">
         <div class="nr-tile__imgs">
           <img src="Kurkowa%2036/1.webp" alt="Kurkowa 36/62 – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Kurkowa 36/62, Wrocław Śródmieście, Nowa Kurkowa – Mieszkanie 2-pokojowe, 38,57 m²" class="nr-tile__img active" loading="lazy" decoding="async" fetchpriority="low">
           <img src="Kurkowa%2036/2.webp" alt="Kurkowa 36/62 – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Kurkowa 36/62, Wrocław Śródmieście, Nowa Kurkowa – Mieszkanie 2-pokojowe, 38,57 m²" class="nr-tile__img" loading="lazy" decoding="async">
@@ -1983,7 +2064,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="nr-tile__badge">1 / 13</span>
         <div class="nr-tile__panel"><p class="nr-tile__name">Kurkowa 36/62</p><p class="nr-tile__loc">Wrocław Śródmieście, Nowa Kurkowa</p><p class="nr-tile__desc">Mieszkanie 2-pokojowe, 38,57 m²</p></div>
       </div>
-      <div class="nr-tile aos" style="--tile-delay: 70ms;" tabindex="0" role="img" aria-label="Jankiela 4 – wykończenie mieszkania Wrocław, P&M Apartments">
+      <div class="nr-tile aos" style="--tile-delay: 140ms;" tabindex="0" role="img" aria-label="Jankiela 4 – wykończenie mieszkania Wrocław, P&M Apartments">
         <div class="nr-tile__imgs">
           <img src="Nasze%20realizacje/Jankiela4.....webp" alt="Jankiela 4 – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Jankiela 4, Wrocław Psie Pole, Osiedle Zielna – Mieszkanie 3-pokojowe, 55,31 m²" class="nr-tile__img active" loading="lazy" decoding="async" fetchpriority="low">
           <img src="Nasze%20realizacje/Jankiela4....webp" alt="Jankiela 4 – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Jankiela 4, Wrocław Psie Pole, Osiedle Zielna – Mieszkanie 3-pokojowe, 55,31 m²" class="nr-tile__img" loading="lazy" decoding="async">
@@ -1993,7 +2074,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="nr-tile__badge">1 / 4</span>
         <div class="nr-tile__panel"><p class="nr-tile__name">Jankiela 4</p><p class="nr-tile__loc">Wrocław Psie Pole, Osiedle Zielna</p><p class="nr-tile__desc">Mieszkanie 3-pokojowe, 55,31 m²</p></div>
       </div>
-      <div class="nr-tile aos" style="--tile-delay: 140ms;" tabindex="0" role="img" aria-label="Nefrytowa 77 – wykończenie mieszkania Wrocław, P&M Apartments">
+      <div class="nr-tile aos" style="--tile-delay: 210ms;" tabindex="0" role="img" aria-label="Nefrytowa 77 – wykończenie mieszkania Wrocław, P&M Apartments">
         <div class="nr-tile__imgs">
           <img src="Nasze%20realizacje/Nefrytowa....webp" alt="Nefrytowa 77 – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Nefrytowa 77, Wrocław Ołtaszyn – Mieszkanie 2-pokojowe, 43,82 m²" class="nr-tile__img active" loading="lazy" decoding="async" fetchpriority="low">
           <img src="Nasze%20realizacje/Nefrytowa...webp" alt="Nefrytowa 77 – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Nefrytowa 77, Wrocław Ołtaszyn – Mieszkanie 2-pokojowe, 43,82 m²" class="nr-tile__img" loading="lazy" decoding="async">
@@ -2003,7 +2084,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="nr-tile__badge">1 / 4</span>
         <div class="nr-tile__panel"><p class="nr-tile__name">Nefrytowa 77</p><p class="nr-tile__loc">Wrocław Ołtaszyn</p><p class="nr-tile__desc">Mieszkanie 2-pokojowe, 43,82 m²</p></div>
       </div>
-      <div class="nr-tile aos" style="--tile-delay: 210ms;" tabindex="0" role="img" aria-label="Kurlandzka 32 – wykończenie mieszkania Wrocław, P&M Apartments">
+      <div class="nr-tile aos" style="--tile-delay: 280ms;" tabindex="0" role="img" aria-label="Kurlandzka 32 – wykończenie mieszkania Wrocław, P&M Apartments">
         <div class="nr-tile__imgs">
           <img src="Nasze%20realizacje/Kurlandzka....webp" alt="Kurlandzka 32 – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Kurlandzka 32, Wrocław Ołtaszyn – Mieszkanie 2-pokojowe, 43,82 m²" class="nr-tile__img active" loading="lazy" decoding="async" fetchpriority="low">
           <img src="Nasze%20realizacje/Kurlandzka...webp" alt="Kurlandzka 32 – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Kurlandzka 32, Wrocław Ołtaszyn – Mieszkanie 2-pokojowe, 43,82 m²" class="nr-tile__img" loading="lazy" decoding="async">
@@ -2012,7 +2093,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="nr-tile__badge">1 / 3</span>
         <div class="nr-tile__panel"><p class="nr-tile__name">Kurlandzka 32</p><p class="nr-tile__loc">Wrocław Ołtaszyn</p><p class="nr-tile__desc">Mieszkanie 2-pokojowe, 43,82 m²</p></div>
       </div>
-      <div class="nr-tile aos" style="--tile-delay: 280ms;" tabindex="0" role="img" aria-label="Kajdasza – wykończenie mieszkania Wrocław, P&M Apartments">
+      <div class="nr-tile aos" style="--tile-delay: 350ms;" tabindex="0" role="img" aria-label="Kajdasza – wykończenie mieszkania Wrocław, P&M Apartments">
         <div class="nr-tile__imgs">
           <img src="Nasze%20realizacje/kajdasza....webp" alt="Kajdasza – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Kajdasza, Wrocław Jagodno – Mieszkanie 2-pokojowe z osobną kuchnią, 49,01 m²" class="nr-tile__img active" loading="lazy" decoding="async" fetchpriority="low">
           <img src="Nasze%20realizacje/kajdasza...webp" alt="Kajdasza – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Kajdasza, Wrocław Jagodno – Mieszkanie 2-pokojowe z osobną kuchnią, 49,01 m²" class="nr-tile__img" loading="lazy" decoding="async">
@@ -2022,7 +2103,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="nr-tile__badge">1 / 4</span>
         <div class="nr-tile__panel"><p class="nr-tile__name">Kajdasza</p><p class="nr-tile__loc">Wrocław Jagodno</p><p class="nr-tile__desc">Mieszkanie 2-pokojowe z osobną kuchnią, 49,01 m²</p></div>
       </div>
-      <div class="nr-tile aos" style="--tile-delay: 350ms;" tabindex="0" role="img" aria-label="Ameriga Vespucciego 41 m² – wykończenie mieszkania Wrocław, P&M Apartments">
+      <div class="nr-tile aos" style="--tile-delay: 420ms;" tabindex="0" role="img" aria-label="Ameriga Vespucciego 41 m² – wykończenie mieszkania Wrocław, P&M Apartments">
         <div class="nr-tile__imgs">
           <img src="Nasze%20realizacje/ameriga%20Vespucciego.webp" alt="Ameriga Vespucciego – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Ameriga Vespucciego, Wrocław Swojczyce, Osiedle Olimpia Port – Mieszkanie 2-pokojowe, 41 m²" class="nr-tile__img active" loading="lazy" decoding="async" fetchpriority="low">
           <img src="Nasze%20realizacje/ameriga%20Vespucciego....webp" alt="Ameriga Vespucciego – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Ameriga Vespucciego, Wrocław Swojczyce, Osiedle Olimpia Port – Mieszkanie 2-pokojowe, 41 m²" class="nr-tile__img" loading="lazy" decoding="async">
@@ -2032,7 +2113,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="nr-tile__badge">1 / 4</span>
         <div class="nr-tile__panel"><p class="nr-tile__name">Ameriga Vespucciego</p><p class="nr-tile__loc">Wrocław Swojczyce, Osiedle Olimpia Port</p><p class="nr-tile__desc">Mieszkanie 2-pokojowe, 41 m²</p></div>
       </div>
-      <div class="nr-tile aos" style="--tile-delay: 420ms;" tabindex="0" role="img" aria-label="Ameriga Vespucciego 40 m² – wykończenie mieszkania Wrocław, P&M Apartments">
+      <div class="nr-tile aos" style="--tile-delay: 490ms;" tabindex="0" role="img" aria-label="Ameriga Vespucciego 40 m² – wykończenie mieszkania Wrocław, P&M Apartments">
         <div class="nr-tile__imgs">
           <img src="Nasze%20realizacje/ameriga%20Vespucciego1...webp" alt="Ameriga Vespucciego – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Ameriga Vespucciego, Wrocław Swojczyce, Osiedle Olimpia Port – Mieszkanie 2-pokojowe, 40 m²" class="nr-tile__img active" loading="lazy" decoding="async" fetchpriority="low">
           <img src="Nasze%20realizacje/ameriga%20Vespucciego1..webp" alt="Ameriga Vespucciego – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Ameriga Vespucciego, Wrocław Swojczyce, Osiedle Olimpia Port – Mieszkanie 2-pokojowe, 40 m²" class="nr-tile__img" loading="lazy" decoding="async">
@@ -2041,7 +2122,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="nr-tile__badge">1 / 3</span>
         <div class="nr-tile__panel"><p class="nr-tile__name">Ameriga Vespucciego</p><p class="nr-tile__loc">Wrocław Swojczyce, Osiedle Olimpia Port</p><p class="nr-tile__desc">Mieszkanie 2-pokojowe, 40 m²</p></div>
       </div>
-      <div class="nr-tile aos" style="--tile-delay: 490ms;" tabindex="0" role="img" aria-label="Wichrowa – wykończenie mieszkania Wrocław, P&M Apartments">
+      <div class="nr-tile aos" style="--tile-delay: 560ms;" tabindex="0" role="img" aria-label="Wichrowa – wykończenie mieszkania Wrocław, P&M Apartments">
         <div class="nr-tile__imgs">
           <img src="Nasze%20realizacje/wichrowa.....webp" alt="Wichrowa – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Wichrowa, Wrocław Fabryczna, Osiedle Planty Racławickie – Mieszkanie 2-pokojowe, 38,37 m²" class="nr-tile__img active" loading="lazy" decoding="async" fetchpriority="low">
           <img src="Nasze%20realizacje/wichrowa....webp" alt="Wichrowa – wykończenie i sprzedaż mieszkania Wrocław, P&M Apartments" title="Wichrowa, Wrocław Fabryczna, Osiedle Planty Racławickie – Mieszkanie 2-pokojowe, 38,37 m²" class="nr-tile__img" loading="lazy" decoding="async">
@@ -2074,6 +2155,178 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="properties-list">
 
+    <div class="property-card">
+
+      <div class="property-header">
+        <h3>Hubska 100</h3>
+        <p class="property-address">ul. Paczkowska 11/51, Wrocław 50-503</p>
+        <span class="property-badge available">Wolne</span>
+      </div>
+
+      <div class="property-meta">
+        <span>2 pokoje</span>
+        <span>35,91 m²</span>
+        <span>21 581 zł/m²</span>
+        <span>775 000 zł</span>
+        <div class="price-history">
+          <button type="button" class="price-history__btn" id="price-history-trigger-hubska" aria-controls="price-history-popover-hubska" aria-expanded="false">Historia ceny</button>
+          <div class="price-history__pop" id="price-history-popover-hubska" hidden>
+            <p>Historia ceny — Hubska 100</p>
+            <table>
+              <thead><tr><th>Status</th><th>Cena</th></tr></thead>
+              <tbody><tr><td>Aktualna cena</td><td>775&nbsp;000&nbsp;zł</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <script>
+      (() => {
+        const trigger = document.getElementById('price-history-trigger-hubska')
+        const popover = document.getElementById('price-history-popover-hubska')
+        if (!trigger || !popover) return
+        const setOpen = open => {
+          popover.hidden = !open
+          trigger.setAttribute('aria-expanded', String(open))
+        }
+        trigger.addEventListener('click', e => {
+          e.stopPropagation()
+          setOpen(popover.hidden)
+        })
+        popover.addEventListener('click', e => e.stopPropagation())
+        document.addEventListener('click', () => setOpen(false))
+        document.addEventListener('keydown', e => e.key === 'Escape' && setOpen(false))
+      })()
+      </script>
+
+      <div class="gallery-wrap" id="gallery-hubska">
+        <button class="gallery-btn gallery-btn--prev" aria-label="Poprzednie zdjęcia" onclick="galleryPrev('gallery-hubska')">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+
+        <div class="gallery-slider">
+          <div class="gallery-track" id="gallery-hubska-track">
+            <a href="Hubska%20100/1.webp" onclick="openLightbox(this);return false;" title="Zdjęcie 1"><img src="Hubska%20100/1.webp" alt="Mieszkanie na sprzedaż Wrocław Krzyki — Hubska 100 salon z sofą" loading="lazy" decoding="async"></a>
+            <a href="Hubska%20100/2.webp" onclick="openLightbox(this);return false;" title="Zdjęcie 2"><img src="Hubska%20100/2.webp" alt="Mieszkanie 2 pokoje Wrocław — Hubska 100 salon z aneksem kuchennym" loading="lazy" decoding="async"></a>
+            <a href="Hubska%20100/3.webp" onclick="openLightbox(this);return false;" title="Zdjęcie 3"><img src="Hubska%20100/3.webp" alt="Wykończone mieszkanie Wrocław — Hubska 100 kuchnia z AGD Electrolux" loading="lazy" decoding="async"></a>
+            <a href="Hubska%20100/4.webp" onclick="openLightbox(this);return false;" title="Zdjęcie 4"><img src="Hubska%20100/4.webp" alt="Mieszkanie pod klucz Wrocław — Hubska 100 strefa dzienna z jadalnią" loading="lazy" decoding="async"></a>
+            <a href="Hubska%20100/5.webp" onclick="openLightbox(this);return false;" title="Zdjęcie 5"><img src="Hubska%20100/5.webp" alt="Kuchnia z kamienną okładziną — Hubska 100 Wrocław" loading="lazy" decoding="async"></a>
+            <a href="Hubska%20100/6.webp" onclick="openLightbox(this);return false;" title="Zdjęcie 6"><img src="Hubska%20100/6.webp" alt="Nowe mieszkanie Wrocław Krzyki — Hubska 100 widok na salon i sypialnię" loading="lazy" decoding="async"></a>
+            <a href="Hubska%20100/7.webp" onclick="openLightbox(this);return false;" title="Zdjęcie 7"><img src="Hubska%20100/7.webp" alt="Sypialnia z łóżkiem 160 cm — Hubska 100 Wrocław" loading="lazy" decoding="async"></a>
+            <a href="Hubska%20100/8.webp" onclick="openLightbox(this);return false;" title="Zdjęcie 8"><img src="Hubska%20100/8.webp" alt="Sypialnia z szafą na wymiar — Hubska 100 Wrocław" loading="lazy" decoding="async"></a>
+            <a href="Hubska%20100/9.webp" onclick="openLightbox(this);return false;" title="Zdjęcie 9"><img src="Hubska%20100/9.webp" alt="Wbudowane biurko z podświetlanymi półkami — Hubska 100 Wrocław" loading="lazy" decoding="async"></a>
+            <a href="Hubska%20100/10.webp" onclick="openLightbox(this);return false;" title="Zdjęcie 10"><img src="Hubska%20100/10.webp" alt="Łazienka z prysznicem walk-in — Hubska 100 Wrocław" loading="lazy" decoding="async"></a>
+            <a href="Hubska%20100/11.webp" onclick="openLightbox(this);return false;" title="Zdjęcie 11"><img src="Hubska%20100/11.webp" alt="Łazienka z podświetlanym lustrem — Hubska 100 Wrocław" loading="lazy" decoding="async"></a>
+            <a href="Hubska%20100/12.webp" onclick="openLightbox(this);return false;" title="Zdjęcie 12"><img src="Hubska%20100/12.webp" alt="Przedpokój z drzwiami ukrytymi — Hubska 100 Wrocław" loading="lazy" decoding="async"></a>
+            <a href="Hubska%20100/13.webp" onclick="openLightbox(this);return false;" title="Zdjęcie 13"><img src="Hubska%20100/13.webp" alt="Sofa z funkcją spania — Hubska 100 Wrocław" loading="lazy" decoding="async"></a>
+            <a href="Hubska%20100/14.webp" onclick="openLightbox(this);return false;" title="Zdjęcie 14"><img src="Hubska%20100/14.webp" alt="Rzut mieszkania 2-pokojowego 35,91 m² — Hubska 100 Wrocław" loading="lazy" decoding="async"></a>
+          </div>
+        </div>
+
+        <button class="gallery-btn gallery-btn--next" aria-label="Następne zdjęcia" onclick="galleryNext('gallery-hubska')">
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+
+        <div class="gallery-counter" id="gallery-hubska-dots"></div>
+      </div>
+
+      <div class="property-description">
+        <p>
+          Zamieszkaj lub zainwestuj na wrocławskich Krzykach. Gotowe 2 pokoje w wysokim standardzie.
+        </p>
+        <p>
+          Oferujemy w pełni wykończone i umeblowane mieszkanie w nowej inwestycji Hubska 100 (Dom Development).
+          Jako P&amp;M Apartments dostarczamy gotowy produkt z rynku pierwotnego: lokal wykończony pod klucz,
+          z pełnym wyposażeniem i gotowy do wprowadzenia od zaraz. Bez uciążliwego procesu remontowego,
+          za to z pełną ochroną prawną i gwarancją.
+        </p>
+      </div>
+
+      <div class="property-features">
+        <h4>O inwestycji Hubska 100</h4>
+        <p>
+          Nowoczesne osiedle z zielonym, zamkniętym patio i reprezentacyjnymi częściami wspólnymi,
+          zlokalizowane przy ul. Paczkowskiej.
+        </p>
+        <ul>
+          <li><strong>Status:</strong> Budynek oddany do użytku na przełomie 2025/2026 r.</li>
+          <li><strong>Komunikacja:</strong> Przystanek tramwajowy tuż przy osiedlu. Około 9 min do Dworca Głównego i Wroclavii, 10 min do Uniwersytetu Ekonomicznego, 18 min do Rynku.</li>
+          <li><strong>Centra biznesowe:</strong> Szybki dojazd do SPOT przy ul. Swobodnej, MidPoint 71 czy Centrum Południe (14–18 min).</li>
+          <li><strong>Infrastruktura:</strong> W bezpośrednim sąsiedztwie Park Andersa, Park Skowroni, Aquapark, Browar Mieszczański oraz markety (Lidl, Biedronka, Auchan).</li>
+          <li><strong>Udogodnienia:</strong> Cichobieżna winda, rowerownia i wózkownia (na osiedlu oraz w garażu), starannie zaprojektowane patio ze strefą wypoczynku. Ogrzewanie miejskie zapewniające niskie koszty eksploatacyjne.</li>
+        </ul>
+
+        <h4>Parametry mieszkania</h4>
+        <ul>
+          <li><strong>Powierzchnia:</strong> 35,91 m² + balkon 3,78 m²</li>
+          <li><strong>Zoptymalizowany układ (2 pokoje):</strong> Przestronny salon z aneksem kuchennym (19,26 m²), wyodrębniona sypialnia (9,33 m²), przedpokój (3,41 m²), łazienka (3,91 m²).</li>
+          <li><strong>Piętro:</strong> 5 z 6</li>
+          <li><strong>Ekspozycja:</strong> Północno-zachodnia. Balkon z widokiem na miasto, gwarantujący prywatność (brak okien sąsiadów naprzeciwko).</li>
+        </ul>
+
+        <h4>Wykończenie P&amp;M Signature — co dokładnie kupujesz?</h4>
+        <p>
+          Oglądasz dokładnie to, co kupujesz – w pełni umeblowany lokal, zaprojektowany i wykonany przez nasz zespół.
+        </p>
+        <ul>
+          <li><strong>Materiały i detale:</strong> Deska fornirowana na podłodze, drzwi ukryte DRE, magnetyczne oświetlenie szynoprzewodowe, gładzie, ukryte karnisze z listwami LED.</li>
+          <li><strong>Zabudowa stolarska na wymiar:</strong> Fronty Egger Dąb Casella i jasny beż, topowe okucia Blum.</li>
+          <li><strong>Kuchnia:</strong> Zintegrowany sprzęt AGD Electrolux, elegancka kamienna okładzina nad blatem, wbudowany stół z krzesłami.</li>
+          <li><strong>Łazienka:</strong> Prysznic walk-in, podtynkowa czarna armatura, wielkoformatowe płytki Maxfliz (120×60 cm), podświetlane lustro, ukryta pralko-suszarka w zabudowie.</li>
+          <li><strong>Sypialnia:</strong> Łóżko 160 cm z pojemnikiem na pościel, pojemna szafa z szufladami, wbudowane biurko z podświetlanymi półkami, kinkiety i stylowa tapeta.</li>
+          <li><strong>Salon i RTV:</strong> Sofa z funkcją spania, szafka RTV ze zintegrowaną osłoną grzejnika, 50-calowy telewizor Samsung.</li>
+          <li><strong>Klimatyzacja:</strong> Zainstalowana i gotowa do pracy.</li>
+        </ul>
+
+        <h4>Bezpieczeństwo transakcji i Twoje prawa</h4>
+        <p>
+          Działamy w oparciu o pełną transparentność i standardy Nowej Ustawy Deweloperskiej.
+        </p>
+        <ul>
+          <li><strong>Brak podatku PCC i ukrytych kosztów:</strong> Podana cena jest kwotą brutto, zawierającą pełne wykończenie i wyposażenie. Sprzedaż na fakturę VAT pozwala zaoszczędzić 2% podatku PCC (ponad 15 000 zł w kieszeni kupującego).</li>
+          <li><strong>Podwójna ochrona:</strong> W akcie notarialnym przenosimy na Ciebie 5-letnią rękojmię dewelopera na wady fizyczne budynku, a dodatkowo otrzymujesz 2 lata gwarancji P&amp;M Apartments na wszystkie prace wykończeniowe.</li>
+          <li><strong>Transparentność:</strong> Przed podpisaniem umowy udostępniamy do wglądu komplet wymaganych dokumentów.</li>
+          <li><strong>Prywatność:</strong> Przy przekazaniu kluczy w drzwiach wejściowych montujemy nową, fabrycznie zaplombowaną wkładkę.</li>
+          <li><strong>Parkowanie bez przymusu:</strong> Miejsce postojowe nie jest obowiązkowym, narzuconym kosztem.</li>
+        </ul>
+      </div>
+
+      <div class="property-map">
+        <p class="map-label">Lokalizacja inwestycji Hubska 100 na mapie</p>
+        <div
+          class="consent-embed"
+          data-consent-embed
+          data-consent-category="social"
+          data-consent-type="iframe"
+          data-consent-src="https://www.google.com/maps?q=ul.+Paczkowska+11,+50-503+Wrocław&t=k&z=16&output=embed"
+          data-consent-title="Lokalizacja: ul. Paczkowska 11, Wrocław"
+          data-consent-width="100%"
+          data-consent-height="420"
+          data-consent-style="border:0; border-radius: 8px;"
+          data-consent-loading="lazy" decoding="async"
+          data-consent-referrerpolicy="no-referrer-when-downgrade"
+          data-consent-allowfullscreen="true">
+          <div class="consent-embed__inner">
+            <p class="font-sans text-cream uppercase tracking-[0.12em]" style="font-size: 0.72rem; color: #B8956A; margin: 0;">Treść zewnętrzna</p>
+            <p class="font-serif text-cream" style="font-size: 1.5rem; margin: 0;">Mapa lokalizacji inwestycji Hubska 100 jest domyślnie zablokowana</p>
+            <p class="font-sans text-cream" style="font-size: 0.95rem; line-height: 1.8; opacity: 0.72; margin: 0; max-width: 38rem;">
+              Podgląd mapy ul. Paczkowskiej 11 we Wrocławiu może przekazywać dane do Google i używać identyfikatorów podobnych do cookies.
+              Włącz kategorię „Social / third-party embeds”, aby załadować mapę na tej stronie.
+            </p>
+            <div class="consent-embed__actions">
+              <button type="button" class="cmp-button cmp-button--solid" data-open-consent-settings>Ustaw zgody</button>
+              <a href="https://www.google.com/maps/search/?api=1&query=ul.+Paczkowska+11,+50-503+Wrocław" target="_blank" rel="noopener noreferrer" class="cmp-button">Otwórz w Google Maps</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="property-footer">
+        <a href="prospekt-hubska-100.pdf" download="Prospekt_Informacyjny_Hubska_100.pdf" class="btn-prospekt">Pobierz prospekt informacyjny (PDF)</a>
+      </div>
+
+    </div>
+
     <!-- KARTA #1 -->
     <div class="property-card property-card--jankiel">
 
@@ -2087,113 +2340,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span>3 pokoje</span>
         <span>55,31 m²</span>
         <span>13 993 zł/m²</span>
-        <span>774 000 zł</span>
-        <!-- PRICE HISTORY FEATURE — Osiedle Zielna -->
-        <div
-          style="
-            position:relative;
-            display:inline-flex;
-            align-items:center;
-            margin-left:8px;
-          "
-        >
-          <button
-            type="button"
-            id="price-history-trigger-jankiel"
-            aria-controls="price-history-popover-jankiel"
-            aria-expanded="false"
-            style="
-              cursor:pointer;
-              font-size:0.75rem;
-              color:#374151;
-              background:#F3F4F6;
-              border:1px solid #D1D5DB;
-              border-radius:999px;
-              padding:4px 10px;
-              user-select:none;
-              line-height:1.2;
-            "
-          >Historia ceny</button>
-
-          <div
-            id="price-history-popover-jankiel"
-            style="
-              display:none;
-              position:absolute;
-              top:calc(100% + 8px);
-              left:0;
-              background:#fff;
-              border:1px solid #E5E7EB;
-              border-radius:12px;
-              padding:18px 20px;
-              min-width:320px;
-              max-width:380px;
-              width:max-content;
-              box-shadow:0 20px 60px rgba(0,0,0,0.2);
-              z-index:30;
-            "
-          >
-            <p style="margin:0 0 12px;font-size:1rem;font-weight:600;color:#111;">
-              Historia ceny — Osiedle Zielna
-            </p>
-            <table style="width:100%;border-collapse:collapse;font-size:0.875rem;">
-              <thead>
-                <tr style="border-bottom:1px solid #E5E7EB;">
-                  <th style="text-align:left;padding:6px 0;color:#6B7280;font-weight:500;">Status</th>
-                  <th style="text-align:right;padding:6px 0;color:#6B7280;font-weight:500;">Cena</th>
-                </tr>
-              </thead>
-              <tbody id="price-history-body-jankiel"></tbody>
-            </table>
-          </div>
-        </div>
         <span>Garaż: 32 000 zł</span>
       </div>
-
-      <script>
-      (function() {
-        var PRICE_HISTORY = [
-          { price: "774\u00a0000\u00a0z\u0142", note: "Aktualna cena" }
-        ];
-
-        var tbody = document.getElementById('price-history-body-jankiel');
-        var trigger = document.getElementById('price-history-trigger-jankiel');
-        var popover = document.getElementById('price-history-popover-jankiel');
-        if (!tbody || !trigger || !popover) return;
-
-        function closePopover() {
-          popover.style.display = 'none';
-          trigger.setAttribute('aria-expanded', 'false');
-        }
-
-        trigger.addEventListener('click', function(event) {
-          event.stopPropagation();
-          var isOpen = popover.style.display === 'block';
-          popover.style.display = isOpen ? 'none' : 'block';
-          trigger.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
-        });
-
-        popover.addEventListener('click', function(event) {
-          event.stopPropagation();
-        });
-
-        document.addEventListener('click', closePopover);
-
-        PRICE_HISTORY.forEach(function(entry, i) {
-          var isFirst = i === 0;
-          var tr = document.createElement('tr');
-          tr.style.borderBottom = '1px solid #F3F4F6';
-          tr.innerHTML =
-            '<td style="padding:8px 0;color:#374151;">' +
-              (entry.note ? entry.note : '&mdash;') +
-            '</td>' +
-            '<td style="padding:8px 0;text-align:right;font-weight:' + (isFirst ? '700' : '400') + ';color:' + (isFirst ? '#111' : '#6B7280') + ';">' +
-              entry.price +
-            '</td>';
-          tbody.appendChild(tr);
-        });
-      })();
-      </script>
 
       <!-- GALERIA ZDJĘĆ – SLIDER -->
       <div class="gallery-wrap" id="gallery-jankiel">
@@ -2343,112 +2491,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span>2 pokoje</span>
         <span>38,57 m²</span>
         <span>21 493 zł/m²</span>
-        <span>829 000 zł</span>
-        <!-- PRICE HISTORY FEATURE — Kurkowa 36/62 -->
-        <div
-          style="
-            position:relative;
-            display:inline-flex;
-            align-items:center;
-            margin-left:8px;
-          "
-        >
-          <button
-            type="button"
-            id="price-history-trigger-kurkowa"
-            aria-controls="price-history-popover-kurkowa"
-            aria-expanded="false"
-            style="
-              cursor:pointer;
-              font-size:0.75rem;
-              color:#374151;
-              background:#F3F4F6;
-              border:1px solid #D1D5DB;
-              border-radius:999px;
-              padding:4px 10px;
-              user-select:none;
-              line-height:1.2;
-            "
-          >Historia ceny</button>
-
-          <div
-            id="price-history-popover-kurkowa"
-            style="
-              display:none;
-              position:absolute;
-              top:calc(100% + 8px);
-              left:0;
-              background:#fff;
-              border:1px solid #E5E7EB;
-              border-radius:12px;
-              padding:18px 20px;
-              min-width:320px;
-              max-width:380px;
-              width:max-content;
-              box-shadow:0 20px 60px rgba(0,0,0,0.2);
-              z-index:30;
-            "
-          >
-            <p style="margin:0 0 12px;font-size:1rem;font-weight:600;color:#111;">
-              Historia ceny — Kurkowa 36/62
-            </p>
-            <table style="width:100%;border-collapse:collapse;font-size:0.875rem;">
-              <thead>
-                <tr style="border-bottom:1px solid #E5E7EB;">
-                  <th style="text-align:left;padding:6px 0;color:#6B7280;font-weight:500;">Status</th>
-                  <th style="text-align:right;padding:6px 0;color:#6B7280;font-weight:500;">Cena</th>
-                </tr>
-              </thead>
-              <tbody id="price-history-body-kurkowa"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <script>
-        (function() {
-        var PRICE_HISTORY = [
-          { price: "829\u00a0000\u00a0z\u0142", note: "Aktualna cena" }
-        ];
-
-          var tbody = document.getElementById('price-history-body-kurkowa');
-          var trigger = document.getElementById('price-history-trigger-kurkowa');
-          var popover = document.getElementById('price-history-popover-kurkowa');
-          if (!tbody || !trigger || !popover) return;
-
-          function closePopover() {
-            popover.style.display = 'none';
-            trigger.setAttribute('aria-expanded', 'false');
-          }
-
-          trigger.addEventListener('click', function(event) {
-            event.stopPropagation();
-            var isOpen = popover.style.display === 'block';
-            popover.style.display = isOpen ? 'none' : 'block';
-            trigger.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
-          });
-
-          popover.addEventListener('click', function(event) {
-            event.stopPropagation();
-          });
-
-          document.addEventListener('click', closePopover);
-
-          PRICE_HISTORY.forEach(function(entry, i) {
-            var isFirst = i === 0;
-            var tr = document.createElement('tr');
-            tr.style.borderBottom = '1px solid #F3F4F6';
-            tr.innerHTML =
-              '<td style="padding:8px 0;color:#374151;">' +
-                (entry.note ? entry.note : '&mdash;') +
-              '</td>' +
-              '<td style="padding:8px 0;text-align:right;font-weight:' + (isFirst ? '700' : '400') + ';color:' + (isFirst ? '#111' : '#6B7280') + ';">' +
-                entry.price +
-              '</td>';
-            tbody.appendChild(tr);
-          });
-        })();
-        </script>
-        <!-- END PRICE HISTORY FEATURE -->
       </div>
 
       <div class="gallery-wrap" id="gallery-kurkowa">
@@ -2955,7 +2997,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   (function() {
     var galleries = {};
     var swipeBound = {};
-    var galleryIds = ['gallery-jankiel', 'gallery-kurkowa'];
+    var galleryIds = ['gallery-hubska', 'gallery-jankiel', 'gallery-kurkowa'];
     var resizeQueued = false;
 
     function perView(id) {
