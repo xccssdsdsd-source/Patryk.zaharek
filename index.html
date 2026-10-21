@@ -117,9 +117,9 @@
     /* Scroll animation */
     .aos {
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease-out,
-                  transform 0.6s ease-out;
+      transform: translateY(20px);
+      transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1),
+                  transform 0.8s cubic-bezier(0.16,1,0.3,1);
     }
     .aos.stagger-1 { transition-delay: 0.1s; }
     .aos.stagger-2 { transition-delay: 0.2s; }
@@ -148,17 +148,20 @@
       transition: color 0.3s ease, transform 0.3s cubic-bezier(0.16,1,0.3,1);
     }
     .nav-link:hover { transform: translateY(-1px); }
-    .nav-link::after {
-      transition: width 0.35s cubic-bezier(0.76,0,0.24,1);
-    }
     #navbar.scrolled {
       background-color: rgba(250, 248, 245, 0.96);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       box-shadow: 0 2px 12px rgba(44, 44, 44, 0.08), 0 1px 2px rgba(184, 149, 106, 0.1);
     }
-    #navbar.scrolled .nav-logo { color: #2C2C2C; }
+    #navbar .nav-logo span { color: #FAF8F5; }
+    #navbar .nav-link { color: #FAF8F5; }
+    #navbar #hamburger span { background-color: #FAF8F5; transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease; }
+    #navbar.scrolled .nav-logo span { color: #2C2C2C; }
     #navbar.scrolled .nav-link { color: #2C2C2C; }
+    #navbar.scrolled #hamburger span { background-color: #2C2C2C; }
+    #navbar .nav-link:hover, #navbar .nav-link:focus-visible { color: #B8956A; }
+    #navbar .nav-link:active { transform: translateY(0); }
 
     /* Mobile menu */
     #mobile-menu {
@@ -176,33 +179,49 @@
       from { opacity: 0; }
       to   { opacity: 1; }
     }
+    @keyframes heroZoom {
+      from { transform: scale(1.06); }
+      to   { transform: scale(1); }
+    }
+    @keyframes heroCtaUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    #hero > img { animation: heroZoom 1.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
     .hero-h1 {
       opacity: 0;
       animation: heroFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
     }
     .hero-cta {
       opacity: 0;
-      animation: heroFadeIn 0.8s ease 1s forwards;
+      animation: heroCtaUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
     }
     @media (prefers-reduced-motion: reduce) {
+      #hero > img { animation: none; }
       .hero-h1, .hero-cta { opacity: 1; animation: none; }
     }
 
-    /* Scroll indicator pulse */
     @keyframes scrollPulse {
       0%, 100% { opacity: 0.5; transform: translateX(-50%) translateY(0); }
       50% { opacity: 1; transform: translateX(-50%) translateY(6px); }
     }
-    .scroll-indicator { animation: scrollPulse 2s ease-in-out infinite; }
+    @keyframes scrollIn {
+      from { opacity: 0; }
+      to   { opacity: 0.5; }
+    }
+    .scroll-indicator { opacity: 0; animation: scrollIn 0.6s ease 1.5s forwards, scrollPulse 2s ease-in-out 2.1s infinite; }
+    @media (prefers-reduced-motion: reduce) {
+      .scroll-indicator { opacity: 0.5; animation: none; }
+    }
 
-    /* Ghost button — brass fill + letter-spacing expand */
     .btn-ghost {
       position: relative;
       overflow: hidden;
       display: inline-block;
       transition: color 0.42s cubic-bezier(0.16,1,0.3,1),
-                  letter-spacing 0.42s cubic-bezier(0.16,1,0.3,1),
-                  border-color 0.42s cubic-bezier(0.16,1,0.3,1);
+                  border-color 0.42s cubic-bezier(0.16,1,0.3,1),
+                  box-shadow 0.42s ease,
+                  transform 0.15s ease;
     }
     .btn-ghost::before {
       content: '';
@@ -219,11 +238,15 @@
       position: relative;
       z-index: 1;
     }
-    .btn-ghost:hover::before { transform: scaleX(1); }
-    .btn-ghost:hover {
+    .btn-ghost:hover::before, .btn-ghost:focus-visible::before { transform: scaleX(1); }
+    .btn-ghost:hover, .btn-ghost:focus-visible {
       color: #FAF8F5 !important;
-      letter-spacing: 0.22em;
       border-color: #B8956A;
+      box-shadow: 0 4px 12px rgba(184, 149, 106, 0.28);
+    }
+    .btn-ghost:focus-visible {
+      outline: 2px solid #B8956A;
+      outline-offset: 2px;
     }
     .btn-ghost:active { transform: scale(0.97); }
 
@@ -254,23 +277,22 @@
 
     /* Property card image zoom */
     .prop-card img {
-      transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .prop-card:hover img { transform: scale(1.05); }
     .prop-card {
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
                   box-shadow 0.4s ease;
     }
-    .prop-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 4px 12px rgba(184, 149, 106, 0.12), 0 12px 32px rgba(44, 44, 44, 0.16), 0 24px 64px rgba(44, 44, 44, 0.12) !important;
-    }
-
     .realization-card img {
       transition: transform 0.45s ease;
     }
-    .realization-card:hover img {
-      transform: scale(1.03);
+    @media (hover: hover) {
+      .prop-card:hover img { transform: scale(1.05); }
+      .prop-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 4px 12px rgba(184, 149, 106, 0.12), 0 12px 32px rgba(44, 44, 44, 0.16), 0 24px 64px rgba(44, 44, 44, 0.12) !important;
+      }
+      .realization-card:hover img { transform: scale(1.03); }
     }
     .realization-carousel {
       position: relative;
@@ -337,7 +359,7 @@
 
     /* Agent photo */
     .agent-photo img {
-      transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .agent-photo:hover img { transform: scale(1.03); }
 
@@ -350,28 +372,36 @@
       position: absolute;
       bottom: -2px;
       left: 0;
-      width: 0;
+      width: 100%;
       height: 1px;
       background: #B8956A;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.35s cubic-bezier(0.76,0,0.24,1);
     }
-    .nav-link:hover::after { width: 100%; }
+    .nav-link:hover::after, .nav-link:focus-visible::after { transform: scaleX(1); }
 
-    /* Ghost button */
-    .btn-ghost {
-      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    .link-soft {
+      position: relative;
+      display: inline-block;
+      transition: opacity 0.3s ease;
     }
-    .btn-ghost:hover {
-      background-color: #B8956A !important;
-      color: #FAF8F5 !important;
-      box-shadow: 0 4px 12px rgba(184, 149, 106, 0.28);
+    .link-soft::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: #B8956A;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.35s cubic-bezier(0.76,0,0.24,1);
     }
-    .btn-ghost:focus-visible {
-      outline: 2px solid #B8956A;
-      outline-offset: 2px;
-    }
-    .btn-ghost:active {
-      transform: scale(0.96);
-    }
+    .link-soft:hover, .link-soft:focus-visible { opacity: 0.9 !important; }
+    .link-soft:hover::after, .link-soft:focus-visible::after { transform: scaleX(1); }
+    .link-soft:active { opacity: 0.7 !important; }
+    .link-soft.underline::after { content: none; }
 
     /* Solid button */
     .btn-solid {
@@ -416,6 +446,7 @@
       color: #B8956A;
       opacity: 0.15;
       letter-spacing: -0.03em;
+      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1);
     }
 
     /* Decorative line */
@@ -425,15 +456,44 @@
       height: 3px;
       background: currentColor;
       margin: 12px auto 0;
+      transform: scaleX(0);
+      transition: transform 0.9s cubic-bezier(0.16,1,0.3,1) 0.2s;
     }
+    .deco-line[style*="margin-left: 0"] { transform-origin: left center; }
+    .deco-line.visible { transform: scaleX(1); }
+    @media (prefers-reduced-motion: reduce) {
+      .deco-line { transform: none; transition: none; }
+    }
+
+    .check-list svg {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1);
+    }
+    .check-list.visible svg { opacity: 1; transform: scale(1); }
+    .check-list.visible > :nth-child(2) svg { transition-delay: 0.08s; }
+    .check-list.visible > :nth-child(3) svg { transition-delay: 0.16s; }
+    .check-list.visible > :nth-child(4) svg { transition-delay: 0.24s; }
+    .check-list.visible > :nth-child(5) svg { transition-delay: 0.32s; }
+    .check-list.visible > :nth-child(6) svg { transition-delay: 0.4s; }
+    .check-list.visible > :nth-child(7) svg { transition-delay: 0.48s; }
+    @media (prefers-reduced-motion: reduce) {
+      .check-list svg { opacity: 1; transform: none; transition: none; }
+    }
+
+    .img-zoom img { transition: transform 0.8s cubic-bezier(0.16,1,0.3,1); }
 
     /* Card hover */
     .card-hover {
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     }
-    .card-hover:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12), 0 16px 40px rgba(0,0,0,0.08);
+    @media (hover: hover) {
+      .card-hover:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 8px 24px rgba(44,44,44,0.1), 0 16px 40px rgba(184,149,106,0.1);
+      }
+      .card-hover:hover .step-num { opacity: 0.35; transform: translateY(-2px); }
+      .img-zoom:hover img { transform: scale(1.04); }
     }
     .card-hover:focus-visible {
       outline: 2px solid #B8956A;
@@ -444,19 +504,25 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       box-shadow: 0 22px 48px -30px rgba(184,149,106,0.5);
     }
-    .opinia-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 28px 56px -28px rgba(184,149,106,0.6);
-      border-color: rgba(184,149,106,0.35);
-    }
     .opinia-quote {
       transition: transform 0.35s ease, opacity 0.35s ease;
       transform-origin: left center;
     }
-    .opinia-card:hover .opinia-quote {
-      transform: scale(1.12);
-      opacity: 0.4;
+    @media (hover: hover) {
+      .opinia-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 28px 56px -28px rgba(184,149,106,0.6);
+        border-color: rgba(184,149,106,0.35);
+      }
+      .opinia-card:hover .opinia-quote {
+        transform: scale(1.12);
+        opacity: 0.4;
+      }
     }
+    .aos.card-hover, .aos.opinia-card {
+      transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .aos.visible.card-hover:hover, .aos.visible.opinia-card:hover { transition-delay: 0s; }
     .opinia-name {
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -519,7 +585,7 @@
       letter-spacing: 0.04em;
     }
     .property-badge.sold {
-      background-color: #c0392b;
+      background-color: #8A3B32;
       color: #fff;
       padding: 4px 10px;
       border-radius: 4px;
@@ -530,7 +596,7 @@
       letter-spacing: 0.06em;
     }
     .property-badge.available {
-      background-color: #27ae60;
+      background-color: #4F6B4A;
       color: #fff;
       padding: 4px 10px;
       border-radius: 4px;
@@ -541,7 +607,7 @@
       letter-spacing: 0.06em;
     }
     .property-badge.in-progress {
-      background-color: #c96f1a;
+      background-color: #8B6A4A;
       color: #fff;
       padding: 4px 10px;
       border-radius: 4px;
@@ -1145,25 +1211,21 @@
     }
     /* ── Nasze Realizacje tiles — premium reveal ── */
     @keyframes tileReveal {
-      0%   { opacity: 0; transform: scale(0.92) translateY(24px); filter: blur(6px); clip-path: inset(8% 4% 8% 4%); }
-      60%  { filter: blur(0); clip-path: inset(0% 0% 0% 0%); }
-      100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); clip-path: inset(0% 0% 0% 0%); }
+      from { opacity: 0; transform: scale(0.96) translateY(16px); }
+      to   { opacity: 1; transform: none; }
     }
     .nr-tile.aos {
       opacity: 0;
-      transform: scale(0.92) translateY(24px);
-      filter: blur(6px);
-      transition: none !important;
+      transform: scale(0.96) translateY(16px);
     }
     .nr-tile.aos.visible {
       opacity: 1;
       transform: none;
-      filter: none;
-      animation: tileReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation: tileReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) backwards;
       animation-delay: var(--tile-delay, 0ms);
     }
     @media (prefers-reduced-motion: reduce) {
-      .nr-tile.aos, .nr-tile.aos.visible { opacity: 1; transform: none; filter: none; animation: none; }
+      .nr-tile.aos, .nr-tile.aos.visible { opacity: 1; transform: none; animation: none; }
     }
     .nr-grid {
       display: grid;
@@ -1184,25 +1246,28 @@
       width: 100%;
       aspect-ratio: 4 / 3;
       overflow: hidden;
-      border: 1px solid rgba(201,169,110,0.25);
+      border: 1px solid rgba(184,149,106,0.25);
       border-radius: 4px;
       cursor: pointer;
       background: #fff;
       box-shadow: 0 4px 16px rgba(0,0,0,0.12), 0 8px 32px rgba(0,0,0,0.08);
       transition: box-shadow 0.4s ease, border-color 0.4s ease, transform 0.3s ease;
     }
-    .nr-tile:hover {
-      box-shadow: 0 8px 28px rgba(0,0,0,0.18), 0 16px 56px rgba(0,0,0,0.14), 0 0 0 1px rgba(201,169,110,0.1);
-      border-color: rgba(201,169,110,0.6);
-      transform: translateY(-4px);
+    @media (hover: hover) {
+      .nr-tile:hover, .nr-tile.aos.visible:hover {
+        box-shadow: 0 8px 28px rgba(44,44,44,0.16), 0 16px 56px rgba(184,149,106,0.14), 0 0 0 1px rgba(184,149,106,0.1);
+        border-color: rgba(184,149,106,0.6);
+        transform: translateY(-4px);
+      }
+      .nr-tile:hover .nr-tile__imgs { transform: scale(1.04); }
+      .nr-tile:hover .nr-tile__panel { transform: translateY(0); }
     }
-    .nr-tile:focus-visible { outline: 2px solid #c9a96e; outline-offset: 2px; }
+    .nr-tile:focus-visible { outline: 2px solid #B8956A; outline-offset: 2px; }
     .nr-tile__imgs {
       position: absolute;
       inset: 0;
-      transition: transform 0.6s ease;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .nr-tile:hover .nr-tile__imgs { transform: scale(1.04); }
     .nr-tile__img {
       position: absolute;
       top: 0;
@@ -1229,7 +1294,7 @@
       letter-spacing: 0.05em;
       padding: 4px 10px;
       border-radius: 0;
-      border: 1px solid rgba(201,169,110,0.3);
+      border: 1px solid rgba(184,149,106,0.3);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       pointer-events: none;
@@ -1247,7 +1312,7 @@
       transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
       z-index: 3;
     }
-    .nr-tile:hover .nr-tile__panel { transform: translateY(0); }
+    .nr-tile:focus-visible .nr-tile__panel { transform: translateY(0); }
     @media (max-width: 540px) { .nr-tile__panel { transform: translateY(0) !important; } }
     @media (max-width: 540px) {
       .nr-tile__panel { padding: 16px 18px; }
@@ -1259,7 +1324,7 @@
       font-family: Georgia, 'Times New Roman', serif;
       font-size: 1.0625rem;
       font-weight: 600;
-      color: #c9a96e;
+      color: #B8956A;
       letter-spacing: -0.02em;
       line-height: 1.3;
       margin-bottom: 6px;
@@ -1267,7 +1332,7 @@
     .nr-tile__loc {
       font-family: system-ui, sans-serif;
       font-size: 0.6875rem;
-      color: #666;
+      color: rgba(250,248,245,0.6);
       text-transform: uppercase;
       letter-spacing: 0.12em;
       line-height: 1.4;
@@ -1474,12 +1539,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <!-- Desktop links -->
   <div class="hidden md:flex items-center gap-8">
-    <a href="#o-nas" title="O firmie P&amp;M Apartments Wrocław" class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="transition: color 0.3s ease; line-height: 1.7;">O nas</a>
-    <a href="#wykończenie" title="Wykończenie mieszkań pod klucz Wrocław" class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="transition: color 0.3s ease; line-height: 1.7;">Wykończenie</a>
-    <a href="#wlasciciel" title="Patryk Zacharek — właściciel P&amp;M Apartments" class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="transition: color 0.3s ease; line-height: 1.7;">O właścicielu</a>
-    <a href="#oferty" title="Realizacje wykończeń mieszkań Wrocław" class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="transition: color 0.3s ease; line-height: 1.7;">Realizacje</a>
-    <a href="#w-sprzedazy" title="Mieszkania na sprzedaż Wrocław" class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="transition: color 0.3s ease; line-height: 1.7;">Inwestycje</a>
-    <a href="#kontakt" title="Kontakt — wykończenie mieszkań Wrocław" class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="transition: color 0.3s ease; line-height: 1.7;">Kontakt</a>
+    <a href="#o-nas" title="O firmie P&amp;M Apartments Wrocław" class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="line-height: 1.7;">O nas</a>
+    <a href="#wykończenie" title="Wykończenie mieszkań pod klucz Wrocław" class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="line-height: 1.7;">Wykończenie</a>
+    <a href="#wlasciciel" title="Patryk Zacharek — właściciel P&amp;M Apartments" class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="line-height: 1.7;">O właścicielu</a>
+    <a href="#oferty" title="Realizacje wykończeń mieszkań Wrocław" class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="line-height: 1.7;">Realizacje</a>
+    <a href="#w-sprzedazy" title="Mieszkania na sprzedaż Wrocław" class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="line-height: 1.7;">Inwestycje</a>
+    <a href="#kontakt" title="Kontakt — wykończenie mieszkań Wrocław" class="nav-link font-sans text-sm text-cream hover:text-brass cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="line-height: 1.7;">Kontakt</a>
   </div>
 
   <!-- Hamburger -->
@@ -1551,13 +1616,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ═══════════════════════════════════════════
      2. O NAS
 ═══════════════════════════════════════════ -->
-<section id="o-nas" class="aos cv-auto py-24 lg:py-28" style="background-color: #2C2C2C;">
+<section id="o-nas" class="cv-auto py-24 lg:py-28" style="background-color: #2C2C2C;">
   <div class="max-w-6xl mx-auto px-8">
 
     <div class="text-center mb-16">
       <p class="font-sans uppercase tracking-[0.12em] mb-4" style="font-size: 0.72rem; color: #B8956A; line-height: 1.7;">P&amp;M Apartments</p>
       <h2 class="font-serif text-cream mb-4" style="font-size: clamp(1.9rem, 3.5vw, 3rem); letter-spacing: -0.03em;">Wykończenie i sprzedaż mieszkań Wrocław — P&amp;M Apartments</h2>
-      <div class="deco-line"></div>
+      <div class="deco-line text-cream"></div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
@@ -1587,7 +1652,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </p>
       </div>
 
-      <div class="aos stagger-2 flex flex-col gap-5">
+      <div class="aos stagger-2 check-list flex flex-col gap-5">
         <div class="flex items-start gap-4">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="flex-shrink-0" style="margin-top: 2px;">
             <circle cx="12" cy="12" r="10" stroke="#B8956A" stroke-width="1.5"/>
@@ -1642,7 +1707,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p class="font-sans text-cream mb-6" style="font-size: 1rem; opacity: 0.85; line-height: 1.9;">
           Kładziemy nacisk na jakość i zadowolenie klienta, wierząc, że te wartości są kluczem do sukcesu w branży.
         </p>
-        <div class="flex flex-col gap-4">
+        <div class="check-list flex flex-col gap-4">
           <div class="flex items-start gap-4">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="flex-shrink-0" style="margin-top: 3px;">
               <circle cx="12" cy="12" r="10" stroke="#B8956A" stroke-width="1.5"/>
@@ -1695,15 +1760,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a href="#oferty"
            class="btn-ghost inline-block font-sans text-sm text-charcoal uppercase tracking-[0.15em] px-10 py-4 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass"
            style="border: 1px solid #B8956A; letter-spacing: 0.15em;">
-          Zobacz realizacje
+          <span>Zobacz realizacje</span>
         </a>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 aos stagger-2">
-        <div class="overflow-hidden" style="box-shadow: 0 4px 6px rgba(184,149,106,0.07), 0 10px 40px rgba(44,44,44,0.08);">
+        <div class="img-zoom overflow-hidden" style="box-shadow: 0 4px 6px rgba(184,149,106,0.07), 0 10px 40px rgba(44,44,44,0.08);">
           <img src="wykonczenie/planowanie.webp" alt="Planowanie wykończenia mieszkania pod klucz Wrocław — P&amp;M Apartments" loading="lazy" decoding="async" class="w-full object-cover block" style="aspect-ratio: 3 / 4;">
         </div>
-        <div class="overflow-hidden" style="box-shadow: 0 4px 6px rgba(184,149,106,0.07), 0 10px 40px rgba(44,44,44,0.08);">
+        <div class="img-zoom overflow-hidden" style="box-shadow: 0 4px 6px rgba(184,149,106,0.07), 0 10px 40px rgba(44,44,44,0.08);">
           <img src="wykonczenie/realizacja.webp" alt="Gotowe wykończone mieszkanie Wrocław — realizacja P&amp;M Apartments" loading="lazy" decoding="async" class="w-full object-cover block" style="aspect-ratio: 3 / 4;">
         </div>
       </div>
@@ -1715,7 +1780,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p class="font-sans text-charcoal mb-8" style="font-size: 1rem; opacity: 0.82; line-height: 1.9;">
           Zajmujemy się kompleksowym wykończeniem mieszkań w stanie deweloperskim. Pracujemy od projektu do gotowego efektu — dokładnie według Twoich oczekiwań.
         </p>
-        <div class="flex flex-col gap-4">
+        <div class="check-list flex flex-col gap-4">
           <div class="flex items-start gap-4">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="flex-shrink-0" style="margin-top: 2px;">
               <circle cx="12" cy="12" r="10" stroke="#B8956A" stroke-width="1.5"/>
@@ -1771,27 +1836,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="aos stagger-2">
         <h3 class="font-serif text-charcoal mb-6" style="font-size: clamp(1.6rem, 2.7vw, 2.4rem); letter-spacing: -0.03em;">Dlaczego warto wybrać nas?</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
+          <div class="aos stagger-1 card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
             <p class="font-sans font-bold text-charcoal mb-3" style="line-height: 1.7;">14 lat doświadczenia</p>
             <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.82; line-height: 1.8;">Wykończyliśmy dziesiątki mieszkań — znamy każdy etap procesu.</p>
           </div>
-          <div class="card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
+          <div class="aos stagger-2 card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
             <p class="font-sans font-bold text-charcoal mb-3" style="line-height: 1.7;">Pełna odpowiedzialność</p>
             <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.82; line-height: 1.8;">Jeden punkt kontaktu, bez pośredników i chaosu organizacyjnego.</p>
           </div>
-          <div class="card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
+          <div class="aos stagger-1 card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
             <p class="font-sans font-bold text-charcoal mb-3" style="line-height: 1.7;">Jasny kosztorys</p>
             <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.82; line-height: 1.8;">Przed startem ustalamy zakres i cenę — bez niespodzianek.</p>
           </div>
-          <div class="card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
+          <div class="aos stagger-2 card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
             <p class="font-sans font-bold text-charcoal mb-3" style="line-height: 1.7;">Terminowość i gwarancja</p>
             <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.82; line-height: 1.8;">Dotrzymujemy terminów i udzielamy gwarancji na wykonane prace.</p>
           </div>
-          <div class="card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
+          <div class="aos stagger-1 card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
             <p class="font-sans font-bold text-charcoal mb-3" style="line-height: 1.7;">Stały kontakt</p>
             <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.82; line-height: 1.8;">Zawsze odbieram telefony. Masz ze mną bezpośredni kontakt na każdym etapie.</p>
           </div>
-          <div class="card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
+          <div class="aos stagger-2 card-hover px-8 py-8" style="background-color: #E8E4DF; border: 1px solid rgba(184,149,106,0.2);">
             <p class="font-sans font-bold text-charcoal mb-3" style="line-height: 1.7;">15% oszczędności na VAT</p>
             <p class="font-sans text-charcoal" style="font-size: 0.95rem; opacity: 0.82; line-height: 1.8;">Pomagamy zoptymalizować koszty materiałów dzięki doświadczeniu inwestycyjnemu.</p>
           </div>
@@ -1889,14 +1954,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ═══════════════════════════════════════════
      5. NASZE REALIZACJE
 ═══════════════════════════════════════════ -->
-<section id="oferty" class="cv-auto" style="padding: 120px 0; position: relative; background: #ffffff; border-top: 1px solid rgba(201,169,110,0.15);">
+<section id="oferty" class="cv-auto" style="padding: 120px 0; position: relative; background: #ffffff; border-top: 1px solid rgba(184,149,106,0.15);">
   <div style="position:absolute;inset:0;background:none;pointer-events:none;"></div>
   <div class="max-w-6xl mx-auto px-8">
     <div class="text-center mb-16 aos">
-      <p class="font-sans uppercase tracking-[0.12em] mb-4" style="font-size: 0.72rem; color: #c9a96e; line-height: 1.7;">REALIZACJE</p>
+      <p class="font-sans uppercase tracking-[0.12em] mb-4" style="font-size: 0.72rem; color: #B8956A; line-height: 1.7;">REALIZACJE</p>
       <h2 class="font-serif text-charcoal mb-4" style="font-size: clamp(1.9rem, 3.5vw, 3rem); letter-spacing: -0.03em;">Nasze realizacje</h2>
       <p class="font-sans text-charcoal mb-4" style="font-size: 1rem; opacity: 0.82; line-height: 1.7;">Każde mieszkanie to osobna historia — sprawdź efekty naszej pracy.</p>
-      <div style="width:60px; height:1px; background:#c9a96e; margin:24px auto 0;"></div>
+      <div class="deco-line" style="width:60px; height:1px; background:#B8956A; margin:24px auto 0;"></div>
     </div>
     <div class="nr-grid">
       <div class="nr-tile aos" style="--tile-delay: 0ms;" tabindex="0" role="img" aria-label="Kurkowa 36/62 – wykończenie mieszkania Wrocław, P&M Apartments">
@@ -2002,7 +2067,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="text-center mb-16">
       <p class="font-sans uppercase tracking-[0.12em] mb-4" style="font-size: 0.72rem; color: #B8956A; line-height: 1.7;">Oferta</p>
       <h2 class="font-serif text-cream mb-4" style="font-size: clamp(1.9rem, 3.5vw, 3rem); letter-spacing: -0.03em;">Mieszkania na sprzedaż Wrocław — gotowe do zamieszkania</h2>
-      <div class="deco-line"></div>
+      <div class="deco-line text-cream"></div>
     </div>
 
   </div>
@@ -2548,7 +2613,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="text-center mb-16">
       <p class="aos font-sans uppercase tracking-[0.25em] text-xs mb-5" style="color: #B8956A;">Opinie klientów</p>
       <h2 class="aos font-serif text-charcoal" style="font-size: clamp(2rem, 3.2vw, 3rem); letter-spacing: -0.03em;">Co mówią o nas klienci</h2>
-      <div class="deco-line aos" style="margin: 24px auto 0;"></div>
+      <div class="deco-line" style="margin: 24px auto 0;"></div>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
       <figure class="aos stagger-1 opinia-card h-full flex flex-col px-12 py-16" style="background-color: #FBF9F5; border: 1px solid rgba(184,149,106,0.16); border-radius: 4px;">
@@ -2612,7 +2677,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#B8956A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
             </svg>
-            <a href="tel:781790212" class="font-sans text-cream text-sm cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="opacity: 0.55; line-height: 1.7; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.55'">781 790 212</a>
+            <a href="tel:781790212" class="link-soft font-sans text-cream text-sm cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="opacity: 0.55; line-height: 1.7;">781 790 212</a>
           </div>
           <!-- Email -->
           <div class="flex items-center gap-4">
@@ -2620,7 +2685,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
               <polyline points="22,6 12,13 2,6"/>
             </svg>
-            <a href="mailto:kontakt@pm-apartments.pl" class="font-sans text-cream text-sm cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="opacity: 0.55; line-height: 1.7; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.55'">kontakt@pm-apartments.pl</a>
+            <a href="mailto:kontakt@pm-apartments.pl" class="link-soft font-sans text-cream text-sm cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="opacity: 0.55; line-height: 1.7;">kontakt@pm-apartments.pl</a>
           </div>
           <!-- Address -->
           <div class="flex items-center gap-4">
@@ -2636,7 +2701,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 1.96C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
               <path d="m9.75 15.02 5.75-3.02-5.75-3.02v6.04z" fill="#B8956A" stroke="none"/>
             </svg>
-            <a href="https://www.youtube.com/channel/UCbp5rX7bQhAjkfdeh-hPdDQ" target="_blank" rel="noopener noreferrer" class="font-sans text-cream text-sm cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="opacity: 0.55; line-height: 1.7; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.55'">YouTube</a>
+            <a href="https://www.youtube.com/channel/UCbp5rX7bQhAjkfdeh-hPdDQ" target="_blank" rel="noopener noreferrer" class="link-soft font-sans text-cream text-sm cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="opacity: 0.55; line-height: 1.7;">YouTube</a>
           </div>
         </div>
       </div>
@@ -2670,20 +2735,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <!-- Nav links -->
       <div class="flex flex-col gap-3">
-        <a href="#o-nas" title="O firmie P&amp;M Apartments Wrocław" class="font-sans text-cream cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="font-size: 0.72rem; opacity: 0.65; line-height: 1.7; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.65'">O nas</a>
-        <a href="#wlasciciel" title="Patryk Zacharek — właściciel P&amp;M Apartments" class="font-sans text-cream cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="font-size: 0.72rem; opacity: 0.65; line-height: 1.7; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.65'">O właścicielu</a>
-        <a href="#oferty" title="Mieszkania na sprzedaż Wrocław" class="font-sans text-cream cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="font-size: 0.72rem; opacity: 0.65; line-height: 1.7; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.65'">Oferty</a>
-        <a href="#kontakt" title="Kontakt — wykończenie mieszkań Wrocław" class="font-sans text-cream cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="font-size: 0.72rem; opacity: 0.65; line-height: 1.7; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.65'">Kontakt</a>
+        <a href="#o-nas" title="O firmie P&amp;M Apartments Wrocław" class="link-soft font-sans text-cream cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="font-size: 0.72rem; opacity: 0.65; line-height: 1.7;">O nas</a>
+        <a href="#wlasciciel" title="Patryk Zacharek — właściciel P&amp;M Apartments" class="link-soft font-sans text-cream cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="font-size: 0.72rem; opacity: 0.65; line-height: 1.7;">O właścicielu</a>
+        <a href="#oferty" title="Mieszkania na sprzedaż Wrocław" class="link-soft font-sans text-cream cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="font-size: 0.72rem; opacity: 0.65; line-height: 1.7;">Oferty</a>
+        <a href="#kontakt" title="Kontakt — wykończenie mieszkań Wrocław" class="link-soft font-sans text-cream cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="font-size: 0.72rem; opacity: 0.65; line-height: 1.7;">Kontakt</a>
       </div>
 
       <!-- Legal data -->
       <div class="flex flex-col gap-3">
         <div class="font-sans text-cream" style="font-size: 0.72rem; opacity: 0.65; line-height: 1.7;">Wykończenie mieszkań pod klucz | Sprzedaż mieszkań Wrocław</div>
         <div class="font-sans text-cream" style="font-size: 0.72rem; opacity: 0.65; line-height: 1.7;">ul. Św. Judy Tadeusza 15a, 52-116 Wrocław (Iwiny)</div>
-        <div class="font-sans text-cream" style="font-size: 0.72rem; opacity: 0.65; line-height: 1.7;">Tel: <a href="tel:+48781790212" class="cursor-pointer" style="color: inherit; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">781 790 212</a> | Email: <a href="mailto:kontakt@pm-apartments.pl" class="cursor-pointer" style="color: inherit; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">kontakt@pm-apartments.pl</a></div>
+        <div class="font-sans text-cream" style="font-size: 0.72rem; opacity: 0.65; line-height: 1.7;">Tel: <a href="tel:+48781790212" class="link-soft cursor-pointer" style="color: inherit;">781 790 212</a> | Email: <a href="mailto:kontakt@pm-apartments.pl" class="link-soft cursor-pointer" style="color: inherit;">kontakt@pm-apartments.pl</a></div>
         <div class="font-sans text-cream" style="font-size: 0.72rem; opacity: 0.65; line-height: 1.7;">NIP: 695 145 0326</div>
-        <a href="https://www.youtube.com/channel/UCbp5rX7bQhAjkfdeh-hPdDQ" target="_blank" rel="noopener noreferrer" class="font-sans text-cream cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="font-size: 0.72rem; opacity: 0.65; line-height: 1.7; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.65'">YouTube</a>
-        <a href="https://instagram.com/patryk_zacharek" target="_blank" rel="noopener noreferrer" class="font-sans text-cream cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="font-size: 0.72rem; opacity: 0.65; line-height: 1.7; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.65'">Instagram</a>
+        <a href="https://www.youtube.com/channel/UCbp5rX7bQhAjkfdeh-hPdDQ" target="_blank" rel="noopener noreferrer" class="link-soft font-sans text-cream cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="font-size: 0.72rem; opacity: 0.65; line-height: 1.7;">YouTube</a>
+        <a href="https://instagram.com/patryk_zacharek" target="_blank" rel="noopener noreferrer" class="link-soft font-sans text-cream cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass" style="font-size: 0.72rem; opacity: 0.65; line-height: 1.7;">Instagram</a>
       </div>
 
     </div>
@@ -2694,13 +2759,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         &copy; 2026 P&amp;M Apartments Patryk Zacharek. Wszelkie prawa zastrzeżone.
       </p>
       <p class="font-sans text-cream" style="font-size: 0.65rem; opacity: 0.65; line-height: 1.7;">
-        Strona stworzona przez <a href="https://getbuild.pl" rel="nofollow noopener" target="_blank" class="underline cursor-pointer" style="color: inherit; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Getbuild.pl</a> &middot; 2026
+        Strona stworzona przez <a href="https://getbuild.pl" rel="nofollow noopener" target="_blank" class="link-soft underline cursor-pointer" style="color: inherit;">Getbuild.pl</a> &middot; 2026
       </p>
       <p class="font-sans text-cream" style="font-size: 0.68rem; opacity: 0.65; line-height: 1.7; margin-top: 1rem;">
         <button type="button" class="consent-link" data-open-consent-settings>Ustawienia prywatności i cookies</button>
       </p>
       <p class="font-sans text-cream" style="font-size: 0.68rem; opacity: 0.65; line-height: 1.7;">
-        <a href="/polityka-prywatnosci/" class="underline cursor-pointer" style="color: inherit; transition: opacity 0.3s ease; display: inline-block; padding: 6px 0;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Polityka prywatności</a>
+        <a href="/polityka-prywatnosci/" class="link-soft underline cursor-pointer" style="color: inherit; display: inline-block; padding: 6px 0;">Polityka prywatności</a>
       </p>
     </div>
 
@@ -2806,26 +2871,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>
   // ── Navbar scroll ──────────────────────────
   const navbar = document.getElementById('navbar');
-  const navLogoSpan = navbar.querySelector('.nav-logo span');
-  const navLinks = navbar.querySelectorAll('.nav-link');
-  const hamSpans = navbar.querySelectorAll('button span');
   let navbarTicking = false;
   let navbarScrolled = null;
 
   function applyNavbarState(scrolled) {
     if (navbarScrolled === scrolled) return;
     navbarScrolled = scrolled;
-    if (scrolled) {
-      navbar.classList.add('scrolled');
-      if (navLogoSpan) navLogoSpan.style.color = '#2C2C2C';
-      navLinks.forEach(l => l.style.color = '#2C2C2C');
-      hamSpans.forEach(s => s.style.background = '#2C2C2C');
-    } else {
-      navbar.classList.remove('scrolled');
-      if (navLogoSpan) navLogoSpan.style.color = '#FAF8F5';
-      navLinks.forEach(l => l.style.color = '#FAF8F5');
-      hamSpans.forEach(s => s.style.background = '#FAF8F5');
-    }
+    navbar.classList.toggle('scrolled', scrolled);
   }
 
   applyNavbarState(window.scrollY > 60);
@@ -2877,7 +2929,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
   }, { threshold: 0.08 });
 
-  document.querySelectorAll('.aos').forEach(el => observer.observe(el));
+  document.querySelectorAll('.aos, .deco-line, .check-list').forEach(el => observer.observe(el));
 
   // ── Smooth anchor scroll ────────────────────
   document.querySelectorAll('a[href^="#"]').forEach(a => {
