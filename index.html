@@ -1687,11 +1687,21 @@
     {
       "@context": "https://schema.org",
       "@type": "HomeAndConstructionBusiness",
+      "@id": "https://pm-apartments.pl/#organization",
       "name": "P&M Apartments Patryk Zacharek",
+      "alternateName": "P&M Apartments",
+      "taxID": "6951450326",
       "description": "Wykończenie mieszkań pod klucz i sprzedaż gotowych mieszkań we Wrocławiu. 16 lat doświadczenia w branży nieruchomości i wykończeń wnętrz.",
       "url": "https://pm-apartments.pl",
       "telephone": "+48781790212",
       "email": "kontakt@pm-apartments.pl",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+48781790212",
+        "email": "kontakt@pm-apartments.pl",
+        "contactType": "customer service",
+        "availableLanguage": "pl"
+      },
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Św. Judy Tadeusza 15a",
@@ -1702,22 +1712,25 @@
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 51.0647,
-        "longitude": 16.9520
+        "latitude": 51.0477,
+        "longitude": 17.0618
       },
       "image": "https://pm-apartments.pl/favicon.webp",
-      "logo": "https://pm-apartments.pl/favicon.webp",
+      "logo": "https://pm-apartments.pl/favicon.png",
       "founder": {
         "@type": "Person",
+        "@id": "https://pm-apartments.pl/#patryk-zacharek",
         "name": "Patryk Zacharek",
-        "jobTitle": "Właściciel"
+        "jobTitle": "Właściciel",
+        "sameAs": "https://instagram.com/patryk_zacharek"
       },
       "foundingDate": "2010",
       "areaServed": {
         "@type": "City",
         "name": "Wrocław"
       },
-      "priceRange": "$$",
+      "priceRange": "2 600, 3 400 lub 4 500 zł/m² brutto",
+      "knowsAbout": ["Wykończenie mieszkań pod klucz", "Wykończenie mieszkań pod wynajem", "Odbiór mieszkania od dewelopera", "Sprzedaż gotowych mieszkań"],
       "sameAs": [
         "https://instagram.com/patryk_zacharek",
         "https://www.youtube.com/channel/UCbp5rX7bQhAjkfdeh-hPdDQ"
@@ -1741,6 +1754,48 @@
               "name": "Sprzedaż gotowych mieszkań Wrocław",
               "description": "Sprzedaż mieszkań wykończonych w wysokim standardzie, gotowych do zamieszkania we Wrocławiu."
             }
+          },
+          {
+            "@type": "Offer",
+            "name": "PM Essential",
+            "description": "Wykończenie pod klucz za 2 600 zł/m² brutto. Mieszkanie 36 m² pod klucz: 93 600 zł.",
+            "url": "https://pm-apartments.pl/cena-wykonczenia-mieszkania-za-m2/",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": 2600,
+              "priceCurrency": "PLN",
+              "unitCode": "MTK",
+              "unitText": "m²",
+              "valueAddedTaxIncluded": true
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "PM Optimum",
+            "description": "Wykończenie pod klucz za 3 400 zł/m² brutto. Mieszkanie 36 m² pod klucz: 122 400 zł.",
+            "url": "https://pm-apartments.pl/cena-wykonczenia-mieszkania-za-m2/",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": 3400,
+              "priceCurrency": "PLN",
+              "unitCode": "MTK",
+              "unitText": "m²",
+              "valueAddedTaxIncluded": true
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "PM Signature",
+            "description": "Wykończenie pod klucz za 4 500 zł/m² brutto. Mieszkanie 36 m² pod klucz: 162 000 zł.",
+            "url": "https://pm-apartments.pl/cena-wykonczenia-mieszkania-za-m2/",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": 4500,
+              "priceCurrency": "PLN",
+              "unitCode": "MTK",
+              "unitText": "m²",
+              "valueAddedTaxIncluded": true
+            }
           }
         ]
       }
@@ -1748,13 +1803,11 @@
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
+      "@id": "https://pm-apartments.pl/#website",
       "name": "P&M Apartments",
       "url": "https://pm-apartments.pl",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://pm-apartments.pl/?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
+      "inLanguage": "pl-PL",
+      "publisher": { "@id": "https://pm-apartments.pl/#organization" }
     }
   ]
   </script>

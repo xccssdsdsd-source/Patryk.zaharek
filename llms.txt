@@ -1,14 +1,39 @@
 # P&M Apartments
 
-Firma wykończeniowa i deweloperska z Wrocławia. Specjalizujemy się w wykończeniu mieszkań pod klucz oraz sprzedaży gotowych mieszkań w wysokim standardzie. 16 lat doświadczenia.
+> P&M Apartments Patryk Zacharek to firma z Wrocławia, która wykańcza mieszkania pod klucz i sprzedaje gotowe mieszkania. Działa we Wrocławiu i okolicach. Założona w 2010 roku, 16 lat doświadczenia.
+
+## Dane firmy
+
+- Nazwa: P&M Apartments Patryk Zacharek
+- Właściciel: Patryk Zacharek
+- Adres: ul. Św. Judy Tadeusza 15a, 52-116 Wrocław (Iwiny)
+- NIP: 6951450326
+- Telefon: +48 781 790 212
+- E-mail: kontakt@pm-apartments.pl
+- Obszar działania: Wrocław i okolice
+
+## Pakiety wykończenia pod klucz
+
+Stawki podane brutto. Obowiązują też przy innym metrażu. Zakres i cenę dla konkretnego mieszkania firma ustala przed startem prac.
+
+| Pakiet | Stawka za m² brutto | Mieszkanie 36 m² | Czas realizacji dla 36 m² | Style |
+| --- | --- | --- | --- | --- |
+| PM Essential | 2 600 zł | 93 600 zł | ok. 2,5 miesiąca | Jasny Minimal |
+| PM Optimum | 3 400 zł | 122 400 zł | ok. 2,5 miesiąca | Kaszmirowy Beż |
+| PM Signature | 4 500 zł | 162 000 zł | ok. 3 miesięcy | Klasyczna Elegancja, Ciepły Dąb |
+
+W pakiecie PM Optimum w cenie są: gładzie, malowanie, podłogi i drzwi, łazienka z ceramiką, armaturą i lustrem, kuchnia w zabudowie, pełne AGD, meble na wymiar, oświetlenie i lampy, przeróbki elektryki, łóżko z materacem oraz Smart TV i pralka.
+
+## Realizacje
+
+Wrocław: Krzyki, Śródmieście, Psie Pole, Ołtaszyn, Jagodno, Swojczyce, Fabryczna.
 
 ## Strony
 
-- [Strona główna](https://pm-apartments.pl/): Oferta wykończenia pod klucz i mieszkań na sprzedaż we Wrocławiu
-- [O nas](https://pm-apartments.pl/o-nas/): Historia firmy, zespół i doświadczenie
-- [Kontakt](https://pm-apartments.pl/kontakt/): Formularz kontaktowy, telefon i adres
-- [Poradnik: odbiór mieszkania od dewelopera](https://pm-apartments.pl/odbior-mieszkania-od-dewelopera/): 7 rzeczy do sprawdzenia przed podpisaniem protokołu odbioru
-- [Wykończenie mieszkań pod klucz Wrocław](https://pm-apartments.pl/wykonczenie-mieszkan-pod-klucz-wroclaw/): Zakres prac, pakiety, przebieg współpracy
-- [Cena wykończenia mieszkania za m²](https://pm-apartments.pl/cena-wykonczenia-mieszkania-za-m2/): Stawki 2 600, 3 400 i 4 500 zł/m² brutto, ceny dla 36 m², co jest w cenie
+- [Strona główna](https://pm-apartments.pl/): Oferta wykończenia pod klucz, pakiety, realizacje i mieszkania na sprzedaż we Wrocławiu
+- [Wykończenie mieszkań pod klucz Wrocław](https://pm-apartments.pl/wykonczenie-mieszkan-pod-klucz-wroclaw/): Zakres prac, pakiety, realizacje, przebieg współpracy
+- [Cena wykończenia mieszkania za m²](https://pm-apartments.pl/cena-wykonczenia-mieszkania-za-m2/): Stawki za m², ceny dla 36, 50, 60 i 70 m², co jest w cenie
 - [Wykończenie mieszkania pod wynajem](https://pm-apartments.pl/wykonczenie-mieszkania-pod-wynajem/): Pakiety PM Essential i PM Optimum pod najem
+- [Poradnik: odbiór mieszkania od dewelopera](https://pm-apartments.pl/odbior-mieszkania-od-dewelopera/): 7 rzeczy do sprawdzenia przed podpisaniem protokołu odbioru
+- [Kontakt](https://pm-apartments.pl/#kontakt): Formularz kontaktowy, telefon i adres
 - [Polityka prywatności](https://pm-apartments.pl/polityka-prywatnosci/): Informacje o przetwarzaniu danych osobowych
